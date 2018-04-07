@@ -122,14 +122,14 @@
         logInfoMsg("Subscribing to events for agent " + agent.getName());
         logInfoMsg("Agent is currently in status of " + agent.getStatus().name);
         displayAgentStatus(agent.getStatus().name);
-        //agent.onRefresh(handleAgentRefresh);
+        agent.onRefresh(handleAgentRefresh);
         agent.onRoutable(handleAgentRoutable);
         agent.onNotRoutable(handleAgentNotRoutable);
         agent.onOffline(handleAgentOffline);
     }
     function handleAgentRefresh(agent) {
         //logInfoEvent("[agent.onRefresh] Agent data refreshed. Agent status is " + agent.getStatus().name);
-        logInfoEvent("[agent.onRefresh] Agent data refreshed. Agent status is XXXX");
+        //logInfoEvent("[agent.onRefresh] Agent data refreshed. Agent status is XXXX");
         //displayAgentStatus(agent.getStatus().name);
     }
     function handleAgentRoutable(agent) {
