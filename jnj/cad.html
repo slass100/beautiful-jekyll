@@ -79,6 +79,7 @@
         logInfoMsg("Contact is from queue " + contact.getQueue().name);
         popScrMsg("Queue: " + contact.getQueue().name);
         logInfoMsg("Contact attributes are " + JSON.stringify(contact.getAttributes()));
+		console.log('wwid: ' + contact.getAttributes()["WWID"]);
         contact.onIncoming(handleContactIncoming);
         contact.onAccepted(handleContactAccepted);
         contact.onConnected(handleContactConnected);
