@@ -132,9 +132,10 @@
         window.myCPP.agent = agent;
 		popScrMsg('Hi ' + agent.getName());
         //agentGreetingDiv.innerHTML = '<h3>Hi ' + agent.getName() + '!</h3>';
-        //logInfoMsg("Subscribing to events for agent " + agent.getName());
-        //logInfoMsg("Agent is currently in status of " + agent.getStatus().name);
-        //displayAgentStatus(agent.getStatus().name);
+		logMsgToScreen('<h3>Hi ' + agent.getName() + '!</h3>');
+        logInfoMsg("Subscribing to events for agent " + agent.getName());
+        logInfoMsg("Agent is currently in status of " + agent.getStatus().name);
+        displayAgentStatus(agent.getStatus().name);
         //agent.onRefresh(handleAgentRefresh);
         //agent.onRoutable(handleAgentRoutable);
         //agent.onNotRoutable(handleAgentNotRoutable);
@@ -175,7 +176,8 @@
         logEventToScreen(eventMsg);
     }
     function displayAgentStatus(status) {
-        agentStatusDiv.innerHTML = 'Status: <span style="font-weight: bold">' + status + '</span>';
+        //agentStatusDiv.innerHTML = 'Status: <span style="font-weight: bold">' + status + '</span>';
+		logMsgToScreen('das: ' + status);
     }
     function goAvailable() {
         var routableState = window.myCPP.agent.getAgentStates().filter(function (state) {
