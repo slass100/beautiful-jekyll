@@ -62,23 +62,9 @@
 
   
   
-    //connect.contact(subscribeToContactEvents);
+    connect.contact(subscribeToContactEvents);
     connect.agent(subscribeToAgentEvents);
 
-	
-	/*
-    connect.agent(subToAgent);
-	
-	function subToAgent(agent) {
-		console.log('subToAgent: ' + agent);
-		window.myCPP.agent = agent;
-		//agent.onRefresh(agentRefresh);
-		console.log('subToAgent: ' + showObj(agent));
-    }
-	
-	function agentRefresh(agent) {
-		console.log('agentRefresh: ' + agent);
-	}
 
     function subscribeToContactEvents(contact) {
         window.myCPP.contact = contact;
@@ -126,7 +112,6 @@
             logInfoEvent("[contact.onEnded] Contact has ended. Null contact passed to event handler");
         }
     }
-	*/
 	
     function subscribeToAgentEvents(agent) {
         window.myCPP.agent = agent;
@@ -136,10 +121,10 @@
         logInfoMsg("Subscribing to events for agent " + agent.getName());
         logInfoMsg("Agent is currently in status of " + agent.getStatus().name);
         displayAgentStatus(agent.getStatus().name);
-        //agent.onRefresh(handleAgentRefresh);
-        //agent.onRoutable(handleAgentRoutable);
-        //agent.onNotRoutable(handleAgentNotRoutable);
-        //agent.onOffline(handleAgentOffline);
+        agent.onRefresh(handleAgentRefresh);
+        agent.onRoutable(handleAgentRoutable);
+        agent.onNotRoutable(handleAgentNotRoutable);
+        agent.onOffline(handleAgentOffline);
     }
     function handleAgentRefresh(agent) {
         logInfoEvent("[agent.onRefresh] Agent data refreshed. Agent status is " + agent.getStatus().name);
