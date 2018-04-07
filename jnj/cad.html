@@ -52,8 +52,10 @@
         popMsgs.innerHTML = '<div id="statusDiv">' + msg + '</div>\n' + popMsgs.innerHTML;
     }
   
-    connect.contact(subscribeToContactEvents);
+    //connect.contact(subscribeToContactEvents);
     connect.agent(subscribeToAgentEvents);
+	
+	/*
     function subscribeToContactEvents(contact) {
         window.myCPP.contact = contact;
         logInfoMsg("Subscribing to events for contact");
@@ -100,6 +102,8 @@
             logInfoEvent("[contact.onEnded] Contact has ended. Null contact passed to event handler");
         }
     }
+	*/
+	
     function subscribeToAgentEvents(agent) {
         window.myCPP.agent = agent;
         agentGreetingDiv.innerHTML = '<h3>Hi ' + agent.getName() + '!</h3>';
