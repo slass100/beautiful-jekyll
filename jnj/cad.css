@@ -6,13 +6,11 @@ body {
 }
 
 #myApp {
-  background-color: #FFA500;
   margin: 5px;
   text-align: center;
 }
 
 #containerDiv {
-  background-color: #FFA500;
   float: left;
   width: 320px;
   min-width: 200px;
