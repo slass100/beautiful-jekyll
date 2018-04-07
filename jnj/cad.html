@@ -60,6 +60,18 @@
 		return out;
 	}
 
+	function safeGetHash(a, b, c) {
+		if (a === undefined || a == null) {
+			return '';
+		}
+		if (a[b] === undefined || a[b] == null) {
+			return '';
+		}
+		if (a[b][c] === undefined || a[b][c] == null) {
+			return '';
+		}
+		return a[b][c]
+	}
   
   
     connect.contact(subscribeToContactEvents);
@@ -79,7 +91,7 @@
         logInfoMsg("Contact is from queue " + contact.getQueue().name);
         popScrMsg("Queue: " + contact.getQueue().name);
         logInfoMsg("Contact attributes are " + JSON.stringify(contact.getAttributes()));
-		console.log('wwid: ' + contact.getAttributes()["WWID"]["value"]);
+		console.log('wwid: ' + safeGetHash(contact.getAttributes(), "WWID", "value"));
         contact.onIncoming(handleContactIncoming);
         contact.onAccepted(handleContactAccepted);
         contact.onConnected(handleContactConnected);
