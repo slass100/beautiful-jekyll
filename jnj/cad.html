@@ -52,14 +52,30 @@
         popMsgs.innerHTML = '<div id="statusDiv">' + msg + '</div>\n' + popMsgs.innerHTML;
     }
   
+	function showObj(o) {
+		var out = '';
+		for (var p in o) {
+			out += p + ': ' + o[p] + '\n';
+		}
+		return out;
+	}
+
+  
+  
     //connect.contact(subscribeToContactEvents);
     //connect.agent(subscribeToAgentEvents);
-    connect.agent(test11);
+    connect.agent(subToAgent);
 	
-	   function test11(test22) {
-        console.log('test11: ' + test22);
-		//console.log('test11: ' + JSON.stringify(YOUR_OBJECT_HERE, null, 4));
+	function subToAgent(agent) {
+		console.log('subToAgent: ' + agent);
+		window.myCPP.agent = agent;
+		//agent.onRefresh(agentRefresh);
+		console.log('subToAgent: ' + showObj(agent));
     }
+	
+	function agentRefresh(agent) {
+		console.log('agentRefresh: ' + agent);
+	}
 	
 	/*
     function subscribeToContactEvents(contact) {
