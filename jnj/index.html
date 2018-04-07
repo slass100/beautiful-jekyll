@@ -20,6 +20,9 @@
  <script type="text/javascript">
  //replace with the CCP URL for your Amazon Connect instance
  var ccpUrl = "https://atosjnjsandbox.awsapps.com/connect/ccp#/";
+  
+  var logMsgs = document.getElementById('logMsgs');
+  var eventMsgs = document.getElementById('eventMsgs');
 
  connect.core.initCCP(containerDiv, {
     ccpUrl: ccpUrl,
