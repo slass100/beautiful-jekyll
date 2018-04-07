@@ -1,0 +1,50 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Ariel, sans-serif;
+  color: #4393CA;
+  color: #1166BB;
+  width: 800px
+}
+
+#myApp {
+  background-color: #FFA500;
+  margin: 5px;
+  text-align: center;
+}
+
+#containerDiv {
+  background-color: #FFA500;
+  float: left;
+  width: 320px;
+  min-width: 200px;
+  height: 465px;
+  min-height: 400px;
+}
+
+#statusDiv {
+  background-color: #1166BB;
+  color: white;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#pad {
+  float: right;
+  width: 480px;
+  min-width: 200px;
+  height: 465px;
+  min-height: 400px;
+}
+
+.main {
+  width: 800px;
+  height: 500px;
+}
+
+.centerDiv {
+  width: 60%;
+  height: 200px;
+  margin: 0 auto;
+  background-color: #FFA500;
+}
