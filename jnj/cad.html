@@ -53,7 +53,12 @@
     }
   
     //connect.contact(subscribeToContactEvents);
-    connect.agent(subscribeToAgentEvents);
+    //connect.agent(subscribeToAgentEvents);
+    connect.agent(test11);
+	
+	   function test11(test22) {
+        console.log('test11: ' + test22);
+    }
 	
 	/*
     function subscribeToContactEvents(contact) {
