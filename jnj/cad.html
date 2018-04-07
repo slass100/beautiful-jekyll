@@ -41,6 +41,7 @@
   
   var logMsgs = document.getElementById('logMsgs');
   var eventMsgs = document.getElementById('eventMsgs');
+  var popMsgs = document.getElementById('pad');
 
   console.log("LOG LOG");
   
@@ -51,6 +52,11 @@
     allowFramedSoftphone: true
     }
   });
+   
+    function popScrMsg(msg) {
+        console.log('lim: ' + msg);
+        popMsgs.innerHTML = '<div id="statusDiv">' + msg + '<div>\n' + popMsgs.innerHTML;
+    }
   
     connect.contact(subscribeToContactEvents);
     connect.agent(subscribeToAgentEvents);
@@ -60,10 +66,12 @@
         if (contact.getActiveInitialConnection()
             && contact.getActiveInitialConnection().getEndpoint()) {
             logInfoMsg("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
+            popScrMsg('Called: ' + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
         } else {
             logInfoMsg("This is an existing contact for this agent");
         }
         logInfoMsg("Contact is from queue " + contact.getQueue().name);
+        popScrMsg("Queue: " + contact.getQueue().name);
         logInfoMsg("Contact attributes are " + JSON.stringify(contact.getAttributes()));
         contact.onIncoming(handleContactIncoming);
         contact.onAccepted(handleContactAccepted);
