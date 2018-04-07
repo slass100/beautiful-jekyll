@@ -116,12 +116,13 @@
     function subscribeToAgentEvents(agent) {
         window.myCPP.agent = agent;
 		popScrMsg('Hi ' + agent.getName());
+		logInfoMsg(showObj(agent));
         //agentGreetingDiv.innerHTML = '<h3>Hi ' + agent.getName() + '!</h3>';
 		logMsgToScreen('<h3>Hi ' + agent.getName() + '!</h3>');
         logInfoMsg("Subscribing to events for agent " + agent.getName());
         logInfoMsg("Agent is currently in status of " + agent.getStatus().name);
         displayAgentStatus(agent.getStatus().name);
-        agent.onRefresh(handleAgentRefresh);
+        //agent.onRefresh(handleAgentRefresh);
         agent.onRoutable(handleAgentRoutable);
         agent.onNotRoutable(handleAgentNotRoutable);
         agent.onOffline(handleAgentOffline);
