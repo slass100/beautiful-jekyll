@@ -129,11 +129,11 @@
     }
     function logMsgToScreen(msg) {
         console.log('lmts: ' + msg);
-        logMsgs.innerHTML = '<div>' + new Date().toLocaleTimeString() + ' ' + msg + '</div>\n' + logMsgs.innerHTML;
+        logMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + msg + '\n' + logMsgs.innerHTML;
     }
     function logEventToScreen(msg) {
         console.log('lets: ' + msg);
-        eventMsgs.innerHTML = '<div>' + new Date().toLocaleTimeString() + ' ' + msg + '</div>\n' + eventMsgs.innerHTML;
+        eventMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + msg + '\n' + eventMsgs.innerHTML;
     }
     function logInfoMsg(msg) {
         console.log('lim: ' + msg);
