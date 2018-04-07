@@ -109,16 +109,20 @@
         displayAgentStatus(agent.getStatus().name);
     }
     function logMsgToScreen(msg) {
+        console.log('lmts: ' + msg);
         logMsgs.innerHTML = '<div>' + new Date().toLocaleTimeString() + ' ' + msg + '</div>' + logMsgs.innerHTML;
     }
     function logEventToScreen(msg) {
+        console.log('lets: ' + msg);
         eventMsgs.innerHTML = '<div>' + new Date().toLocaleTimeString() + ' ' + msg + '</div>' + eventMsgs.innerHTML;
     }
     function logInfoMsg(msg) {
+        console.log('lim: ' + msg);
         connect.getLog().info(msg);
         logMsgToScreen(msg);
     }
     function logInfoEvent(eventMsg) {
+        console.log('lie: ' + msg);
         connect.getLog().info(eventMsg);
         logEventToScreen(eventMsg);
     }
