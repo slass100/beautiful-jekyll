@@ -116,7 +116,7 @@
     function subscribeToAgentEvents(agent) {
         window.myCPP.agent = agent;
 		popScrMsg('Hi ' + agent.getName());
-		logInfoMsg(showObj(agent));
+		//logInfoMsg(showObj(agent));
         //agentGreetingDiv.innerHTML = '<h3>Hi ' + agent.getName() + '!</h3>';
 		logMsgToScreen('<h3>Hi ' + agent.getName() + '!</h3>');
         logInfoMsg("Subscribing to events for agent " + agent.getName());
@@ -139,12 +139,14 @@
         //displayAgentStatus(agent.getStatus().name);
     }
     function handleAgentNotRoutable(agent) {
-        logInfoEvent("[agent.onNotRoutable] Agent is online, but not routable. Agent status is " + agent.getStatus().name);
-        displayAgentStatus(agent.getStatus().name);
+		console.log('agent.notRoutable: ' + agent.getStatus().name);
+        //logInfoEvent("[agent.onNotRoutable] Agent is online, but not routable. Agent status is " + agent.getStatus().name);
+        //displayAgentStatus(agent.getStatus().name);
     }
     function handleAgentOffline(agent) {
-        logInfoEvent("[agent.onOffline] Agent is offline. Agent status is " + agent.getStatus().name);
-        displayAgentStatus(agent.getStatus().name);
+		console.log('agent.offline: ' + agent.getStatus().name);
+        //logInfoEvent("[agent.onOffline] Agent is offline. Agent status is " + agent.getStatus().name);
+        //displayAgentStatus(agent.getStatus().name);
     }
     function logMsgToScreen(msg) {
         console.log('lmts: ' + msg);
