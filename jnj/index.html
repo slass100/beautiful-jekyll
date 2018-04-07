@@ -9,13 +9,15 @@
  <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
  <!--Amazon CCP will go here-->
  </div>
- <div id="statusDiv" style="float:right; width: 480px; min-width: 200px; height: 465px; min-height: 400px; background-color:#cf2c1b;">
+ <div id="statusDiv" style="float:right; width: 480px; min-width: 200px; height: 465px; min-height: 400px; ">
  Text
  </div>
  </div>
- <textarea id="logMsgs" rows="6" cols="80">
+ <br/>
+ <textarea id="logMsgs" rows="6" cols="120">
  </textarea>
- <textarea id="eventMsgs" rows="6" cols="80">
+ <br/>
+ <textarea id="eventMsgs" rows="6" cols="120">
  </textarea>
  </body>
  </html>
@@ -28,18 +30,16 @@
   
   var logMsgs = document.getElementById('logMsgs');
   var eventMsgs = document.getElementById('eventMsgs');
-  
-  logMsgs.innerHTML = 'OK';
 
   console.log("LOG LOG");
   
- connect.core.initCCP(containerDiv, {
+  connect.core.initCCP(containerDiv, {
     ccpUrl: ccpUrl,
     loginPopup: true,
     softphone: {
     allowFramedSoftphone: true
     }
- });
+  });
   
     connect.contact(subscribeToContactEvents);
     connect.agent(subscribeToAgentEvents);
