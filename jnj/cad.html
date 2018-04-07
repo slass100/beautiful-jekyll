@@ -128,11 +128,11 @@
     }
     function handleAgentRefresh(agent) {
         logInfoEvent("[agent.onRefresh] Agent data refreshed. Agent status is " + agent.getStatus().name);
-        displayAgentStatus(agent.getStatus().name);
+        //displayAgentStatus(agent.getStatus().name);
     }
     function handleAgentRoutable(agent) {
         logInfoEvent("[agent.onRoutable] Agent is routable. Agent status is " + agent.getStatus().name);
-        displayAgentStatus(agent.getStatus().name);
+        //displayAgentStatus(agent.getStatus().name);
     }
     function handleAgentNotRoutable(agent) {
         logInfoEvent("[agent.onNotRoutable] Agent is online, but not routable. Agent status is " + agent.getStatus().name);
