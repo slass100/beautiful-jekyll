@@ -45,9 +45,14 @@
   });
    
     function popScrMsg(msg) {
-        console.log('lim: ' + msg);
-        popMsgs.innerHTML = '<div id="statusDiv">' + msg + '</div>\n' + popMsgs.innerHTML;
-    }
+		if(msg) {
+			console.log('lim: ' + msg);
+			popMsgs.innerHTML = '<div id="statusDiv">' + msg + '</div>\n' + popMsgs.innerHTML;
+		}
+		else {
+			popMsgs.innerHTML = '';
+		}
+	}
   
 	function showObj(o) {
 		var out = '';
@@ -123,6 +128,7 @@
         } else {
             logMsgToScreen("[contact.onEnded] Contact has ended. Null contact passed to event handler");
         }
+		popScrMsg(null);
     }
 	
     function subscribeToAgentEvents(agent) {
