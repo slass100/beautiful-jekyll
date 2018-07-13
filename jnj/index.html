@@ -1,4 +1,4 @@
- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html>
     <head>
         <title>J&J GSD Desktop Agent</title>
@@ -11,14 +11,13 @@
             <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
                 <!--Amazon CCP will go here-->
             </div>
-            <textarea id="agentMsgs" style="float:right; width: 460px; min-width: 200px; height: 465px; min-height: 400px; "></textarea>
+            <textarea id="agentMsgs" style="float:right; width: 460px; min-width: 200px; height: 460px; min-height: 400px; "></textarea>
         </div>
         <br>
-        <textarea id="logMsgs" rows="6" cols="120"></textarea>
+        <textarea id="logMsgs" rows="12" cols="120"></textarea>
         <br>
-        <textarea id="eventMsgs" rows="6" cols="120"></textarea>
-        <!-- see https://github.com/aws/amazon-connect-streams -->
 
+        <!-- see https://github.com/aws/amazon-connect-streams -->
         <script src="amazon-connect-v1.2.0-21-ge9b5224.js"></script>
 
         <script type="text/javascript">
@@ -28,9 +27,8 @@
             //var ccpUrl = "https://atosjnjsandbox.awsapps.com/connect/ccp#/";
             var ccpUrl = "https://jnj-gsd-us.awsapps.com/connect/ccp#/";
 
-            var logMsgs = document.getElementById("logMsgs");
-            var eventMsgs = document.getElementById("eventMsgs");
             var agentMsgs = document.getElementById("agentMsgs");
+            var logMsgs = document.getElementById("logMsgs");
 
             console.log("LOG LOG");
 
@@ -43,21 +41,20 @@
             });
 
             connect.contact(subscribeToContactEvents);
-            connect.agent(subscribeToAgentEvents);
             function subscribeToContactEvents(contact) {
                 window.myCPP.contact = contact;
-                logInfoMsg("Subscribing to events for contact");
+                logMsgToScreen("Subscribing to events for contact");
                 if (contact.getActiveInitialConnection()
                         && contact.getActiveInitialConnection().getEndpoint()) {
-                    logInfoMsg("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString());
-                    displayToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
+                    logMsgToScreen("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString());
+                    displayMsgToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
                 } else {
-                    logInfoMsg("This is an existing contact for this agent");
+                    logMsgToScreen("This is an existing contact for this agent");
                 }
-                logInfoMsg("Contact is from queue " + contact.getQueue().name);
-                displayToAgent("Queue: " + contact.getQueue().name.toString());
-                logInfoMsg("Contact attributes are " + JSON.stringify(contact.getAttributes()));
-                displayToAgent("WWID: " + contact.getAttributes().get("WWID").toString());
+                logMsgToScreen("Contact is from queue " + contact.getQueue().name);
+                displayMsgToAgent("Queue: " + contact.getQueue().name.toString());
+                logMsgToScreen("Contact attributes are " + JSON.stringify(contact.getAttributes()));
+                displayMsgToAgent("WWID: " + contact.getAttributes().get("WWID").toString());
                 contact.onIncoming(handleContactIncoming);
                 contact.onAccepted(handleContactAccepted);
                 contact.onConnected(handleContactConnected);
@@ -65,96 +62,68 @@
             }
             function handleContactIncoming(contact) {
                 if (contact) {
-                    logInfoEvent("[contact.onIncoming] Contact is incoming. Contact state is " + contact.getStatus().type);
+                    logMsgToScreen("[contact.onIncoming] Contact is incoming. Contact state is " + contact.getStatus().type);
                 } else {
-                    logInfoEvent("[contact.onIncoming] Contact is incoming. Null contact passed to event handler");
+                    logMsgToScreen("[contact.onIncoming] Contact is incoming. Null contact passed to event handler");
                 }
             }
             function handleContactAccepted(contact) {
                 if (contact) {
-                    logInfoEvent("[contact.onAccepted] Contact accepted by agent. Contact state is " + contact.getStatus().type);
+                    logMsgToScreen("[contact.onAccepted] Contact accepted by agent. Contact state is " + contact.getStatus().type);
                 } else {
-                    logInfoEvent("[contact.onAccepted] Contact accepted by agent. Null contact passed to event handler");
+                    logMsgToScreen("[contact.onAccepted] Contact accepted by agent. Null contact passed to event handler");
                 }
             }
             function handleContactConnected(contact) {
                 if (contact) {
-                    logInfoEvent("[contact.onConnected] Contact connected to agent. Contact state is " + contact.getStatus().type);
+                    logMsgToScreen("[contact.onConnected] Contact connected to agent. Contact state is " + contact.getStatus().type);
                 } else {
-                    logInfoEvent("[contact.onConnected] Contact connected to agent. Null contact passed to event handler");
+                    logMsgToScreen("[contact.onConnected] Contact connected to agent. Null contact passed to event handler");
                 }
             }
             function handleContactEnded(contact) {
                 if (contact) {
-                    logInfoEvent("[contact.onEnded] Contact has ended. Contact state is " + contact.getStatus().type);
+                    logMsgToScreen("[contact.onEnded] Contact has ended. Contact state is " + contact.getStatus().type);
                 } else {
-                    logInfoEvent("[contact.onEnded] Contact has ended. Null contact passed to event handler");
+                    logMsgToScreen("[contact.onEnded] Contact has ended. Null contact passed to event handler");
                 }
             }
+
+
+            connect.agent(subscribeToAgentEvents);
             function subscribeToAgentEvents(agent) {
                 window.myCPP.agent = agent;
                 agentMsgs.innerHTML = 'Hi ' + agent.getName() + ' !\n';
-                logInfoMsg("Subscribing to events for agent " + agent.getName());
-                logInfoMsg("Agent is currently in status of " + agent.getStatus().name);
-                displayAgentStatus(agent.getStatus().name);
+                logMsgToScreen("Subscribing to events for agent " + agent.getName());
+                logMsgToScreen("Agent is currently in status of " + agent.getStatus().name);
                 agent.onRefresh(handleAgentRefresh);
                 agent.onRoutable(handleAgentRoutable);
                 agent.onNotRoutable(handleAgentNotRoutable);
                 agent.onOffline(handleAgentOffline);
             }
             function handleAgentRefresh(agent) {
-                logInfoEvent("[agent.onRefresh] Agent data refreshed. Agent status is " + agent.getStatus().name);
-                displayAgentStatus(agent.getStatus().name);
+                logMsgToScreen("[agent.onRefresh] Agent data refreshed. Agent status is " + agent.getStatus().name);
             }
             function handleAgentRoutable(agent) {
-                logInfoEvent("[agent.onRoutable] Agent is routable. Agent status is " + agent.getStatus().name);
-                displayAgentStatus(agent.getStatus().name);
+                logMsgToScreen("[agent.onRoutable] Agent is routable. Agent status is " + agent.getStatus().name);
             }
             function handleAgentNotRoutable(agent) {
-                logInfoEvent("[agent.onNotRoutable] Agent is online, but not routable. Agent status is " + agent.getStatus().name);
-                displayAgentStatus(agent.getStatus().name);
+                logMsgToScreen("[agent.onNotRoutable] Agent is online, but not routable. Agent status is " + agent.getStatus().name);
             }
             function handleAgentOffline(agent) {
-                logInfoEvent("[agent.onOffline] Agent is offline. Agent status is " + agent.getStatus().name);
-                displayAgentStatus(agent.getStatus().name);
+                logMsgToScreen("[agent.onOffline] Agent is offline. Agent status is " + agent.getStatus().name);
             }
 
-            function displayToAgent(msg) {
-                console.log("dta: " + msg);
-                agentMsgs.innerHTML = "" + String(agentMsgs.innerHTML) + String(msg) + "\n";
-            }
-
-            function logMsgToScreen(msg) {
-                console.log('lmts: ' + msg);
-                logMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + msg + '\n' + logMsgs.innerHTML;
-            }
-            function logEventToScreen(msg) {
-                console.log('lets: ' + msg);
-                eventMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + msg + '\n' + eventMsgs.innerHTML;
-            }
-            function logInfoMsg(msg) {
-                console.log('lim: ' + msg);
-                connect.getLog().info(msg);
-                logMsgToScreen(msg);
-            }
-            function logInfoEvent(eventMsg) {
-                console.log('lie: ' + msg);
-                connect.getLog().info(eventMsg);
-                logEventToScreen(eventMsg);
-            }
-            function displayAgentStatus(status) {
-                eventMsgs.innerHTML = 'Status: ' + status;
-            }
             function goAvailable() {
                 var routableState = window.myCPP.agent.getAgentStates().filter(function (state) {
                     return state.type === connect.AgentStateType.ROUTABLE;
                 })[0];
                 window.myCPP.agent.setState(routableState, {
                     success: function () {
-                        logInfoMsg("Set agent status to Available (routable) via Streams");
+                        logMsgToScreen("Set agent status to Available (routable) via Streams");
                     },
                     failure: function () {
-                        logInfoMsg("Failed to set agent status to Available (routable) via Streams");
+                        logMsgToScreen("Failed to set agent status to Available (routable) via Streams");
                     }
                 });
             }
@@ -164,20 +133,20 @@
                 })[0];
                 window.myCPP.agent.setState(offlineState, {
                     success: function () {
-                        logInfoMsg("Set agent status to Offline via Streams");
+                        logMsgToScreen("Set agent status to Offline via Streams");
                     },
                     failure: function () {
-                        logInfoMsg("Failed to set agent status to Offline via Streams");
+                        logMsgToScreen("Failed to set agent status to Offline via Streams");
                     }
                 });
             }
             function acceptContact() {
                 window.myCPP.contact.accept({
                     success: function () {
-                        logInfoMsg("Accepted contact via Streams");
+                        logMsgToScreen("Accepted contact via Streams");
                     },
                     failure: function () {
-                        logInfoMsg("Failed to accept contact via Streams");
+                        logMsgToScreen("Failed to accept contact via Streams");
                     }
                 });
             }
@@ -185,15 +154,39 @@
                 //cannot do contact.destroy(), can only destroy (hang-up) agent connection
                 window.myCPP.contact.getAgentConnection().destroy({
                     success: function () {
-                        logInfoMsg("Disconnected contact via Streams");
+                        logMsgToScreen("Disconnected contact via Streams");
                     },
                     failure: function () {
-                        logInfoMsg("Failed to disconnect contact via Streams");
+                        logMsgToScreen("Failed to disconnect contact via Streams");
                     }
                 });
             }
 
-        </script>
 
+
+            function displayMsgToAgent(msg) {
+                console.log("dta: " + msg);
+                agentMsgs.innerHTML = "" + String(agentMsgs.innerHTML) + String(msg) + "\n";
+            }
+
+            function logMsgToScreen(msg) {
+                console.log('lmts: ' + msg);
+                logMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + msg + '\n' + logMsgs.innerHTML;
+            }
+
+            //function logInfoMsg(msg) {
+            //    console.log('lim: ' + msg);
+            //    connect.getLog().info(msg);
+            //    logMsgToScreen(msg);
+            //}
+            //function logInfoEvent(eventMsg) {
+            //    console.log('lie: ' + msg);
+            //    connect.getLog().info(eventMsg);
+            //}
+            function displayAgentStatus(status) {
+                eventMsgs.innerHTML = 'Status: ' + status;
+            }
+
+        </script>
     </body>
 </html>
