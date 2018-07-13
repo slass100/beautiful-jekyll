@@ -2,14 +2,13 @@
  <html>
  <body>
  <div id="myApp">
- <h1>Connect Agent Desktop<h1>
- <h2>CCP + Data</h2>
+ <h1>AWS Connect - J&J GSD Agent Desktop<h1>
  </div>
  <div style="width: 800px; height: 500px; "> 
  <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
  <!--Amazon CCP will go here-->
  </div>
- <div id="statusDiv" style="float:right; width: 480px; min-width: 200px; height: 465px; min-height: 400px; ">
+ <div id="statusDiv" style="float:right; width: 460px; min-width: 200px; height: 465px; min-height: 400px; ">
  Text
  </div>
  </div>
@@ -51,10 +50,12 @@
         if (contact.getActiveInitialConnection()
             && contact.getActiveInitialConnection().getEndpoint()) {
             logInfoMsg("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
+			displayToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber)
         } else {
             logInfoMsg("This is an existing contact for this agent");
         }
         logInfoMsg("Contact is from queue " + contact.getQueue().name);
+		displayToAgent("Queue: " + contact.getQueue().name)
         logInfoMsg("Contact attributes are " + JSON.stringify(contact.getAttributes()));
         contact.onIncoming(handleContactIncoming);
         contact.onAccepted(handleContactAccepted);
@@ -116,7 +117,14 @@
         logInfoEvent("[agent.onOffline] Agent is offline. Agent status is " + agent.getStatus().name);
         displayAgentStatus(agent.getStatus().name);
     }
-    function logMsgToScreen(msg) {
+
+    function displayToAgent(msg) {
+        console.log('dta: ' + msg);
+        statusDiv.innerHTML = statusDiv.innerHTML + '<div>' +  + msg + '</div>\n' + statusDiv.innerHTML;
+    }
+	
+	
+	function logMsgToScreen(msg) {
         console.log('lmts: ' + msg);
         logMsgs.innerHTML = '<div>' + new Date().toLocaleTimeString() + ' ' + msg + '</div>\n' + logMsgs.innerHTML;
     }
