@@ -142,7 +142,7 @@
         logEventToScreen(eventMsg);
     }
     function displayAgentStatus(status) {
-        agentStatusDiv.innerHTML = 'Status: <span style="font-weight: bold">' + status + '</span>';
+        eventMsgs.innerHTML = 'Status: <span style="font-weight: bold">' + status + '</span>';
     }
     function goAvailable() {
         var routableState = window.myCPP.agent.getAgentStates().filter(function (state) {
