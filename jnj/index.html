@@ -9,7 +9,6 @@
  <!--Amazon CCP will go here-->
  </div>
  <div id="statusDiv" style="float:right; width: 460px; min-width: 200px; height: 465px; min-height: 400px; ">
- Text
  </div>
  </div>
  <br/>
@@ -50,12 +49,12 @@
         if (contact.getActiveInitialConnection()
             && contact.getActiveInitialConnection().getEndpoint()) {
             logInfoMsg("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
-			displayToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber)
+            displayToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber)
         } else {
             logInfoMsg("This is an existing contact for this agent");
         }
         logInfoMsg("Contact is from queue " + contact.getQueue().name);
-		displayToAgent("Queue: " + contact.getQueue().name)
+        displayToAgent("Queue: " + contact.getQueue().name)
         logInfoMsg("Contact attributes are " + JSON.stringify(contact.getAttributes()));
         contact.onIncoming(handleContactIncoming);
         contact.onAccepted(handleContactAccepted);
@@ -123,8 +122,7 @@
         statusDiv.innerHTML = statusDiv.innerHTML + '<div>' +  + msg + '</div>\n' + statusDiv.innerHTML;
     }
 	
-	
-	function logMsgToScreen(msg) {
+    function logMsgToScreen(msg) {
         console.log('lmts: ' + msg);
         logMsgs.innerHTML = '<div>' + new Date().toLocaleTimeString() + ' ' + msg + '</div>\n' + logMsgs.innerHTML;
     }
