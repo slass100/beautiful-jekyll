@@ -5,7 +5,7 @@
     </head>
     <body>
         <div id="myApp">
-            <h1>AWS Connect - J&amp;J GSD Agent Desktop 7</h1>
+            <h1>AWS Connect - J&amp;J GSD Agent Desktop 8</h1>
         </div>
         <div style="width: 800px; height: 500px; "> 
             <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
@@ -92,27 +92,38 @@
                 agent.onNotRoutable(eventAgentNotRoutable);
                 agent.onOffline(eventAgentOffline);
                 agent.onError(eventAgentError);
+                agent.onAfterCallWork(eventAfterCallWork);
             }
             function eventAgentRefresh(agent) {
-                logMsgToScreen("[agent.onRefresh] Agent data refreshed. Agent status is " + agent.getStatus().name);
-                logMsgToScreen("[agent.onRefresh] " + JSON.stringify(agent));
+                logMsgToScreen("[agent.onRefresh] " + agentToString(agent));
             }
             function eventAgentRoutable(agent) {
-                logMsgToScreen("[agent.onRoutable] Agent is routable. Agent status is " + agent.getStatus().name);
-                logMsgToScreen("[agent.onRoutable] " + JSON.stringify(agent));
+                logMsgToScreen("[agent.onRoutable] " + agentToString(agent));
             }
             function eventAgentNotRoutable(agent) {
-                logMsgToScreen("[agent.onNotRoutable] Agent is online, but not routable. Agent status is " + agent.getStatus().name);
-                logMsgToScreen("[agent.onNotRoutable] " + JSON.stringify(agent));
+                logMsgToScreen("[agent.onNotRoutable] " + agentToString(agent));
             }
             function eventAgentOffline(agent) {
-                logMsgToScreen("[agent.onOffline] Agent is offline. Agent status is " + agent.getStatus().name);
-                logMsgToScreen("[agent.onOffline] " + JSON.stringify(agent));
+                logMsgToScreen("[agent.onOffline] " + agentToString(agent));
             }
             function eventAgentError(agent) {
-                logMsgToScreen("[agent.onError] Agent is offline. Agent status is " + agent.getStatus().name);
-                logMsgToScreen("[agent.onError] " + JSON.stringify(agent));
+                logMsgToScreen("[agent.onError] " + agentToString(agent));
             }
+            function eventAfterCallWork(agent) {
+                logMsgToScreen("[agent.onAfterCallWork] " + agentToString(agent));
+            }
+            function agentToString(agent) {
+                rv = [];
+                if (agent) {
+                    return "[" + rv.join(",");
+                }
+                state = agent.getState();
+                rv.push("state:" + state);
+                
+                return "[" + rv.join(",");
+            }
+            
+            
             function goAvailable() {
                 var routableState = window.myCPP.agent.getAgentStates().filter(function (state) {
                     return state.type === connect.AgentStateType.ROUTABLE;
