@@ -121,7 +121,7 @@
 
     function displayToAgent(msg) {
         console.log("dta: " + msg);
-        agentMsgs.innerHTML = "" +  String(agentMsgs.innerHTML) + String(msg) + "\n";
+        agentMsgs.innerHTML = "" +  String(agentMsgs.innerHTML).trim() + String(msg) + "\n";
     }
 	
     function logMsgToScreen(msg) {
