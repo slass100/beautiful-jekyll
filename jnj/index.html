@@ -23,15 +23,11 @@
         <script type="text/javascript">
 
             window.myCPP = window.myCPP || {};
-
             //var ccpUrl = "https://atosjnjsandbox.awsapps.com/connect/ccp#/";
             var ccpUrl = "https://jnj-gsd-us.awsapps.com/connect/ccp#/";
-
             var agentMsgs = document.getElementById("agentMsgs");
             var logMsgs = document.getElementById("logMsgs");
-
             console.log("LOG LOG");
-
             connect.core.initCCP(containerDiv, {
                 ccpUrl: ccpUrl,
                 loginPopup: false,
@@ -39,7 +35,6 @@
                     allowFramedSoftphone: true
                 }
             });
-
             connect.contact(subscribeToContactEvents);
             function subscribeToContactEvents(contact) {
                 window.myCPP.contact = contact;
@@ -63,30 +58,27 @@
             function handleContactIncoming(contact) {
                 if (contact) {
                     logMsgToScreen("[contact.onIncoming] Contact is incoming. Contact state is " + contact.getStatus().type);
-                } else {
-                    logMsgToScreen("[contact.onIncoming] Contact is incoming. Null contact passed to event handler");
                 }
+                logMsgToScreen("[contact.onIncoming] " + JSON.stringify(contact));
             }
             function handleContactAccepted(contact) {
                 if (contact) {
                     logMsgToScreen("[contact.onAccepted] Contact accepted by agent. Contact state is " + contact.getStatus().type);
-                } else {
-                    logMsgToScreen("[contact.onAccepted] Contact accepted by agent. Null contact passed to event handler");
                 }
+                logMsgToScreen("[contact.onAccepted] " + JSON.stringify(contact));
             }
             function handleContactConnected(contact) {
                 if (contact) {
                     logMsgToScreen("[contact.onConnected] Contact connected to agent. Contact state is " + contact.getStatus().type);
-                } else {
-                    logMsgToScreen("[contact.onConnected] Contact connected to agent. Null contact passed to event handler");
                 }
+                logMsgToScreen("[contact.onConnected] " + JSON.stringify(contact));
+            }
             }
             function handleContactEnded(contact) {
                 if (contact) {
                     logMsgToScreen("[contact.onEnded] Contact has ended. Contact state is " + contact.getStatus().type);
-                } else {
-                    logMsgToScreen("[contact.onEnded] Contact has ended. Null contact passed to event handler");
                 }
+                logMsgToScreen("[contact.onEnded] " + JSON.stringify(contact));
             }
 
 
@@ -103,15 +95,19 @@
             }
             function handleAgentRefresh(agent) {
                 logMsgToScreen("[agent.onRefresh] Agent data refreshed. Agent status is " + agent.getStatus().name);
+                logMsgToScreen("[agent.onRefresh] " + JSON.stringify(agent));
             }
             function handleAgentRoutable(agent) {
                 logMsgToScreen("[agent.onRoutable] Agent is routable. Agent status is " + agent.getStatus().name);
+                logMsgToScreen("[agent.onRefresh] " + JSON.stringify(agent));
             }
             function handleAgentNotRoutable(agent) {
                 logMsgToScreen("[agent.onNotRoutable] Agent is online, but not routable. Agent status is " + agent.getStatus().name);
+                logMsgToScreen("[agent.onRefresh] " + JSON.stringify(agent));
             }
             function handleAgentOffline(agent) {
                 logMsgToScreen("[agent.onOffline] Agent is offline. Agent status is " + agent.getStatus().name);
+                logMsgToScreen("[agent.onRefresh] " + JSON.stringify(agent));
             }
 
             function goAvailable() {
