@@ -5,7 +5,7 @@
     </head>
     <body>
         <div id="myApp">
-            <h1>AWS Connect - J&amp;J GSD Agent Desktop 6</h1>
+            <h1>AWS Connect - J&amp;J GSD Agent Desktop 7</h1>
         </div>
         <div style="width: 800px; height: 500px; "> 
             <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
@@ -50,30 +50,30 @@
                 displayMsgToAgent("Queue: " + contact.getQueue().name.toString());
                 logMsgToScreen("Contact attributes are " + JSON.stringify(contact.getAttributes()));
                 displayMsgToAgent("WWID: " + contact.getAttributes().get("WWID").toString());
-                contact.onIncoming(handleContactIncoming);
-                contact.onAccepted(handleContactAccepted);
-                contact.onConnected(handleContactConnected);
-                contact.onEnded(handleContactEnded);
+                contact.onIncoming(eventContactIncoming);
+                contact.onAccepted(eventContactAccepted);
+                contact.onConnected(eventContactConnected);
+                contact.onEnded(eventContactEnded);
             }
-            function handleContactIncoming(contact) {
+            function eventContactIncoming(contact) {
                 if (contact) {
                     logMsgToScreen("[contact.onIncoming] Contact is incoming. Contact state is " + contact.getStatus().type);
                 }
                 logMsgToScreen("[contact.onIncoming] " + JSON.stringify(contact));
             }
-            function handleContactAccepted(contact) {
+            function eventContactAccepted(contact) {
                 if (contact) {
                     logMsgToScreen("[contact.onAccepted] Contact accepted by agent. Contact state is " + contact.getStatus().type);
                 }
                 logMsgToScreen("[contact.onAccepted] " + JSON.stringify(contact));
             }
-            function handleContactConnected(contact) {
+            function eventContactConnected(contact) {
                 if (contact) {
                     logMsgToScreen("[contact.onConnected] Contact connected to agent. Contact state is " + contact.getStatus().type);
                 }
                 logMsgToScreen("[contact.onConnected] " + JSON.stringify(contact));
             }
-            function handleContactEnded(contact) {
+            function eventContactEnded(contact) {
                 if (contact) {
                     logMsgToScreen("[contact.onEnded] Contact has ended. Contact state is " + contact.getStatus().type);
                 }
@@ -87,28 +87,32 @@
                 agentMsgs.innerHTML = 'Hi ' + agent.getName() + ' !\n';
                 logMsgToScreen("Subscribing to events for agent " + agent.getName());
                 logMsgToScreen("Agent is currently in status of " + agent.getStatus().name);
-                agent.onRefresh(handleAgentRefresh);
-                agent.onRoutable(handleAgentRoutable);
-                agent.onNotRoutable(handleAgentNotRoutable);
-                agent.onOffline(handleAgentOffline);
+                agent.onRefresh(eventAgentRefresh);
+                agent.onRoutable(eventAgentRoutable);
+                agent.onNotRoutable(eventAgentNotRoutable);
+                agent.onOffline(eventAgentOffline);
+                agent.onError(eventAgentError);
             }
-            function handleAgentRefresh(agent) {
+            function eventAgentRefresh(agent) {
                 logMsgToScreen("[agent.onRefresh] Agent data refreshed. Agent status is " + agent.getStatus().name);
                 logMsgToScreen("[agent.onRefresh] " + JSON.stringify(agent));
             }
-            function handleAgentRoutable(agent) {
+            function eventAgentRoutable(agent) {
                 logMsgToScreen("[agent.onRoutable] Agent is routable. Agent status is " + agent.getStatus().name);
-                logMsgToScreen("[agent.onRefresh] " + JSON.stringify(agent));
+                logMsgToScreen("[agent.onRoutable] " + JSON.stringify(agent));
             }
-            function handleAgentNotRoutable(agent) {
+            function eventAgentNotRoutable(agent) {
                 logMsgToScreen("[agent.onNotRoutable] Agent is online, but not routable. Agent status is " + agent.getStatus().name);
-                logMsgToScreen("[agent.onRefresh] " + JSON.stringify(agent));
+                logMsgToScreen("[agent.onNotRoutable] " + JSON.stringify(agent));
             }
-            function handleAgentOffline(agent) {
+            function eventAgentOffline(agent) {
                 logMsgToScreen("[agent.onOffline] Agent is offline. Agent status is " + agent.getStatus().name);
-                logMsgToScreen("[agent.onRefresh] " + JSON.stringify(agent));
+                logMsgToScreen("[agent.onOffline] " + JSON.stringify(agent));
             }
-
+            function eventAgentError(agent) {
+                logMsgToScreen("[agent.onError] Agent is offline. Agent status is " + agent.getStatus().name);
+                logMsgToScreen("[agent.onError] " + JSON.stringify(agent));
+            }
             function goAvailable() {
                 var routableState = window.myCPP.agent.getAgentStates().filter(function (state) {
                     return state.type === connect.AgentStateType.ROUTABLE;
