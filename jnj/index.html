@@ -13,9 +13,9 @@
             </div>
             <textarea id="agentMsgs" style="float:right; width: 460px; min-width: 200px; height: 465px; min-height: 400px; "></textarea>
         </div>
-        <br/>
+        <br>
         <textarea id="logMsgs" rows="6" cols="120"></textarea>
-        <br/>
+        <br>
         <textarea id="eventMsgs" rows="6" cols="120"></textarea>
         <!-- see https://github.com/aws/amazon-connect-streams -->
 
@@ -93,7 +93,7 @@
             }
             function subscribeToAgentEvents(agent) {
                 window.myCPP.agent = agent;
-                agentMsgs.innerHTML = '<h3>Hi ' + agent.getName() + '!</h3>\n';
+                agentMsgs.innerHTML = 'Hi ' + agent.getName() + ' !\n';
                 logInfoMsg("Subscribing to events for agent " + agent.getName());
                 logInfoMsg("Agent is currently in status of " + agent.getStatus().name);
                 displayAgentStatus(agent.getStatus().name);
@@ -126,11 +126,11 @@
 
             function logMsgToScreen(msg) {
                 console.log('lmts: ' + msg);
-                logMsgs.innerHTML = '<div>' + new Date().toLocaleTimeString() + ' ' + msg + '</div>\n' + logMsgs.innerHTML;
+                logMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + msg + '\n' + logMsgs.innerHTML;
             }
             function logEventToScreen(msg) {
                 console.log('lets: ' + msg);
-                eventMsgs.innerHTML = '<div>' + new Date().toLocaleTimeString() + ' ' + msg + '</div>\n' + eventMsgs.innerHTML;
+                eventMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + msg + '\n' + eventMsgs.innerHTML;
             }
             function logInfoMsg(msg) {
                 console.log('lim: ' + msg);
@@ -143,7 +143,7 @@
                 logEventToScreen(eventMsg);
             }
             function displayAgentStatus(status) {
-                eventMsgs.innerHTML = 'Status: <span style="font-weight: bold">' + status + '</span>';
+                eventMsgs.innerHTML = 'Status: ' + status;
             }
             function goAvailable() {
                 var routableState = window.myCPP.agent.getAgentStates().filter(function (state) {
