@@ -5,7 +5,7 @@
     </head>
     <body>
         <div id="myApp">
-            <h1>AWS Connect - J&amp;J GSD Agent Desktop 1</h1>
+            <h1>AWS Connect - J&amp;J GSD Agent Desktop 2</h1>
         </div>
         <div style="width: 800px; height: 500px; "> 
             <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
@@ -50,35 +50,42 @@
                 displayMsgToAgent("Queue: " + contact.getQueue().name.toString());
                 logMsgToScreen("Contact attributes are " + JSON.stringify(contact.getAttributes()));
                 displayMsgToAgent("WWID: " + contact.getAttributes().get("WWID").toString());
+                contact.onRefresh(eventContactRefresh);
                 contact.onIncoming(eventContactIncoming);
                 contact.onAccepted(eventContactAccepted);
                 contact.onConnected(eventContactConnected);
                 contact.onEnded(eventContactEnded);
             }
+            function eventContactRefresh(contact) {
+                logMsgToScreen("[contact.onRefresh] " + contactToString(contact));
+            }
             function eventContactIncoming(contact) {
-                if (contact) {
-                    logMsgToScreen("[contact.onIncoming] Contact is incoming. Contact state is " + contact.getStatus().type);
-                }
-                logMsgToScreen("[contact.onIncoming] " + JSON.stringify(contact));
+                logMsgToScreen("[contact.onIncoming] " + contactToString(contact));
             }
             function eventContactAccepted(contact) {
-                if (contact) {
-                    logMsgToScreen("[contact.onAccepted] Contact accepted by agent. Contact state is " + contact.getStatus().type);
-                }
-                logMsgToScreen("[contact.onAccepted] " + JSON.stringify(contact));
+                logMsgToScreen("[contact.onAccepted] " + contactToString(contact));
             }
             function eventContactConnected(contact) {
-                if (contact) {
-                    logMsgToScreen("[contact.onConnected] Contact connected to agent. Contact state is " + contact.getStatus().type);
-                }
-                logMsgToScreen("[contact.onConnected] " + JSON.stringify(contact));
+                logMsgToScreen("[contact.onContactConnected] " + contactToString(contact));
             }
             function eventContactEnded(contact) {
-                if (contact) {
-                    logMsgToScreen("[contact.onEnded] Contact has ended. Contact state is " + contact.getStatus().type);
-                }
-                logMsgToScreen("[contact.onEnded] " + JSON.stringify(contact));
+                logMsgToScreen("[contact.onEnded] " + contactToString(contact));
             }
+            function contactToString(contact) {
+                rv = [];
+                if (!contact) {
+                    return "[Contact[nil]]";
+                }
+                id = contact.getContactId();
+                rv.push("id:" + id);
+                type = contact.getType();
+                rv.push("type:" + type);
+                queue = contact.getQueue().name;
+                rv.push("queue:" + queue);
+                rv.push("attributes:" + JSON.stringify(contact.getAttributes()));
+                return "[Contact[" + rv.join(",") + "]]";
+            }
+
 
 
             connect.agent(subscribeToAgentEvents);
@@ -115,7 +122,7 @@
             function agentToString(agent) {
                 rv = [];
                 if (!agent) {
-                    return "[" + rv.join(",");
+                    return "[Agent[nil]]";
                 }
                 state = agent.getState().name;
                 rv.push("state:" + state);
@@ -123,7 +130,7 @@
                 config = agent.getConfiguration();
                 rv.push("name:" + config.name);
                 rv.push("user:" + config.username);
-                return "[" + rv.join(",") + "]";
+                return "[Agent[" + rv.join(",") + "]]";
             }
 
 
