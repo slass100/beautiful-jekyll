@@ -57,6 +57,7 @@
         logInfoMsg("Contact is from queue " + contact.getQueue().name);
         displayToAgent("Queue: " + contact.getQueue().name.toString())
         logInfoMsg("Contact attributes are " + JSON.stringify(contact.getAttributes()));
+        displayToAgent("WWID: " + contact.getAttributes().get("WWID"))
         contact.onIncoming(handleContactIncoming);
         contact.onAccepted(handleContactAccepted);
         contact.onConnected(handleContactConnected);
@@ -120,7 +121,7 @@
 
     function displayToAgent(msg) {
         console.log("dta: " + msg);
-        agentMsgs.innerHTML = "" +  String(agentMsgs.innerHTML) + "<div>" + String(msg) + "</div>\n";
+        agentMsgs.innerHTML = "" +  String(agentMsgs.innerHTML) + String(msg) + "\n";
     }
 	
     function logMsgToScreen(msg) {
