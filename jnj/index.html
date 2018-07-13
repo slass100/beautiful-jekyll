@@ -8,7 +8,7 @@
  <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
  <!--Amazon CCP will go here-->
  </div>
- <div id="statusDiv" style="float:right; width: 460px; min-width: 200px; height: 465px; min-height: 400px; ">
+ <div id="agentMsgs" style="float:right; width: 460px; min-width: 200px; height: 465px; min-height: 400px; ">
  </div>
  </div>
  <br/>
@@ -30,6 +30,7 @@
   
   var logMsgs = document.getElementById("logMsgs");
   var eventMsgs = document.getElementById("eventMsgs");
+  var agentMsgs = document.getElementById("agentMsgs");
 
   console.log("LOG LOG");
   
@@ -119,7 +120,7 @@
 
     function displayToAgent(msg) {
         console.log("dta: " + msg);
-        statusDiv.innerHTML = "" +  statusDiv.innerHTML + "<div>" +  + String(msg) + "</div>\n";
+        agentMsgs.innerHTML = "" +  agentMsgs.innerHTML + "<div>" +  + String(msg) + "</div>\n";
     }
 	
     function logMsgToScreen(msg) {
