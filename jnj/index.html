@@ -90,7 +90,7 @@
     }
     function subscribeToAgentEvents(agent) {
         window.myCPP.agent = agent;
-        agentMsgs.innerHTML = '<h3>Hi ' + agent.getName() + '!</h3>';
+        agentMsgs.innerHTML = '<h3>Hi ' + agent.getName() + '!</h3>\n';
         logInfoMsg("Subscribing to events for agent " + agent.getName());
         logInfoMsg("Agent is currently in status of " + agent.getStatus().name);
         displayAgentStatus(agent.getStatus().name);
