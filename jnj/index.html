@@ -8,15 +8,12 @@
  <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
  <!--Amazon CCP will go here-->
  </div>
- <textarea id="agentMsgs" style="float:right; width: 460px; min-width: 200px; height: 465px; min-height: 400px; ">
- </textarea>
+ <textarea id="agentMsgs" style="float:right; width: 460px; min-width: 200px; height: 465px; min-height: 400px; "></textarea>
  </div>
  <br/>
- <textarea id="logMsgs" rows="6" cols="120">
- </textarea>
+ <textarea id="logMsgs" rows="6" cols="120"></textarea>
  <br/>
- <textarea id="eventMsgs" rows="6" cols="120">
- </textarea>
+ <textarea id="eventMsgs" rows="6" cols="120"></textarea>
  </body>
  </html>
  <!-- see https://github.com/aws/amazon-connect-streams --->
@@ -57,7 +54,7 @@
         logInfoMsg("Contact is from queue " + contact.getQueue().name);
         displayToAgent("Queue: " + contact.getQueue().name.toString())
         logInfoMsg("Contact attributes are " + JSON.stringify(contact.getAttributes()));
-        displayToAgent("WWID: " + contact.getAttributes().get("WWID"))
+        displayToAgent("WWID: " + contact.getAttributes().get("WWID").toString())
         contact.onIncoming(handleContactIncoming);
         contact.onAccepted(handleContactAccepted);
         contact.onConnected(handleContactConnected);
@@ -121,7 +118,7 @@
 
     function displayToAgent(msg) {
         console.log("dta: " + msg);
-        agentMsgs.innerHTML = "" +  String(agentMsgs.innerHTML).trim() + String(msg) + "\n";
+        agentMsgs.innerHTML = "" +  String(agentMsgs.innerHTML) + String(msg) + "\n";
     }
 	
     function logMsgToScreen(msg) {
