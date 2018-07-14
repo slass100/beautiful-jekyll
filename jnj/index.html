@@ -5,7 +5,7 @@
     </head>
     <body>
         <div id="myApp">
-            <h1>AWS Connect - J&amp;J GSD Agent Desktop 1</h1>
+            <h1>AWS Connect - J&amp;J GSD Agent Desktop 2</h1>
         </div>
         <div style="width: 800px; height: 500px; "> 
             <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
@@ -53,7 +53,7 @@
                 displayMsgToAgent("Contact CA: " + ca.toString());
                 displayMsgToAgent("Contact CA1: " + ca.constructor.name);
                 displayMsgToAgent("Contact CA2: " + ca.constructor.toString());
-                displayMsgToAgent("WWID: " + contact.getAttributes().WWID);
+                displayMsgToAgent("WWID: " + contact.getAttributes().WWID.value);
                 displayMsgToAgent("Contact OK");
                 contact.onRefresh(eventContactRefresh);
                 contact.onIncoming(eventContactIncoming);
