@@ -5,7 +5,7 @@
     </head>
     <body>
         <div id="myApp">
-            <h1>AWS Connect - J&amp;J GSD Agent Desktop 6</h1>
+            <h1>AWS Connect - J&amp;J GSD Agent Desktop 7</h1>
         </div>
         <div style="width: 800px; height: 500px; "> 
             <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
@@ -68,6 +68,7 @@
                 contact.onAccepted(eventContactAccepted);
                 contact.onConnected(eventContactConnected);
                 contact.onEnded(eventContactEnded);
+                displayMsgToAgent('URL  <a href="https://www.w3schools.com">Visit W3Schools</a>');
             }
             function eventContactRefresh(contact) {
                 logMsgToScreen("[contact.onRefresh] " + contactToString(contact));
@@ -116,7 +117,7 @@
                 agent.onAfterCallWork(eventAfterCallWork);
             }
             function eventAgentRefresh(agent) {
-                logMsgToScreen("[agent.onRefresh] " + agentToString(agent));
+                //logMsgToScreen("[agent.onRefresh] " + agentToString(agent));
             }
             function eventAgentRoutable(agent) {
                 logMsgToScreen("[agent.onRoutable] " + agentToString(agent));
@@ -225,7 +226,7 @@
                 agentMsgs.innerHTML = "";
             }
             function setURL1(msg) {
-                url.innerHTML = msg;
+                url1.innerHTML = msg;
             }
 
         </script>
