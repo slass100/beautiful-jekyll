@@ -5,7 +5,7 @@
     </head>
     <body>
         <div id="myApp">
-            <h1>AWS Connect - J&amp;J GSD Agent Desktop 2</h1>
+            <h1>AWS Connect - J&amp;J GSD Agent Desktop 3</h1>
         </div>
         <div style="width: 800px; height: 500px; "> 
             <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
@@ -14,7 +14,7 @@
             <textarea id="agentMsgs" style="float:right; width: 460px; min-width: 200px; height: 460px; min-height: 400px; "></textarea>
         </div>
         <br>
-        <textarea id="logMsgs" rows="12" cols="120"></textarea>
+        <textarea id="logMsgs" rows="12" cols="100"></textarea>
         <br>
 
         <!-- see https://github.com/aws/amazon-connect-streams -->
@@ -50,10 +50,11 @@
                 displayMsgToAgent("Queue: " + contact.getQueue().name.toString());
                 logMsgToScreen("Contact attributes are " + JSON.stringify(contact.getAttributes()));
                 var ca = contact.getAttributes();
-                displayMsgToAgent("Contact CA: " + ca.toString());
-                displayMsgToAgent("Contact CA1: " + ca.constructor.name);
-                displayMsgToAgent("Contact CA2: " + ca.constructor.toString());
-                displayMsgToAgent("WWID: " + contact.getAttributes().WWID.value);
+                wwid = "unknown";
+                if (ca && ca.WWID) {
+                    wwid = ca.WWID.value;
+                }
+                displayMsgToAgent("WWID: " + wwid);
                 displayMsgToAgent("Contact OK");
                 contact.onRefresh(eventContactRefresh);
                 contact.onIncoming(eventContactIncoming);
