@@ -5,7 +5,7 @@
     </head>
     <body>
         <div id="myApp">
-            <h1>AWS Connect - J&amp;J GSD Agent Desktop 5</h1>
+            <h1>AWS Connect - J&amp;J GSD Agent Desktop 6</h1>
         </div>
         <div style="width: 800px; height: 500px; "> 
             <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
@@ -51,6 +51,7 @@
                 logMsgToScreen("Contact attributes are " + JSON.stringify(contact.getAttributes()));
                 var ca = contact.getAttributes();
                 //displayMsgToAgent("WWID: " + contact.getAttributes().get("WWID").toString());
+                displayMsgToAgent("Contact: " + ca.get("WWID"));
                 displayMsgToAgent("Contact OK");
                 contact.onRefresh(eventContactRefresh);
                 contact.onIncoming(eventContactIncoming);
