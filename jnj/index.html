@@ -5,7 +5,7 @@
     </head>
     <body>
         <div id="myApp">
-            <h1>AWS Connect - J&amp;J GSD Agent Desktop 3</h1>
+            <h1>AWS Connect - J&amp;J GSD Agent Desktop 4</h1>
             <a href='https://jnj-gsd-us.awsapps.com/connect/home'>Login</a>
         </div>
         <div style="width: 800px; height: 500px; "> 
@@ -63,7 +63,7 @@
                     wwid = ca.WWID.value;
                 }
                 displayMsgToAgent("WWID: " + wwid);
-                u1 = "https://jnj-gsd-us.awsapps.com/connect/home";
+                u1 = "https://jnjsandbox5.service-now.com/nav_to.do?uri=%2Fincident.do%3Fsys_id%3D-1%26sysparm_query%3Dconnection_id%3D12345%5Ecti_rule%3Dcti_genesys%5Econtact_type%3Dphone%5Eu_service_location%3DIVR%2520Option:%2520%2520%2520:%2520%5Eu_cti_connection_id%3Df67d9d96131b17407cdc52722244b03a";
                 setURL1("<a href='" + u1 +"'>" + u1 + "</a>");
                 contact.onRefresh(eventContactRefresh);
                 contact.onIncoming(eventContactIncoming);
