@@ -12,13 +12,17 @@
             <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
                 <!--Amazon CCP will go here-->
             </div>
-            <div style="float:right; width: 460px; min-width: 200px; height: 260px; min-height: 200px;">
+            <div style="float:right; width: 460px; min-width: 200px; height: 260px; min-height: 150px;">
                 <textarea id="agentMsgs" rows="12" cols="60"></textarea>
                 <br>
                 URL1: <div id="url1"></div>
                 <br>
                 URL2:
-            </div>        </div>
+				<br>
+				<textarea id="historyMsgs" rows="12" cols="60"></textarea>
+            </div>
+	
+		</div>
         <br>
         <textarea id="logMsgs" rows="12" cols="100"></textarea>
         <br>
@@ -32,6 +36,7 @@
             //var ccpUrl = "https://atosjnjsandbox.awsapps.com/connect/ccp#/";
             var ccpUrl = "https://jnj-gsd-us.awsapps.com/connect/ccp#/";
             var agentMsgs = document.getElementById("agentMsgs");
+            var historyMsgs = document.getElementById("historyMsgs");
             var logMsgs = document.getElementById("logMsgs");
             var url1 = document.getElementById("url1");
 
@@ -73,7 +78,7 @@
                 contact.onAccepted(eventContactAccepted);
                 contact.onConnected(eventContactConnected);
                 contact.onEnded(eventContactEnded);
-                displayMsgToAgent('Open URLs in new tab');
+                //displayMsgToAgent('Open URLs in new tab');
             }
             function eventContactRefresh(contact) {
                 logMsgToScreen("[contact.onRefresh] " + contactToString(contact));
@@ -89,6 +94,9 @@
             }
             function eventContactConnected(contact) {
                 logMsgToScreen("[contact.onContactConnected] " + contactToString(contact));
+				if (contact) {
+					logMsgToHistory(contact.getQueue().name + ": " + contact.getAttributes().CustomerNumber.value);
+				}
             }
             function eventContactEnded(contact) {
                 logMsgToScreen("[contact.onEnded] " + contactToString(contact));
@@ -207,7 +215,12 @@
             }
 
 
+            function displayMsgToHistory(msg) {
+                console.log("hist: " + msg);
+                historyMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + String(historyMsgs.innerHTML) + String(msg) + "\n";
+            }
 
+			
             function displayMsgToAgent(msg) {
                 console.log("dta: " + msg);
                 agentMsgs.innerHTML = "" + String(agentMsgs.innerHTML) + String(msg) + "\n";
