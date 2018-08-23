@@ -15,9 +15,11 @@
             <div style="float:right; width: 460px; min-width: 200px; height: 260px; min-height: 150px;">
                 <textarea id="agentMsgs" rows="12" cols="60"></textarea>
                 <br>
+				<form>
+				<input id="openURL" name="openURL" type="checkbox" />Launch URL
+				</form>
+				<br>
                 URL1: <div id="url1"></div>
-                <br>
-                URL2:
                 <br>
                 <textarea id="historyMsgs" rows="12" cols="60"></textarea>
             </div>
@@ -38,6 +40,7 @@
             var agentMsgs = document.getElementById("agentMsgs");
             var historyMsgs = document.getElementById("historyMsgs");
             var logMsgs = document.getElementById("logMsgs");
+            var openURLCB = document.getElementById("openURL");
             var url1 = document.getElementById("url1");
 
             console.log("LOG LOG");
@@ -89,7 +92,9 @@
             function eventContactAccepted(contact) {
                 logMsgToScreen("[contact.onAccepted] " + contactToString(contact));
                 logMsgToScreen("[contact.onAccepted] window.open");
-                window.open(window.url);
+				if (openURLCB) {
+                  window.open(window.url);
+				}
 
             }
             function eventContactConnected(contact) {
