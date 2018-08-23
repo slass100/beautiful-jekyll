@@ -18,11 +18,11 @@
                 URL1: <div id="url1"></div>
                 <br>
                 URL2:
-				<br>
-				<textarea id="historyMsgs" rows="12" cols="60"></textarea>
+                <br>
+                <textarea id="historyMsgs" rows="12" cols="60"></textarea>
             </div>
-	
-		</div>
+    
+        </div>
         <br>
         <textarea id="logMsgs" rows="12" cols="100"></textarea>
         <br>
@@ -94,9 +94,9 @@
             }
             function eventContactConnected(contact) {
                 logMsgToScreen("[contact.onContactConnected] " + contactToString(contact));
-				if (contact) {
-					logMsgToHistory(contact.getQueue().name + ": " + contact.getAttributes().CustomerNumber.value);
-				}
+                if (contact) {
+                    displayMsgToHistory(contact.getQueue().name + ": " + contact.getAttributes().CustomerNumber.value);
+                }
             }
             function eventContactEnded(contact) {
                 logMsgToScreen("[contact.onEnded] " + contactToString(contact));
@@ -220,7 +220,7 @@
                 historyMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + String(historyMsgs.innerHTML) + String(msg) + "\n";
             }
 
-			
+            
             function displayMsgToAgent(msg) {
                 console.log("dta: " + msg);
                 agentMsgs.innerHTML = "" + String(agentMsgs.innerHTML) + String(msg) + "\n";
