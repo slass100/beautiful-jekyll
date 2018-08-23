@@ -92,7 +92,7 @@
             function eventContactAccepted(contact) {
                 logMsgToScreen("[contact.onAccepted] " + contactToString(contact));
                 logMsgToScreen("[contact.onAccepted] window.open");
-				if (openURLCB) {
+				if (openURLCB.checked) {
                   window.open(window.url);
 				}
 
@@ -222,7 +222,7 @@
 
             function displayMsgToHistory(msg) {
                 console.log("hist: " + msg);
-                historyMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + String(historyMsgs.innerHTML) + String(msg) + "\n";
+                historyMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + String(msg) + "\n" + String(historyMsgs.innerHTML);
             }
 
             
