@@ -233,7 +233,7 @@
 
             function logMsgToScreen(msg) {
                 console.log('lmts: ' + msg);
-                logMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + msg + '\n' + logMsgs.innerHTML;
+                logMsgs.innerHTML =  logMsgs.innerHTML + new Date().toLocaleTimeString() + ' ' + msg + '\n';
             }
 
             //function logInfoMsg(msg) {
