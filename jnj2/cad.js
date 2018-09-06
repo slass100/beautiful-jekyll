@@ -38,10 +38,10 @@
                 }
                 displayMsgToAgent("WWID: " + window.wwid);
                 window.url = "unknown";
-                if (ca && ca.URL) {
-                    window.url = ca.URL.value;
-                }
-                setURL1("<a href='" + window.url +"'>" + window.url + "</a>");
+                //if (ca && ca.URL) {
+                //    window.url = ca.URL.value;
+                //}
+                //setURL1("<a href='" + window.url +"'>" + window.url + "</a>");
                 contact.onRefresh(eventContactRefresh);
                 contact.onIncoming(eventContactIncoming);
                 contact.onAccepted(eventContactAccepted);
