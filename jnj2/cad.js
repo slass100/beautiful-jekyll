@@ -23,8 +23,10 @@
                 logMsgToScreen("Subscribing to events for contact");
                 if (contact.getActiveInitialConnection()
                         && contact.getActiveInitialConnection().getEndpoint()) {
-                    logMsgToScreen("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString());
-                    displayMsgToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
+					var phonestr = contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString()
+                    logMsgToScreen("New contact is from " + phonestr);
+                    displayMsgToAgent("Calling: " + phonestr);
+					window.VUE.userInfo.currentCall.number = phonestr;
                 } else {
                     logMsgToScreen("This is an existing contact for this agent");
                 }
