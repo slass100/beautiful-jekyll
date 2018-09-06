@@ -87,21 +87,23 @@
             }
             function eventContactEnded(contact) {
                 logMsgToScreen("[contact.onEnded] " + contactToString(contact));
-                window.VUE.callHistory.unshift({
-                    time: window.VUE.currentCall.time,
-                    wwid: window.VUE.currentCall.wwid,
-                    number: window.VUE.currentCall.number,
-                    queue: window.VUE.currentCall.queue,
-                    topic: window.VUE.currentCall.topic,
-                    snow: window.VUE.currentCall.snow
-                });
-                window.VUE.callHistory.pop();
-				window.VUE.currentCall.time = "";
-                window.VUE.currentCall.wwid = "";
-                window.VUE.currentCall.number = "";
-                window.VUE.currentCall.queue = "";
-                window.VUE.currentCall.topic = "";
-                window.VUE.currentCall.snow = "";
+                if (window.VUE.currentCall.time.length > 0) {
+                    window.VUE.callHistory.unshift({
+                        time: window.VUE.currentCall.time,
+                        wwid: window.VUE.currentCall.wwid,
+                        number: window.VUE.currentCall.number,
+                        queue: window.VUE.currentCall.queue,
+                        topic: window.VUE.currentCall.topic,
+                        snow: window.VUE.currentCall.snow
+                    });
+                    window.VUE.callHistory.pop();
+                    window.VUE.currentCall.time = "";
+                    window.VUE.currentCall.wwid = "";
+                    window.VUE.currentCall.number = "";
+                    window.VUE.currentCall.queue = "";
+                    window.VUE.currentCall.topic = "";
+                    window.VUE.currentCall.snow = "";
+                }
                 clearAgentDisplay();
             }
             function contactToString(contact) {
