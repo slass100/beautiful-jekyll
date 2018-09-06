@@ -58,9 +58,10 @@
             function eventContactAccepted(contact) {
                 logMsgToScreen("[contact.onAccepted] " + contactToString(contact));
                 logMsgToScreen("[contact.onAccepted] window.open");
-				if (openURLCB.checked) {
-                  window.open(window.url);
-				}
+				console.log(window.url);
+				//if (openURLCB.checked) {
+                //  window.open(window.url);
+				//}
 
             }
             function eventContactConnected(contact) {
@@ -94,7 +95,8 @@
             connect.agent(subscribeToAgentEvents);
             function subscribeToAgentEvents(agent) {
                 window.myCPP.agent = agent;
-                agentMsgs.innerHTML = 'Hi ' + agent.getName() + ' !\n';
+				console.log('Hi ' + agent.getName() + ' !')
+                //agentMsgs.innerHTML = 'Hi ' + agent.getName() + ' !\n';
                 logMsgToScreen("Subscribing to events for agent " + agent.getName());
                 logMsgToScreen("Agent is currently in status of " + agent.getStatus().name);
                 agent.onRefresh(eventAgentRefresh);
@@ -188,18 +190,18 @@
 
             function displayMsgToHistory(msg) {
                 console.log("hist: " + msg);
-                historyMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + String(msg) + "\n" + String(historyMsgs.innerHTML);
+                //historyMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + String(msg) + "\n" + String(historyMsgs.innerHTML);
             }
 
             
             function displayMsgToAgent(msg) {
                 console.log("dta: " + msg);
-                agentMsgs.innerHTML = "" + String(agentMsgs.innerHTML) + String(msg) + "\n";
+                //agentMsgs.innerHTML = "" + String(agentMsgs.innerHTML) + String(msg) + "\n";
             }
 
             function logMsgToScreen(msg) {
                 console.log('lmts: ' + msg);
-                logMsgs.innerHTML =  logMsgs.innerHTML + new Date().toLocaleTimeString() + ' ' + msg + '\n';
+                //logMsgs.innerHTML =  logMsgs.innerHTML + new Date().toLocaleTimeString() + ' ' + msg + '\n';
             }
 
             //function logInfoMsg(msg) {
@@ -212,12 +214,15 @@
             //    connect.getLog().info(eventMsg);
             //}
             function displayAgentStatus(status) {
-                eventMsgs.innerHTML = 'Status: ' + status;
+				console.log('displayAgentStatus: ' + msg);
+                //eventMsgs.innerHTML = 'Status: ' + status;
             }
 
             function clearAgentDisplay() {
-                agentMsgs.innerHTML = "";
+				console.log('clearAgentDisplay: ');				
+                //agentMsgs.innerHTML = "";
             }
             function setURL1(msg) {
-                url1.innerHTML = msg;
+				console.log('clearAgentDisplay: ');		
+                //url1.innerHTML = msg;
             }
