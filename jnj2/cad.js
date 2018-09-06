@@ -95,6 +95,7 @@
                     topic: window.VUE.currentCall.topic,
                     snow: window.VUE.currentCall.snow
                 });
+                window.VUE.callHistory.pop();
                 clearAgentDisplay();
             }
             function contactToString(contact) {
