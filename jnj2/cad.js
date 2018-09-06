@@ -30,8 +30,8 @@
                 } else {
                     logMsgToScreen("This is an existing contact for this agent");
                 }
-				var timestr = new Date().toLocaleString();
-				window.VUE.currentCall.time = timestr;
+                var timestr = new Date().toLocaleString();
+                window.VUE.currentCall.time = timestr;
                 var queuestr = contact.getQueue().name.toString();
                 logMsgToScreen("Contact is from queue " + queuestr);
                 displayMsgToAgent("Queue: " + queuestr);
@@ -55,7 +55,7 @@
                     window.topic = ca.Topic.value;
                 }
                 window.VUE.currentCall.topic = window.topic;
-                logMsgToScreen("Topic: " + window.topic);				
+                logMsgToScreen("Topic: " + window.topic);               
                 //setURL1("<a href='" + window.url +"'>" + window.url + "</a>");
                 contact.onRefresh(eventContactRefresh);
                 contact.onIncoming(eventContactIncoming);
@@ -87,8 +87,15 @@
             }
             function eventContactEnded(contact) {
                 logMsgToScreen("[contact.onEnded] " + contactToString(contact));
+                window.VUE.callHistory.unshift({
+                    time: window.VUE.currentCall.time,
+                    wwid: window.VUE.currentCall.wwid,
+                    number: window.VUE.currentCall.number,
+                    queue: window.VUE.currentCall.queue,
+                    topic: window.VUE.currentCall.topic,
+                    snow: window.VUE.currentCall.snow
+                });
                 clearAgentDisplay();
-                setURL1("");
             }
             function contactToString(contact) {
                 rv = [];

@@ -124,10 +124,11 @@ a
 {
     padding:0 2px
 }
-.app-header a
+.login a
 {
-    color: white;
+    color:white
 }
+
 .history-wrap .title
 {
     font-size:15px;
