@@ -30,7 +30,9 @@
                 } else {
                     logMsgToScreen("This is an existing contact for this agent");
                 }
-                var queuestr = contact.getQueue().name.toString()
+				var timestr = new Date().toLocaleString();
+				window.VUE.currentCall.time = timestr;
+                var queuestr = contact.getQueue().name.toString();
                 logMsgToScreen("Contact is from queue " + queuestr);
                 displayMsgToAgent("Queue: " + queuestr);
                 window.VUE.currentCall.queue = queuestr;
