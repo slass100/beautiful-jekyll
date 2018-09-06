@@ -15,42 +15,43 @@ window.VUE = window.VUE || new Vue({
 	data:{
 		appTitle:{
 			mainTitle:"AWS Connect",
-			subTitle:"J&J GSD Agent Desktop"},
-			callHistory:[
-				{
-					time:"09:58:57 AM",
-					wwid:"3456123",
-					number:"+1 214 4032 2355",
-					queue:"English",
-					topic:"hardware problem",
-					snow:"url..."
-				},
-				{
-					time:"09:58:57 AM",
-					wwid:"3456123",
-					number:"+1 214 4032 2355",
-					queue:"English",
-					topic:"hardware problem",
-					snow:"url..."
-				},
-				{
-					time:"09:58:57 AM",
-					wwid:"3456123",
-					number:"+1 214 4032 2355",
-					queue:"English",
-					topic:"hardware problem",
-					snow:"url..."
-				}
-				],
-			userInfo:{	name:""	},
-				currentCall:{
-					time:"",
-					wwid:"",
-					number:"",
-					queue:"",
-					topic:"",
-					snow:""
-				}
+			subTitle:"J&J GSD Agent Desktop"
+			},
+		callHistory:[
+			{
+				time:"09:58:57 AM",
+				wwid:"3456123",
+				number:"+1 214 4032 2355",
+				queue:"English",
+				topic:"hardware problem",
+				snow:"url..."
+			},
+			{
+				time:"09:58:57 AM",
+				wwid:"3456123",
+				number:"+1 214 4032 2355",
+				queue:"English",
+				topic:"hardware problem",
+				snow:"url..."
+			},
+			{
+				time:"09:58:57 AM",
+				wwid:"3456123",
+				number:"+1 214 4032 2355",
+				queue:"English",
+				topic:"hardware problem",
+				snow:"url..."
+			}
+			],
+		userInfo:{	name:""	},
+		currentCall:{
+			time:"",
+			wwid:"",
+			number:"",
+			queue:"",
+			topic:"",
+			snow:""
+		}
 		},
 	components:{
 		"app-header":n,

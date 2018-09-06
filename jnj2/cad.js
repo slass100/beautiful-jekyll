@@ -26,7 +26,7 @@
 					var phonestr = contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString()
                     logMsgToScreen("New contact is from " + phonestr);
                     displayMsgToAgent("Calling: " + phonestr);
-					window.VUE.userInfo.currentCall.number = phonestr;
+					window.VUE.currentCall.number = phonestr;
                 } else {
                     logMsgToScreen("This is an existing contact for this agent");
                 }
@@ -39,6 +39,7 @@
                     window.wwid = ca.WWID.value;
                 }
                 displayMsgToAgent("WWID: " + window.wwid);
+				window.VUE.currentCall.wwid = window.wwid;
                 window.url = "unknown";
                 //if (ca && ca.URL) {
                 //    window.url = ca.URL.value;
