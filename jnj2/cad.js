@@ -3,11 +3,11 @@
             window.myCPP = window.myCPP || {};
             //var ccpUrl = "https://atosjnjsandbox.awsapps.com/connect/ccp#/";
             var ccpUrl = "https://jnj-gsd-na.awsapps.com/connect/ccp#/";
-            var agentMsgs = document.getElementById("agentMsgs");
-            var historyMsgs = document.getElementById("historyMsgs");
-            var logMsgs = document.getElementById("logMsgs");
-            var openURLCB = document.getElementById("openURL");
-            var url1 = document.getElementById("url1");
+            //var agentMsgs = document.getElementById("agentMsgs");
+            //var historyMsgs = document.getElementById("historyMsgs");
+            //var logMsgs = document.getElementById("logMsgs");
+            //var openURLCB = document.getElementById("openURL");
+            //var url1 = document.getElementById("url1");
 
             console.log("LOG LOG");
             connect.core.initCCP(containerDiv, {
@@ -97,6 +97,7 @@
                 window.myCPP.agent = agent;
 				console.log('Hi ' + agent.getName() + ' !')
                 //agentMsgs.innerHTML = 'Hi ' + agent.getName() + ' !\n';
+				vm.userInfo.name = agent.getName()
                 logMsgToScreen("Subscribing to events for agent " + agent.getName());
                 logMsgToScreen("Agent is currently in status of " + agent.getStatus().name);
                 agent.onRefresh(eventAgentRefresh);

@@ -42,14 +42,14 @@ var vm = new Vue({
 					snow:"url..."
 				}
 				],
-			userInfo:{	name:"Steven"	},
+			userInfo:{	name:""	},
 				currentCall:{
-					time:"09:58:57 AM",
-					wwid:"3456123",
-					number:"+1 214 4032 2355",
-					queue:"English",
-					topic:"hardware problem",
-					snow:"xxxxxxx"
+					time:"",
+					wwid:"",
+					number:"",
+					queue:"",
+					topic:"",
+					snow:""
 				}
 		},
 	components:{
