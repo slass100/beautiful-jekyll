@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Atos JNJ AWS 1</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="Atos_JNJ_AWS1.b2e2e1b2.css">
+    </head> 
+    <body> 
+        <div id="app"> 
+            <app-header></app-header> 
+            <div class="app-body"> 
+                <app-title :app-title="appTitle"></app-title>
+                <div class="user-panel"> 
+					<div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
+						<!--Amazon CCP will go here-->
+					</div>
+                    <current-call :user-info="userInfo" :current-call="currentCall">
+                        
+                    </current-call>
+                </div> 
+                <call-history :history-data="callHistory"></call-history> 
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script> 
+        <script src="Atos_JNJ_AWS1.d54d2452.js"></script>
+		<script src="amazon-connect-v1.2.0.js"></script>
+		<script src="cad.js"></script>
+    </body> 
+</html>
