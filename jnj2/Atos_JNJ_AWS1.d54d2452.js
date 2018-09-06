@@ -10,12 +10,12 @@ a={template:"\n        <div class=\"history-wrap\">\n            <h2 class=\"tit
 t={template:'\n        <section class="phone-interface">\n            <nav class="app-header">\n                <div class="header-left-wrap">\n                    <img class="logo" :src=logoSrc>\n                    <span class="change-status">change status <i class="fa fa-angle-down"></i></span>\n                </div>\n\n                <i class=\'fa fa-cog\'></i>\n            </nav>\n            <section class="in-app-title-section">\n                <h2>{{status}}</h2>\n            </section>\n            <section class="action-panel">\n                <div class="call-wrap">\n                    <button @click=dialNum class="btn btn-normal">\n                        <i></i><span>Dial Number</span>\n                    </button>\n                    <button @click=quickConne class="btn btn-normal">\n                        <i class="fa fa-address-book"></i><span>Quick connects</span>\n                    </button>\n                </div>\n                <button @click=setAvailable class="btn btn-primary">Set to Available</button>\n            </section>\n        </section>\n    ',data:function(){return{status:"Offline",logoSrc:"xxxxx"}},methods:{dialNum:function(){console.log("dial")},quickConne:function(){console.log("qucik")},setAvailable:function(){console.log("setavai")}}},
 s={template:'\n        <section class="current-call-wrap">\n            <h2 class=\'greeting\'>Hello, {{userInfo.name}}!</h2>\n            <div class="current-call">\n                <p class="prop-display each-info" v-for="(i, key) in currentCall"  v-if="computeName(key) !== false">\n                    <span v-text=\'computeName(key)\' class="prop-name"></span>:<span class="prop-value">{{i}}</span>\n                </p>\n                <a v-for="(i, key) in currentCall" :href=i v-if="key===\'snow\'">SNOW incident URL</a>\n            </div>\n        </section>\n    ',props:["userInfo","currentCall"],methods:{computeName:function(n){var e="";switch(n){case"wwid":e="Caller WWID";break;case"number":e="Caller Phone";break;case"queue":e="Queue";break;case"topic":e="Topic";break;default:e=!1}return e}}};
 
-new Vue({
+var vm = new Vue({
 	el:"#app",
 	data:{
 		appTitle:{
 			mainTitle:"AWS Connect",
-			subTitle:"J&J GSD Agent Desktop 6"},
+			subTitle:"J&J GSD Agent Desktop"},
 			callHistory:[
 				{
 					time:"09:58:57 AM",
