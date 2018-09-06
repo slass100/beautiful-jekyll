@@ -113,7 +113,8 @@ a
 {
     align-items:center;
     background:#525252;
-    color:#fff;
+    /* color:#fff; */
+    color:white;
     display:flex;
     height:57px;
     justify-content:space-between;
@@ -122,6 +123,10 @@ a
 .app-header i
 {
     padding:0 2px
+}
+.app-header a
+{
+    color: white;
 }
 .history-wrap .title
 {
