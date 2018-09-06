@@ -23,15 +23,17 @@
                 logMsgToScreen("Subscribing to events for contact");
                 if (contact.getActiveInitialConnection()
                         && contact.getActiveInitialConnection().getEndpoint()) {
-					var phonestr = contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString()
+                    var phonestr = contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString()
                     logMsgToScreen("New contact is from " + phonestr);
                     displayMsgToAgent("Calling: " + phonestr);
-					window.VUE.currentCall.number = phonestr;
+                    window.VUE.currentCall.number = phonestr;
                 } else {
                     logMsgToScreen("This is an existing contact for this agent");
                 }
-                logMsgToScreen("Contact is from queue " + contact.getQueue().name);
-                displayMsgToAgent("Queue: " + contact.getQueue().name.toString());
+                var queuestr = contact.getQueue().name.toString()
+                logMsgToScreen("Contact is from queue " + queuestr);
+                displayMsgToAgent("Queue: " + queuestr);
+                window.VUE.currentCall.queue = queuestr;
                 logMsgToScreen("Contact attributes are " + JSON.stringify(contact.getAttributes()));
                 var ca = contact.getAttributes();
                 window.wwid = "unknown";
@@ -39,11 +41,13 @@
                     window.wwid = ca.WWID.value;
                 }
                 displayMsgToAgent("WWID: " + window.wwid);
-				window.VUE.currentCall.wwid = window.wwid;
+                window.VUE.currentCall.wwid = window.wwid;
                 window.url = "unknown";
-                //if (ca && ca.URL) {
-                //    window.url = ca.URL.value;
-                //}
+                if (ca && ca.URL) {
+                    window.url = ca.URL.value;
+                }
+                window.VUE.currentCall.snow = window.url;
+                logMsgToScreen("URL: " + window.url);
                 //setURL1("<a href='" + window.url +"'>" + window.url + "</a>");
                 contact.onRefresh(eventContactRefresh);
                 contact.onIncoming(eventContactIncoming);
@@ -61,10 +65,10 @@
             function eventContactAccepted(contact) {
                 logMsgToScreen("[contact.onAccepted] " + contactToString(contact));
                 logMsgToScreen("[contact.onAccepted] window.open");
-				console.log(window.url);
-				//if (openURLCB.checked) {
+                console.log(window.url);
+                //if (openURLCB.checked) {
                 //  window.open(window.url);
-				//}
+                //}
 
             }
             function eventContactConnected(contact) {
@@ -98,9 +102,9 @@
             connect.agent(subscribeToAgentEvents);
             function subscribeToAgentEvents(agent) {
                 window.myCPP.agent = agent;
-				console.log('Hi ' + agent.getName() + ' !')
+                console.log('Hi ' + agent.getName() + ' !')
                 //agentMsgs.innerHTML = 'Hi ' + agent.getName() + ' !\n';
-				window.VUE.userInfo.name = agent.getName()
+                window.VUE.userInfo.name = agent.getName()
                 logMsgToScreen("Subscribing to events for agent " + agent.getName());
                 logMsgToScreen("Agent is currently in status of " + agent.getStatus().name);
                 agent.onRefresh(eventAgentRefresh);
@@ -218,15 +222,15 @@
             //    connect.getLog().info(eventMsg);
             //}
             function displayAgentStatus(status) {
-				console.log('displayAgentStatus: ' + msg);
+                console.log('displayAgentStatus: ' + msg);
                 //eventMsgs.innerHTML = 'Status: ' + status;
             }
 
             function clearAgentDisplay() {
-				console.log('clearAgentDisplay: ');				
+                console.log('clearAgentDisplay: ');             
                 //agentMsgs.innerHTML = "";
             }
             function setURL1(msg) {
-				console.log('clearAgentDisplay: ');		
+                console.log('clearAgentDisplay: ');     
                 //url1.innerHTML = msg;
             }
