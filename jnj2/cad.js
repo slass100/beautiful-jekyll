@@ -96,6 +96,12 @@
                     snow: window.VUE.currentCall.snow
                 });
                 window.VUE.callHistory.pop();
+				window.VUE.currentCall.time = "";
+                window.VUE.currentCall.wwid = "";
+                window.VUE.currentCall.number = "";
+                window.VUE.currentCall.queue = "";
+                window.VUE.currentCall.topic = "";
+                window.VUE.currentCall.snow = "";
                 clearAgentDisplay();
             }
             function contactToString(contact) {
