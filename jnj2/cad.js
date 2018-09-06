@@ -97,7 +97,7 @@
                 window.myCPP.agent = agent;
 				console.log('Hi ' + agent.getName() + ' !')
                 //agentMsgs.innerHTML = 'Hi ' + agent.getName() + ' !\n';
-				vm.userInfo.name = agent.getName()
+				window.VUE.userInfo.name = agent.getName()
                 logMsgToScreen("Subscribing to events for agent " + agent.getName());
                 logMsgToScreen("Agent is currently in status of " + agent.getStatus().name);
                 agent.onRefresh(eventAgentRefresh);
