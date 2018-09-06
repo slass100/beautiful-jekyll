@@ -48,6 +48,12 @@
                 }
                 window.VUE.currentCall.snow = window.url;
                 logMsgToScreen("URL: " + window.url);
+                window.topic = "unknown";
+                if (ca && ca.Topic) {
+                    window.topic = ca.Topic.value;
+                }
+                window.VUE.currentCall.topic = window.topic;
+                logMsgToScreen("Topic: " + window.topic);				
                 //setURL1("<a href='" + window.url +"'>" + window.url + "</a>");
                 contact.onRefresh(eventContactRefresh);
                 contact.onIncoming(eventContactIncoming);
