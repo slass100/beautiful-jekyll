@@ -8,15 +8,17 @@
             <h1>AWS Connect - Fras</h1>
             <a href='https://atosjnjsandbox.awsapps.com/connect/home'>Login</a>
         </div>
-        <button id="bAnswer" >answer</button>
-        <button id="bHold" >hold</button>
-        <button id="bHangup" >hangup</button>
-        <button id="bTest" hidden>test</button>
+        <button id="bCCP" >hide/show</button>
+
         <div style="width: 800px; height: 500px; "> 
             <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; " >
                 <!--Amazon CCP will go here-->
             </div>
             <div style="float:right; width: 460px; min-width: 200px; height: 260px; min-height: 150px;">
+                <button id="bAnswer" >answer</button>
+                <button id="bHold" >hold</button>
+                <button id="bHangup" >hangup</button>
+                <button id="bTest" hidden>test</button>
                 <textarea id="agentMsgs" rows="12" cols="60"></textarea>
                 <br>
                 <textarea id="logMsgs" rows="12" cols="100"></textarea>
@@ -33,12 +35,19 @@
 
             window.myCPP = window.myCPP || {};
             var ccpUrl = "https://atosjnjsandbox.awsapps.com/connect/ccp#/";
+            var ccpDiv = document.getElementById("containerDiv");
+            var bCCP = document.getElementById("bCCP");
             var agentMsgs = document.getElementById("agentMsgs");
             var logMsgs = document.getElementById("logMsgs");
             var bAnswer = document.getElementById("bAnswer");
             var bHangup = document.getElementById("bHangup");
             var bHold = document.getElementById("bHold");
             var bTest = document.getElementById("bTest");
+            
+            ccpDiv.style.visibility = 'hidden';
+            bCCP.onclick = function (){
+                ccpDiv.style.visibility = (ccpDiv.style.visibility == 'visible') ? 'hidden' : 'visible';
+            }
             
             bAnswer.style.visibility = 'hidden';
             bHold.style.visibility = 'hidden';
