@@ -45,13 +45,13 @@
             bHangup.style.visibility = 'hidden';
             
             bAnswer.onclick = function() {
-                myCPP.contact.accept();
+                acceptContact();
                 bAnswer.style.visibility = 'hidden';
                 bHangup.style.visibility = 'visible';
             }
             
             bHangup.onclick = function() {
-                myCPP.contact.destroy();
+                disconnectContact();
                 bAnswer.style.visibility = 'visible';
                 bHangup.style.visibility = 'hidden';
             }
