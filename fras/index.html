@@ -8,8 +8,10 @@
             <h1>AWS Connect - Fras</h1>
             <a href='https://atosjnjsandbox.awsapps.com/connect/home'>Login</a>
         </div>
-        <button id="bAnswer" onclick="buttonanswer" hidden>answer</button>
-        <button id="hold" onclick="buttonhold" hidden >hold</button>
+        <button id="bAnswer" >answer</button>
+        <button id="bHold" >hold</button>
+        <button id="bHangup" >hangup</button>
+        <button id="bTest" hidden>test</button>
         <div style="width: 800px; height: 500px; "> 
             <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
                 <!--Amazon CCP will go here-->
@@ -44,9 +46,29 @@
             var openURLCB = document.getElementById("openURL");
             var url1 = document.getElementById("url1");
             var bAnswer = document.getElementById("bAnswer");
+            var bHangup = document.getElementById("bHangup");
             var bHold = document.getElementById("bHold");
-
+            var bTest = document.getElementById("bTest");
+            
+            bAnswer.style.visibility = 'hidden';
+            bHold.style.visibility = 'hidden';
+            bHangup.style.visibility = 'hidden';
+            
+            bAnswer.onclick = function() {
+                contact.accept();
+                bAnswer.style.visibility = 'hidden';
+                bHangup.style.visibility = 'hidden';
+            }
+            
+            bTest.onclick = function (){
+                console.log("click");
+                console.log(bAnswer.style.visibility);
+                bAnswer.style.visibility = (bAnswer.style.visibility == 'visible') ? 'hidden' : 'visible';
+                bHold.style.visibility = 'visible';
+            }
+            
             console.log("LOG LOG");
+            /*
             connect.core.initCCP(containerDiv, {
                 ccpUrl: ccpUrl,
                 loginPopup: true,
@@ -54,6 +76,7 @@
                     allowFramedSoftphone: true
                 }
             });
+
             connect.contact(subscribeToContactEvents);
             function subscribeToContactEvents(contact) {
                 window.myCPP.contact = contact;
@@ -62,8 +85,8 @@
                         && contact.getActiveInitialConnection().getEndpoint()) {
                     logMsgToScreen("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString());
                     displayMsgToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
-                    bAnswer.attributes.removeNamedItem["hidden"];
-                    bHold.attributes.removeNamedItem["hidden"]
+                    bAnswer.style.visibility = 'visible';
+                    bAnswer.style.visibility = 'visible';
                 } else {
                     logMsgToScreen("This is an existing contact for this agent");
                 }
@@ -223,7 +246,7 @@
                     }
                 });
             }
-
+            */
 
             function displayMsgToHistory(msg) {
                 console.log("hist: " + msg);
