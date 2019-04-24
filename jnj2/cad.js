@@ -12,7 +12,7 @@
             console.log("LOG LOG");
             connect.core.initCCP(containerDiv, {
                 ccpUrl: ccpUrl,
-                loginPopup: true,
+                loginPopup: false,
                 softphone: {
                     allowFramedSoftphone: true
                 }
@@ -75,7 +75,7 @@
                 logMsgToScreen("[contact.onAccepted] window.open");
                 console.log(window.url);
                 //if (openURLCB.checked) {
-                //  window.open(window.url);
+                window.open(window.url);
                 //}
 
             }
