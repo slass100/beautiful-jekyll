@@ -19,12 +19,6 @@
             <div style="float:right; width: 460px; min-width: 200px; height: 260px; min-height: 150px;">
                 <textarea id="agentMsgs" rows="12" cols="60"></textarea>
                 <br>
-				<form>
-				<input id="openURL" name="openURL" type="checkbox" />Launch URL
-				</form>
-				<br>
-                URL1: <div id="url1"></div>
-                <br>
                 <textarea id="historyMsgs" rows="12" cols="60"></textarea>
             </div>
     
@@ -43,8 +37,6 @@
             var agentMsgs = document.getElementById("agentMsgs");
             var historyMsgs = document.getElementById("historyMsgs");
             var logMsgs = document.getElementById("logMsgs");
-            var openURLCB = document.getElementById("openURL");
-            var url1 = document.getElementById("url1");
             var bAnswer = document.getElementById("bAnswer");
             var bHangup = document.getElementById("bHangup");
             var bHold = document.getElementById("bHold");
@@ -107,11 +99,7 @@
                     window.wwid = ca.WWID.value;
                 }
                 displayMsgToAgent("WWID: " + window.wwid);
-                window.url = "unknown";
-                if (ca && ca.URL) {
-                    window.url = ca.URL.value;
-                }
-                setURL1("<a href='" + window.url +"'>" + window.url + "</a>");
+                
                 contact.onRefresh(eventContactRefresh);
                 contact.onIncoming(eventContactIncoming);
                 contact.onAccepted(eventContactAccepted);
@@ -128,10 +116,6 @@
             function eventContactAccepted(contact) {
                 logMsgToScreen("[contact.onAccepted] " + contactToString(contact));
                 logMsgToScreen("[contact.onAccepted] window.open");
-				if (openURLCB.checked) {
-                  window.open(window.url);
-				}
-
             }
             function eventContactConnected(contact) {
                 logMsgToScreen("[contact.onContactConnected] " + contactToString(contact));
@@ -142,7 +126,6 @@
             function eventContactEnded(contact) {
                 logMsgToScreen("[contact.onEnded] " + contactToString(contact));
                 clearAgentDisplay();
-                setURL1("");
             }
             function contactToString(contact) {
                 rv = [];
@@ -288,9 +271,7 @@
             function clearAgentDisplay() {
                 agentMsgs.innerHTML = "";
             }
-            function setURL1(msg) {
-                url1.innerHTML = msg;
-            }
+
 
         </script>
     </body>
