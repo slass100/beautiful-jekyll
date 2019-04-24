@@ -54,7 +54,18 @@
             bHold.style.visibility = 'hidden';
             bHangup.style.visibility = 'hidden';
             
-
+            bAnswer.onclick = function() {
+                myCPP.contact.accept();
+                bAnswer.style.visibility = 'hidden';
+                bHangup.style.visibility = 'visible';
+            }
+            
+            bHangup.onclick = function() {
+                myCPP.contact.destroy();
+                bAnswer.style.visibility = 'visible';
+                bHangup.style.visibility = 'hidden';
+                }
+            }
             
             bTest.onclick = function (){
                 console.log("click");
@@ -82,17 +93,8 @@
                     logMsgToScreen("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString());
                     displayMsgToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
                     bAnswer.style.visibility = 'visible';
-                    bAnswer.style.visibility = 'visible';
-                    bAnswer.onclick = function() {
-                        contact.accept();
-                        bAnswer.style.visibility = 'hidden';
-                        bHangup.style.visibility = 'visible';
-                        bHangup.onclick = function() {
-                            contact.destroy();
-                            bAnswer.style.visibility = 'visible';
-                            bHangup.style.visibility = 'hidden';
-                        }
-                    }
+                    bHold.style.visibility = 'visible';
+
                 } else {
                     logMsgToScreen("This is an existing contact for this agent");
                 }
