@@ -62,8 +62,8 @@
                         && contact.getActiveInitialConnection().getEndpoint()) {
                     logMsgToScreen("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString());
                     displayMsgToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
-                    bAnswer.show;
-                    bHold.show;
+                    bAnswer.attributes.removeNamedItem["hidden"];
+                    bHold.attributes.removeNamedItem["hidden"]
                 } else {
                     logMsgToScreen("This is an existing contact for this agent");
                 }
