@@ -86,7 +86,12 @@
                     bAnswer.onclick = function() {
                         contact.accept();
                         bAnswer.style.visibility = 'hidden';
-                        bHangup.style.visibility = 'hidden';
+                        bHangup.style.visibility = 'visible';
+                        bHangup.onclick = function() {
+                            contact.destroy();
+                            bAnswer.style.visibility = 'visible';
+                            bHangup.style.visibility = 'hidden';
+                        }
                     }
                 } else {
                     logMsgToScreen("This is an existing contact for this agent");
