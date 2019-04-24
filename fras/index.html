@@ -117,9 +117,6 @@
             }
             function eventContactConnected(contact) {
                 logMsgToScreen("[contact.onContactConnected] " + contactToString(contact));
-                if (contact) {
-                    displayMsgToHistory(contact.getQueue().name + ": " + contact.getAttributes().CustomerNumber.value);
-                }
             }
             function eventContactEnded(contact) {
                 logMsgToScreen("[contact.onEnded] " + contactToString(contact));
