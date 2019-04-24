@@ -8,6 +8,8 @@
             <h1>AWS Connect - Fras</h1>
             <a href='https://atosjnjsandbox.awsapps.com/connect/home'>Login</a>
         </div>
+        <button id="bAnswer" onclick="buttonanswer" hidden>answer</button>
+        <button id="hold" onclick="buttonhold" hidden >hold</button>
         <div style="width: 800px; height: 500px; "> 
             <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
                 <!--Amazon CCP will go here-->
@@ -41,6 +43,8 @@
             var logMsgs = document.getElementById("logMsgs");
             var openURLCB = document.getElementById("openURL");
             var url1 = document.getElementById("url1");
+            var bAnswer = document.getElementById("bAnswer");
+            var bHold = document.getElementById("bHold");
 
             console.log("LOG LOG");
             connect.core.initCCP(containerDiv, {
@@ -58,6 +62,8 @@
                         && contact.getActiveInitialConnection().getEndpoint()) {
                     logMsgToScreen("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString());
                     displayMsgToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
+                    bAnswer.show;
+                    bHold.show;
                 } else {
                     logMsgToScreen("This is an existing contact for this agent");
                 }
