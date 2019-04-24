@@ -54,11 +54,7 @@
             bHold.style.visibility = 'hidden';
             bHangup.style.visibility = 'hidden';
             
-            bAnswer.onclick = function() {
-                connect.contact.accept();
-                bAnswer.style.visibility = 'hidden';
-                bHangup.style.visibility = 'hidden';
-            }
+
             
             bTest.onclick = function (){
                 console.log("click");
@@ -87,6 +83,11 @@
                     displayMsgToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
                     bAnswer.style.visibility = 'visible';
                     bAnswer.style.visibility = 'visible';
+                    bAnswer.onclick = function() {
+                        contact.accept();
+                        bAnswer.style.visibility = 'hidden';
+                        bHangup.style.visibility = 'hidden';
+                    }
                 } else {
                     logMsgToScreen("This is an existing contact for this agent");
                 }
