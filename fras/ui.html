@@ -231,7 +231,6 @@
         }
 
         function disconnectContact() {
-            //cannot do contact.destroy(), can only destroy (hang-up) agent connection
             window.myCPP.contact.getAgentConnection().destroy({
                 success: function() {
                     logMsg("Disconnected contact via Streams");
