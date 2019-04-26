@@ -278,6 +278,14 @@
             logMsg("test")
 
         }
+        bStatus.onclick = function(button) {
+            if (agent.getStatus().name == "Available") {
+                goOffline();
+            }
+            else {
+                goAvailable();
+            }
+        }
 
         logMsg("ready");
 
