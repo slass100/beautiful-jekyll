@@ -274,11 +274,11 @@
         }
         
         bTest.onclick = function(button) {
+            logMsg("test");
             toggleDisabled(bHangup);
-            logMsg("test")
-
         }
         bStatus.onclick = function(button) {
+            logMsg("status toggle");
             if (agent.getStatus().name == "Available") {
                 goOffline();
             }
