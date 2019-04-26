@@ -37,7 +37,7 @@
     <p>Custom CCP</p>
 
     <div class="ccp ">
-        <span id="bStatus" class="btn btn-block btn-sm btn-info">Status: Available</span>
+        <span id="bStatus" class="btn btn-block btn-sm btn-info">Status: None</span>
         <span id="bAnswer" class="btn btn-block btn-sm btn-primary disabled">Answer</span>
         <span id="bHangup" class="btn btn-block btn-sm btn-primary">Hangup</span>
         <span id="bHold" class="btn btn-block btn-sm btn-primary">Hold</span>
@@ -152,17 +152,21 @@
         function subscribeToAgentEvents(agent) {
             window.myCPP.agent = agent;
             logMsg("Subscribing to events for agent " + agent.getName());
-            logMsg("Agent is currently in status of " + agent.getStatus().name);
+
             agent.onRefresh(eventAgentRefresh);
             agent.onRoutable(eventAgentRoutable);
             agent.onNotRoutable(eventAgentNotRoutable);
             agent.onOffline(eventAgentOffline);
             agent.onError(eventAgentError);
             agent.onAfterCallWork(eventAfterCallWork);
+
+            logMsg("Agent is currently in status of " + agent.getStatus().name);
+            toggleStatus(agent.getStatus().name);
         }
 
         function eventAgentRefresh(agent) {
             logMsg("[agent.onRefresh] " + agentToString(agent));
+            toggleStatus(agent.getStatus().name);
         }
 
         function eventAgentRoutable(agent) {
@@ -259,6 +263,10 @@
 
 
         /////////////////////////////////////////////////////////////////////
+
+        function toggleStatus(msg) {
+            bStatus.innerHTML = "Status: " + msg;
+        }
 
         function toggleDisabled(button) {
             if (button.className.includes("disabled")) {
