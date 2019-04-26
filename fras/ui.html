@@ -80,27 +80,16 @@
 
         function subscribeToContactEvents(contact) {
             window.myCPP.contact = contact;
-            logMsg("Subscribing to events for contact");
+            logMsg("Subscribing to events for contact: New contact");
             if (contact.getActiveInitialConnection() &&
                 contact.getActiveInitialConnection().getEndpoint()) {
                 logMsg("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString());
-                displayMsgToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
-                bAnswer.style.visibility = 'visible';
-                bHold.style.visibility = 'visible';
-
+                toggleDisabled(bAnswer);
             } else {
                 logMsg("This is an existing contact for this agent");
             }
             logMsg("Contact is from queue " + contact.getQueue().name);
-            displayMsgToAgent("Queue: " + contact.getQueue().name.toString());
             logMsg("Contact attributes are " + JSON.stringify(contact.getAttributes()));
-            var ca = contact.getAttributes();
-            window.wwid = "unknown";
-            if (ca && ca.WWID) {
-                window.wwid = ca.WWID.value;
-            }
-            displayMsgToAgent("WWID: " + window.wwid);
-
             contact.onRefresh(eventContactRefresh);
             contact.onIncoming(eventContactIncoming);
             contact.onAccepted(eventContactAccepted);
