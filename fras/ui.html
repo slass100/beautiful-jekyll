@@ -279,7 +279,7 @@
         }
         bStatus.onclick = function(button) {
             logMsg("status toggle");
-            if (agent.getStatus().name == "Available") {
+            if (myCPP.agent.getStatus().name == "Available") {
                 goOffline();
             }
             else {
