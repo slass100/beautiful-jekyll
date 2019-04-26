@@ -71,7 +71,7 @@
             ccpUrl: ccpUrl,
             loginPopup: true,
             softphone: {
-                allowFramedSoftphone: false
+                allowFramedSoftphone: true
             }
         });
 
@@ -108,16 +108,14 @@
 
         function eventContactAccepted(contact) {
             logMsg("[contact.onAccepted] " + contactToString(contact));
-            logMsg("[contact.onAccepted] window.open");
         }
 
         function eventContactConnected(contact) {
-            logMsg("[contact.onContactConnected] " + contactToString(contact));
+            logMsg("[contact.onConnected] " + contactToString(contact));
         }
 
         function eventContactEnded(contact) {
             logMsg("[contact.onEnded] " + contactToString(contact));
-            clearAgentDisplay();
         }
 
         function contactToString(contact) {
