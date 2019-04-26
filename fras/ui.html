@@ -270,7 +270,11 @@
                 new Date().toLocaleTimeString() + " " +
                 text;
         }
-
+        
+        bAnswer.onclick = function(button) {
+            acceptContact();
+        }
+        
         bTest.onclick = function(button) {
             toggleDisabled(bHangup);
             logMsg("test")
