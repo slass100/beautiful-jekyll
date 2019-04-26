@@ -267,12 +267,17 @@
                 new Date().toLocaleTimeString() + " " +
                 text;
         }
-        
+
         bAnswer.onclick = function(button) {
             logMsg("Answering...")
             acceptContact();
         }
-        
+
+        bHangup.onclick = function(button) {
+            logMsg("Hangup...")
+            disconnectContact();
+        }
+
         bTest.onclick = function(button) {
             logMsg("test");
             toggleDisabled(bHangup);
@@ -281,8 +286,7 @@
             logMsg("status toggle");
             if (myCPP.agent.getStatus().name == "Available") {
                 goOffline();
-            }
-            else {
+            } else {
                 goAvailable();
             }
         }
