@@ -151,7 +151,6 @@
 
         function subscribeToAgentEvents(agent) {
             window.myCPP.agent = agent;
-            agentMsgs.innerHTML = 'Hi ' + agent.getName() + ' !\n';
             logMsg("Subscribing to events for agent " + agent.getName());
             logMsg("Agent is currently in status of " + agent.getStatus().name);
             agent.onRefresh(eventAgentRefresh);
@@ -253,32 +252,10 @@
         }
 
 
-        function displayMsgToHistory(msg) {
-            console.log("hist: " + msg);
-            historyMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + String(msg) + "\n" + String(historyMsgs.innerHTML);
-        }
-
-
-        function displayMsgToAgent(msg) {
-            console.log("dta: " + msg);
-            agentMsgs.innerHTML = "" + String(agentMsgs.innerHTML) + String(msg) + "\n";
-        }
-
         function logMsg(msg) {
             console.log('lmts: ' + msg);
             logMsgs.innerHTML = logMsgs.innerHTML + new Date().toLocaleTimeString() + ' ' + msg + '\n';
         }
-
-
-        function displayAgentStatus(status) {
-            eventMsgs.innerHTML = 'Status: ' + status;
-        }
-
-        function clearAgentDisplay() {
-            agentMsgs.innerHTML = "";
-        }
-
-
 
 
         /////////////////////////////////////////////////////////////////////
