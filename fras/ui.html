@@ -84,7 +84,8 @@
             if (contact.getActiveInitialConnection() &&
                 contact.getActiveInitialConnection().getEndpoint()) {
                 logMsg("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString());
-                toggleDisabled(bAnswer);
+                enableButton(bAnswer);
+                disableButton(bHangup);
             } else {
                 logMsg("This is an existing contact for this agent");
             }
@@ -252,7 +253,7 @@
 
         function toggleStatus(msg) {
             bStatus.innerHTML = "Status: " + msg;
-        }
+        };
 
         function toggleDisabled(button) {
             if (button.className.includes("disabled")) {
@@ -262,32 +263,50 @@
             }
         };
 
+        function disableButton(button) {
+            if (!button.className.includes("disabled")) {
+                button.className += " disabled";
+            }
+        };
+
+        function enableButton(button) {
+            button.className = button.className.replace("disabled", "").replace("  ", " ").trim();
+        };
+
         function logMsg(text) {
             taLog.innerHTML += "\n" +
-                new Date().toLocaleTimeString() + " " +
-                text;
-        }
+                new Date().toLocaleTimeString() + " " + text;
+        };
 
         bAnswer.onclick = function(button) {
-            logMsg("Answering...")
+            logMsg("Answering...");
             acceptContact();
-        }
+            disableButton(bAnswer);
+            enableButton(bHangup);
+        };
 
         bHangup.onclick = function(button) {
-            logMsg("Hangup...")
+            logMsg("Hangup...");
             disconnectContact();
+            disableButton(bAnswer);
+            disableButton(bHangup);
         }
 
         bTest.onclick = function(button) {
             logMsg("test");
             toggleDisabled(bHangup);
         }
+
         bStatus.onclick = function(button) {
             logMsg("status toggle");
             if (myCPP.agent.getStatus().name == "Available") {
                 goOffline();
+                disableButton(bAnswer);
+                disableButton(bHangup);
             } else {
                 goAvailable();
+                disableButton(bAnswer);
+                disableButton(bHangup);
             }
         }
 
