@@ -49,7 +49,7 @@
         <textarea id="taLog" rows="20" cols="30"></textarea>
     </div>
 
-    <button id="bTest" class="btn btn-block btn-sm btn-primary" hidden>Test</button>
+    <button id="bTest" class="btn btn-block btn-sm btn-primary" >Test</button>
 
 
     <script src="amazon-connect-1.3.js"></script>
@@ -295,6 +295,7 @@
         bTest.onclick = function(button) {
             logMsg("test");
             toggleDisabled(bHangup);
+            connect.getLog().warn("yar, I'm a pirate");
         }
 
         bStatus.onclick = function(button) {
