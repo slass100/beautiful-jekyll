@@ -293,9 +293,8 @@
         }
 
         bTest.onclick = function(button) {
-            logMsg("test");
-            toggleDisabled(bHangup);
-            connect.getLog().warn("yar, I'm a pirate");
+            logMsg("test - click");
+            myCCP.agent.connect("12144032355");
         }
 
         bStatus.onclick = function(button) {
