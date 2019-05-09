@@ -6,7 +6,7 @@
     <body>
         <div id="myApp">
             <h1>AWS Connect - Fras</h1>
-            <a href='https://atosjnjsandbox.awsapps.com/connect/home'>Login</a>
+            <a href='https://mmsandbox2.awsapps.com/connect/home'>Login</a>
         </div>
         <button id="bCCP" >hide/show</button>
 
@@ -66,10 +66,8 @@
             }
             
             bTest.onclick = function (){
-                console.log("click");
-                console.log(bAnswer.style.visibility);
-                bAnswer.style.visibility = (bAnswer.style.visibility == 'visible') ? 'hidden' : 'visible';
-                bHold.style.visibility = 'visible';
+                logMsgToScreen("test - click");
+                window.myCPP.agent.connect("12144032355");
             }
             
             console.log("LOG LOG");
