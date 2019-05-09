@@ -294,12 +294,12 @@
 
         bTest.onclick = function(button) {
             logMsg("test - click");
-            myCCP.agent.connect("12144032355");
+            window.myCCP.agent.connect("12144032355");
         }
 
         bStatus.onclick = function(button) {
             logMsg("status toggle");
-            if (myCPP.agent.getStatus().name == "Available") {
+            if (window.myCPP.agent.getStatus().name == "Available") {
                 goOffline();
                 disableButton(bAnswer);
                 disableButton(bHangup);
