@@ -294,7 +294,7 @@
 
         bTest.onclick = function(button) {
             logMsg("test - click");
-            endpoint = connect.Endpoint.byPhoneNumber("2144032355");
+            endpoint = connect.Endpoint.byPhoneNumber("12144032355");
             queue_arn = "arn:aws:connect:us-east-1:050373271311:instance/f61d80fa-f8f2-41c3-8ea5-e5fe349482ef/queue/6478fa98-cd33-471e-b22e-bb16e7ad89fa";
             window.myCPP.agent.connect(endpoint, {
                 queueARN: queue_arn,
