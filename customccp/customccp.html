@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Amazon Connect Custom CCP Demo</title>
+  <script type="text/javascript" src="amazon-connect-v1.3.2.js"></script>
+  <script type="text/javascript" src="customCCP.js"></script>
+</head>
+<body>
+
+
+  <!--navbar div with the id-->
+  <div id="navbar-frame" class="customccp-nav"></div>
+
+  <!--CCP Hidden div-->
+  <div id="ccpContainer" style="width: 320px; min-width: 200px; height: 465px; min-height: 400px; display: none;">
+  </div>
+
+  <section id="main-section" class="section-main">
+    <div>
+      <fieldset class="call-controls">
+        <div>
+          <table style="display: inline-block;">
+            <tbody>
+              <tr>
+                <td>
+                  <span type="button" id="goReady" class="goReady" value="I'M READY LET'S GO!">I'M READY LET'S GO!</span>
+                </td>
+                <td>
+                  <select id="agentStatusDropdown" style="display: none;" name="locality">
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table style="float:right;padding:11px;">
+            <tbody>
+              <tr>
+                <td>
+                  <span type="button" id="answerCall" style="display: none;" class="goReady" value="GET IT!">Answer</span>
+                </td>
+                <td style="padding-left:10px;">
+                  <span type="button" id="rejectCall" style="display: none;" class="rejectCall" value="DECLINE!">Reject</span>
+                </td>
+                <td style="padding-left:10px;">
+                  <span type="button" id="endContact" style="display: none;" class="rejectCall" value="DECLINE!">Hang UP</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </fieldset>
+    </div>
+    <form name="agentDetails" id="agentDetails">
+      <fieldset class="agent-info">
+        <legend>Agent Details</legend>
+        <div>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <label for="agentName">Agent Name:</label>
+                </td>
+                <td>
+                  <span id="agentName"></span>
+                </td>
+              </tr>
+              <td>
+                <label for="agentStatus">Current Status:</label>
+              </td>
+              <td>
+                <span id="agentStatus"></span>
+              </td>
+              <tr>
+                <td>
+                  <label for="routingProfile">Routing Profile:</label>
+                </td>
+                <td>
+                  <span id="routingProfile"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <div id="hiddenQueueList">
+              <input type=button id="showQueueList" value="Show Agent Queues"></input>
+            </div>
+            <div id="visibleQueueList" style="display:none;">
+              <input type=button id="hideQueueList" value="Hide Agent Queues"></input>
+              <table id="queueList" style="width:100%; text-align:left; border:1px;"></table>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+    <form name="Contact Details" id="contactDetails">
+      <fieldset class="contact-info">
+        <legend>Contact Details</legend>
+        <div>
+          <table>
+            <tbody>
+                <tr id="custWaitTime" style="display: none;" >
+                    <td>
+                      <label for="custWaitTimeSpan">Customer Waited: </label>
+                    </td>
+                    <td>
+                      <span id="custWaitTimeSpan"></span>
+                    </td>
+                  </tr>
+              <tr>
+                <td>
+                  <label style='width:130px' for="phoneNumber">Customer Number:</label>
+                </td>
+                <td>
+                  <span name="phoneNumber" id="phoneNumber" ></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <label for="firstName" style="width: 128px;">Full Name</label>
+                </td>
+                <td>
+                  <input name="firstName" type="text" id="firstName" placeholder="First Name" style='width:129px'>
+                </td>
+                <td>
+                  <input name="lastName" type="text" id="lastName" placeholder="Last Name" style='width:129px'>
+                </td>
+                <td>
+                  <button class="btn" type="submit" style="width: 45px; height: 30px;" id="updateName">
+                    <img id="updateNameImg" class="clippy" src="../assets/sync.svg" width="17" alt="Update Customer Name"> </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <label for="contactID" style="width: 128px;">Contact ID</label>
+                </td>
+                <td>
+                  <input name="contactID" type="text" id="contactID" placeholder="Contact ID" style='width: 275px' readonly>
+                </td>
+                <td>
+                  <button class="btn" type="button" id="btn" style="width: 45px; height: 30px;" data-clipboard-demo data-clipboard-target="#contactID">
+                    <img class="clippy" src="../assets/clippy.svg" width="17" alt="Copy to clipboard">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div id="hiddenAttributes">
+            <input type=button id="showAttributes" value="Show Contact Attributes"></input>
+          </div>
+          <div id="visibleAttributes" style="display:none;">
+            <input type=button id="hideAttributes" value="Hide Contact Attributes"></input>
+            <table id="attributes" style="width:100%; text-align:left; border:1px;"></table>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </section>
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-96261456-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+</body>
+
+</html>
