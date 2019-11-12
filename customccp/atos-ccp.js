@@ -1,0 +1,218 @@
+window.myCPP = window.myCPP || {};
+var ccpUrl = "https://atosjnjsandbox.awsapps.com/connect/ccp#/";
+var ccpDiv = document.getElementById("containerDiv");
+var bCCP = document.getElementById("bCCP");
+var agentMsgs = document.getElementById("agentMsgs");
+var logMsgs = document.getElementById("logMsgs");
+var bAnswer = document.getElementById("bAnswer");
+var bHangup = document.getElementById("bHangup");
+var bHold = document.getElementById("bHold");
+var bTest = document.getElementById("bTest");
+
+ccpDiv.style.visibility = 'hidden';
+bCCP.onclick = function (){
+	ccpDiv.style.visibility = (ccpDiv.style.visibility == 'visible') ? 'hidden' : 'visible';
+}
+
+bAnswer.style.visibility = 'hidden';
+bHold.style.visibility = 'hidden';
+bHangup.style.visibility = 'hidden';
+
+bAnswer.onclick = function() {
+	acceptContact();
+	bAnswer.style.visibility = 'hidden';
+	bHangup.style.visibility = 'visible';
+}
+
+bHangup.onclick = function() {
+	disconnectContact();
+	bAnswer.style.visibility = 'visible';
+	bHangup.style.visibility = 'hidden';
+}
+
+bTest.onclick = function (){
+	logMsgToScreen("test - click");
+	window.myCPP.agent.connect("12144032355");
+}
+
+console.log("LOG LOG");
+
+connect.core.initCCP(containerDiv, {
+	ccpUrl: ccpUrl,
+	loginPopup: true,
+	softphone: {
+		allowFramedSoftphone: true
+	}
+});
+connect.contact(subscribeToContactEvents);
+function subscribeToContactEvents(contact) {
+	window.myCPP.contact = contact;
+	logMsgToScreen("Subscribing to events for contact");
+	if (contact.getActiveInitialConnection()
+			&& contact.getActiveInitialConnection().getEndpoint()) {
+		logMsgToScreen("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString());
+		displayMsgToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
+		bAnswer.style.visibility = 'visible';
+		bHold.style.visibility = 'visible';
+	} else {
+		logMsgToScreen("This is an existing contact for this agent");
+	}
+	logMsgToScreen("Contact is from queue " + contact.getQueue().name);
+	displayMsgToAgent("Queue: " + contact.getQueue().name.toString());
+	logMsgToScreen("Contact attributes are " + JSON.stringify(contact.getAttributes()));
+	var ca = contact.getAttributes();
+	window.wwid = "unknown";
+	if (ca && ca.WWID) {
+		window.wwid = ca.WWID.value;
+	}
+	displayMsgToAgent("WWID: " + window.wwid);
+	
+	contact.onRefresh(eventContactRefresh);
+	contact.onIncoming(eventContactIncoming);
+	contact.onAccepted(eventContactAccepted);
+	contact.onConnected(eventContactConnected);
+	contact.onEnded(eventContactEnded);
+	//displayMsgToAgent('Open URLs in new tab');
+}
+function eventContactRefresh(contact) {
+	logMsgToScreen("[contact.onRefresh] " + contactToString(contact));
+}
+function eventContactIncoming(contact) {
+	logMsgToScreen("[contact.onIncoming] " + contactToString(contact));
+}
+function eventContactAccepted(contact) {
+	logMsgToScreen("[contact.onAccepted] " + contactToString(contact));
+	logMsgToScreen("[contact.onAccepted] window.open");
+}
+function eventContactConnected(contact) {
+	logMsgToScreen("[contact.onContactConnected] " + contactToString(contact));
+}
+function eventContactEnded(contact) {
+	logMsgToScreen("[contact.onEnded] " + contactToString(contact));
+	clearAgentDisplay();
+}
+function contactToString(contact) {
+	rv = [];
+	if (!contact) {
+		return "[Contact[nil]]";
+	}
+	id = contact.getContactId();
+	rv.push("id:" + id);
+	type = contact.getType();
+	rv.push("type:" + type);
+	queue = contact.getQueue().name;
+	rv.push("queue:" + queue);
+	rv.push("attributes:" + JSON.stringify(contact.getAttributes()));
+	return "[Contact[" + rv.join(",") + "]]";
+}
+connect.agent(subscribeToAgentEvents);
+function subscribeToAgentEvents(agent) {
+	window.myCPP.agent = agent;
+	agentMsgs.innerHTML = 'Hi ' + agent.getName() + ' !\n';
+	logMsgToScreen("Subscribing to events for agent " + agent.getName());
+	logMsgToScreen("Agent is currently in status of " + agent.getStatus().name);
+	agent.onRefresh(eventAgentRefresh);
+	agent.onRoutable(eventAgentRoutable);
+	agent.onNotRoutable(eventAgentNotRoutable);
+	agent.onOffline(eventAgentOffline);
+	agent.onError(eventAgentError);
+	agent.onAfterCallWork(eventAfterCallWork);
+}
+function eventAgentRefresh(agent) {
+	//logMsgToScreen("[agent.onRefresh] " + agentToString(agent));
+}
+function eventAgentRoutable(agent) {
+	logMsgToScreen("[agent.onRoutable] " + agentToString(agent));
+}
+function eventAgentNotRoutable(agent) {
+	logMsgToScreen("[agent.onNotRoutable] " + agentToString(agent));
+}
+function eventAgentOffline(agent) {
+	logMsgToScreen("[agent.onOffline] " + agentToString(agent));
+}
+function eventAgentError(agent) {
+	logMsgToScreen("[agent.onError] " + agentToString(agent));
+}
+function eventAfterCallWork(agent) {
+	logMsgToScreen("[agent.onAfterCallWork] " + agentToString(agent));
+}
+function agentToString(agent) {
+	rv = [];
+	if (!agent) {
+		return "[Agent[nil]]";
+	}
+	state = agent.getState().name;
+	rv.push("state:" + state);
+	config = agent.getConfiguration();
+	rv.push("name:" + config.name);
+	rv.push("user:" + config.username);
+	return "[Agent[" + rv.join(",") + "]]";
+}
+function goAvailable() {
+	var routableState = window.myCPP.agent.getAgentStates().filter(function (state) {
+		return state.type === connect.AgentStateType.ROUTABLE;
+	})[0];
+	window.myCPP.agent.setState(routableState, {
+		success: function () {
+			logMsgToScreen("Set agent status to Available (routable) via Streams");
+		},
+		failure: function () {
+			logMsgToScreen("Failed to set agent status to Available (routable) via Streams");
+		}
+	});
+}
+function goOffline() {
+	var offlineState = window.myCPP.agent.getAgentStates().filter(function (state) {
+		return state.type === connect.AgentStateType.OFFLINE;
+	})[0];
+	window.myCPP.agent.setState(offlineState, {
+		success: function () {
+			logMsgToScreen("Set agent status to Offline via Streams");
+		},
+		failure: function () {
+			logMsgToScreen("Failed to set agent status to Offline via Streams");
+		}
+	});
+}
+function acceptContact() {
+	window.myCPP.contact.accept({
+		success: function () {
+			logMsgToScreen("Accepted contact via Streams");
+		},
+		failure: function () {
+			logMsgToScreen("Failed to accept contact via Streams");
+		}
+	});
+}
+function disconnectContact() {
+	//cannot do contact.destroy(), can only destroy (hang-up) agent connection
+	window.myCPP.contact.getAgentConnection().destroy({
+		success: function () {
+			logMsgToScreen("Disconnected contact via Streams");
+		},
+		failure: function () {
+			logMsgToScreen("Failed to disconnect contact via Streams");
+		}
+	});
+}
+
+function displayMsgToHistory(msg) {
+	console.log("hist: " + msg);
+	historyMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + String(msg) + "\n" + String(historyMsgs.innerHTML);
+}
+
+function displayMsgToAgent(msg) {
+	console.log("dta: " + msg);
+	agentMsgs.innerHTML = "" + String(agentMsgs.innerHTML) + String(msg) + "\n";
+}
+function logMsgToScreen(msg) {
+	console.log('lmts: ' + msg);
+	logMsgs.innerHTML =  logMsgs.innerHTML + new Date().toLocaleTimeString() + ' ' + msg + '\n';
+}
+function displayAgentStatus(status) {
+	eventMsgs.innerHTML = 'Status: ' + status;
+}
+function clearAgentDisplay() {
+	agentMsgs.innerHTML = "";
+}
+
