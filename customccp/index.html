@@ -1,35 +1,39 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <title>Custom CCP</title>
-    </head>
-    <body>
-        <div id="myApp">
-            <h1>AWS Connect - Custom CCP</h1>
-            <a href='https://atosjnjsandbox.awsapps.com/connect/home'>Login</a>
+
+<head>
+    <title>Custom CCP</title>
+</head>
+
+<body>
+    <div id="myApp">
+        <h1>AWS Connect - Custom CCP</h1>
+        <a href='https://atosjnjsandbox.awsapps.com/connect/home'>Login</a>
+    </div>
+    <button id="bCCP">hide/show</button>
+
+    <div style="width: 800px; height: 500px; ">
+        <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
+            <!--Amazon CCP will go here-->
         </div>
-        <button id="bCCP" >hide/show</button>
+        <div style="float:right; width: 460px; min-width: 200px; height: 260px; min-height: 400px;">
+            <button id="bAnswer">answer</button>
+            <button id="bHold">hold</button>
+            <button id="bHangup">hangup</button>
+            <button id="bTest" hidden>test</button>
+            <br>
 
-        <div style="width: 800px; height: 500px; "> 
-            <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; " >
-                <!--Amazon CCP will go here-->
-            </div>
-            <div style="float:right; width: 460px; min-width: 200px; height: 260px; min-height: 150px;">
-                <button id="bAnswer" >answer</button>
-                <button id="bHold" >hold</button>
-                <button id="bHangup" >hangup</button>
-                <button id="bTest" hidden>test</button>
-                <textarea id="agentMsgs" rows="12" cols="60"></textarea>
-                <br>
-                <textarea id="logMsgs" rows="12" cols="100"></textarea>
-            </div>
-    
         </div>
-        <br>
+    </div>
+    <br>
+    <div>
+        <textarea id="logMsgs" rows="12" cols="100"></textarea>
+    </div>
 
 
-        <!-- see https://github.com/aws/amazon-connect-streams -->
-        <script src="amazon-connect-v1.3.2.js"></script>
-        <script src="atos-ccp.js"></script>
-    </body>
+    <!-- see https://github.com/aws/amazon-connect-streams -->
+    <script src="amazon-connect-v1.3.2.js"></script>
+    <script src="atos-ccp.js"></script>
+</body>
+
 </html>

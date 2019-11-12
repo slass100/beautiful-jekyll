@@ -1,20 +1,23 @@
 window.myCPP = window.myCPP || {};
+
 var ccpUrl = "https://atosjnjsandbox.awsapps.com/connect/ccp#/";
 var ccpDiv = document.getElementById("containerDiv");
+
 var bCCP = document.getElementById("bCCP");
-var agentMsgs = document.getElementById("agentMsgs");
-var logMsgs = document.getElementById("logMsgs");
+
 var bAnswer = document.getElementById("bAnswer");
-var bHangup = document.getElementById("bHangup");
 var bHold = document.getElementById("bHold");
+var bHangup = document.getElementById("bHangup");
 var bTest = document.getElementById("bTest");
+var logMsgs = document.getElementById("logMsgs");
 
 ccpDiv.style.visibility = 'hidden';
 bCCP.onclick = function (){
 	ccpDiv.style.visibility = (ccpDiv.style.visibility == 'visible') ? 'hidden' : 'visible';
 }
 
-bAnswer.style.visibility = 'hidden';
+//bAnswer.style.visibility = 'hidden';
+bAnswer.prop( "disabled", true );
 bHold.style.visibility = 'hidden';
 bHangup.style.visibility = 'hidden';
 
