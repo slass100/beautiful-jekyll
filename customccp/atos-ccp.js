@@ -32,7 +32,7 @@ bHangup.onclick = function() {
 	bHangup.disabled = 'true';
 }
 
-bTest.onclick = function (){
+bCall.onclick = function (){
 	logMsgToScreen("test - click");
 	window.myCPP.agent.connect("12144032355");
 }
