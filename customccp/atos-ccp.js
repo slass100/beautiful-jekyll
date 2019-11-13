@@ -8,7 +8,7 @@ var bCCP = document.getElementById("bCCP");
 var bAnswer = document.getElementById("bAnswer");
 var bHold = document.getElementById("bHold");
 var bHangup = document.getElementById("bHangup");
-var bTest = document.getElementById("bTest");
+var bCall = document.getElementById("bCall");
 var logMsgs = document.getElementById("logMsgs");
 
 ccpDiv.style.visibility = 'hidden';
