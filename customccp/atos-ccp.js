@@ -17,7 +17,7 @@ bCCP.onclick = function (){
 }
 
 //bAnswer.style.visibility = 'hidden';
-bAnswer.prop( "disabled", true );
+bAnswer.disabled = 'true';
 bHold.style.visibility = 'hidden';
 bHangup.style.visibility = 'hidden';
 
