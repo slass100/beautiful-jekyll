@@ -16,21 +16,20 @@ bCCP.onclick = function (){
 	ccpDiv.style.visibility = (ccpDiv.style.visibility == 'visible') ? 'hidden' : 'visible';
 }
 
-//bAnswer.style.visibility = 'hidden';
 bAnswer.disabled = 'true';
-bHold.style.visibility = 'hidden';
-bHangup.style.visibility = 'hidden';
+bHold.disabled = 'true';
+bHangup.disabled = 'true';
 
 bAnswer.onclick = function() {
 	acceptContact();
-	bAnswer.style.visibility = 'hidden';
-	bHangup.style.visibility = 'visible';
+	bAnswer.disabled = 'true';
+	bHangup.disabled = 'false';
 }
 
 bHangup.onclick = function() {
 	disconnectContact();
-	bAnswer.style.visibility = 'visible';
-	bHangup.style.visibility = 'hidden';
+	bAnswer.disabled = 'false';
+	bHangup.disabled = 'true';
 }
 
 bTest.onclick = function (){
@@ -38,7 +37,7 @@ bTest.onclick = function (){
 	window.myCPP.agent.connect("12144032355");
 }
 
-console.log("LOG LOG");
+logMsgToScreen("initCCP: start");
 
 connect.core.initCCP(containerDiv, {
 	ccpUrl: ccpUrl,
@@ -47,35 +46,29 @@ connect.core.initCCP(containerDiv, {
 		allowFramedSoftphone: true
 	}
 });
-connect.contact(subscribeToContactEvents);
-function subscribeToContactEvents(contact) {
+logMsgToScreen("initCCP: end");
+
+
+connect.contact(eventContact);
+function eventContact(contact) {
 	window.myCPP.contact = contact;
-	logMsgToScreen("Subscribing to events for contact");
+	logMsgToScreen("new contact");
 	if (contact.getActiveInitialConnection()
 			&& contact.getActiveInitialConnection().getEndpoint()) {
 		logMsgToScreen("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString());
-		displayMsgToAgent("Calling: " + contact.getActiveInitialConnection().getEndpoint().phoneNumber);
-		bAnswer.style.visibility = 'visible';
-		bHold.style.visibility = 'visible';
+		bAnswer.disabled = 'false';
+		bHold.disabled = 'false';
 	} else {
 		logMsgToScreen("This is an existing contact for this agent");
 	}
 	logMsgToScreen("Contact is from queue " + contact.getQueue().name);
-	displayMsgToAgent("Queue: " + contact.getQueue().name.toString());
 	logMsgToScreen("Contact attributes are " + JSON.stringify(contact.getAttributes()));
-	var ca = contact.getAttributes();
-	window.wwid = "unknown";
-	if (ca && ca.WWID) {
-		window.wwid = ca.WWID.value;
-	}
-	displayMsgToAgent("WWID: " + window.wwid);
 	
 	contact.onRefresh(eventContactRefresh);
 	contact.onIncoming(eventContactIncoming);
 	contact.onAccepted(eventContactAccepted);
 	contact.onConnected(eventContactConnected);
 	contact.onEnded(eventContactEnded);
-	//displayMsgToAgent('Open URLs in new tab');
 }
 function eventContactRefresh(contact) {
 	logMsgToScreen("[contact.onRefresh] " + contactToString(contact));
@@ -108,12 +101,11 @@ function contactToString(contact) {
 	rv.push("attributes:" + JSON.stringify(contact.getAttributes()));
 	return "[Contact[" + rv.join(",") + "]]";
 }
-connect.agent(subscribeToAgentEvents);
-function subscribeToAgentEvents(agent) {
+connect.agent(eventAgent);
+function eventAgent(agent) {
 	window.myCPP.agent = agent;
-	agentMsgs.innerHTML = 'Hi ' + agent.getName() + ' !\n';
-	logMsgToScreen("Subscribing to events for agent " + agent.getName());
-	logMsgToScreen("Agent is currently in status of " + agent.getStatus().name);
+	logMsgToScreen("eventAgent: " + agent.getName());
+	logMsgToScreen("Agent status: " + agent.getStatus().name);
 	agent.onRefresh(eventAgentRefresh);
 	agent.onRoutable(eventAgentRoutable);
 	agent.onNotRoutable(eventAgentNotRoutable);
@@ -122,7 +114,7 @@ function subscribeToAgentEvents(agent) {
 	agent.onAfterCallWork(eventAfterCallWork);
 }
 function eventAgentRefresh(agent) {
-	//logMsgToScreen("[agent.onRefresh] " + agentToString(agent));
+	logMsgToScreen("[agent.onRefresh] " + agentToString(agent));
 }
 function eventAgentRoutable(agent) {
 	logMsgToScreen("[agent.onRoutable] " + agentToString(agent));
@@ -199,23 +191,9 @@ function disconnectContact() {
 	});
 }
 
-function displayMsgToHistory(msg) {
-	console.log("hist: " + msg);
-	historyMsgs.innerHTML = '' + new Date().toLocaleTimeString() + ' ' + String(msg) + "\n" + String(historyMsgs.innerHTML);
-}
-
-function displayMsgToAgent(msg) {
-	console.log("dta: " + msg);
-	agentMsgs.innerHTML = "" + String(agentMsgs.innerHTML) + String(msg) + "\n";
-}
 function logMsgToScreen(msg) {
 	console.log('lmts: ' + msg);
 	logMsgs.innerHTML =  logMsgs.innerHTML + new Date().toLocaleTimeString() + ' ' + msg + '\n';
 }
-function displayAgentStatus(status) {
-	eventMsgs.innerHTML = 'Status: ' + status;
-}
-function clearAgentDisplay() {
-	agentMsgs.innerHTML = "";
-}
+
 
