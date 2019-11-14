@@ -116,7 +116,7 @@ function eventAgent(agent) {
 	logMsgToScreen("Agent status: " + agent.getStatus().name);
     
         
-    routingProfile = agent.getRoutingProfile();
+    var routingProfile = agent.getRoutingProfile();
     logMsgToScreen("got rp");
     logMsgtoScreen("rp: " + routingProfile.name.toString());
     logMsgToScreen("got rp");
