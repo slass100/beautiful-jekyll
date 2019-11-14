@@ -10,10 +10,15 @@ var bHold = document.getElementById("bHold");
 var bHangup = document.getElementById("bHangup");
 var bCall = document.getElementById("bCall");
 var logMsgs = document.getElementById("logMsgs");
+var pAlias = document.getElementById("alias");
+
+var url = new URL(document.URL);
+pAlias.innerHTML = url.searchParams.get("alias");
 
 ccpDiv.style.visibility = 'hidden';
 bCCP.onclick = function (){
 	ccpDiv.style.visibility = (ccpDiv.style.visibility == 'visible') ? 'hidden' : 'visible';
+    ccpDiv.style.display = 'block';
 }
 
 bAnswer.disabled = 'true';
@@ -34,6 +39,7 @@ bHangup.onclick = function() {
 
 bCall.onclick = function (){
 	logMsgToScreen("test - click");
+    alert("help")
     var qarn = window.myCPP.agent.getRoutingProfile().defaultOutboundQueue.queueARN;
     var endpoint = connect.Endpoint.byPhoneNumber("2144032355");
 	window.myCPP.agent.connect(endpoint, {

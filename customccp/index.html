@@ -3,33 +3,40 @@
 
 <head>
     <title>Custom CCP</title>
+    <link rel="stylesheet" type="text/css" href="flat-ui.css">
 </head>
 
 <body>
     <div id="myApp">
-        <h1>AWS Connect - Custom CCP</h1>
-        <a href='https://atosjnjsandbox.awsapps.com/connect/home'>Login</a>
+        <h2>AWS Connect - Custom CCP</h2>
     </div>
-    <button id="bCCP">hide/show</button>
+    <div>
+        Connect Alias: <div id="alias">Alias</div>
+        <a href='https://atosjnjsandbox.awsapps.com/connect/login'>Login</a>
+    </div>
+    <div>
+        <input class="form-control" type="text" id="phonenumber" value="">
+    </div>
+    <p/>
+    <p/>
+    <div>
+        <button class='btn btn-block btn-primary' id="bAnswer">answer</button>
+        <button class='btn btn-block btn-primary' id="bHold">hold</button>
+        <button class='btn btn-block btn-primary' id="bHangup">hangup</button>
+        <button class='btn btn-block btn-primary' id="bCall">call</button>
+    </div>    
+    <p/>
+    <p/>
+    
+    <button class="btn btn-block btn-info" id="bCCP">CCP</button>
 
-    <div style="width: 800px; height: 500px; ">
-        <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
-            <!--Amazon CCP will go here-->
-        </div>
-        <div style="float:right; width: 460px; min-width: 200px; height: 260px; min-height: 400px;">
-            <button id="bAnswer">answer</button>
-            <button id="bHold">hold</button>
-            <button id="bHangup">hangup</button>
-            <button id="bCall">call</button>
-            <br>
-
-        </div>
+    <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
+        <!--Amazon CCP will go here-->
     </div>
     <br>
     <div>
         <textarea id="logMsgs" rows="12" cols="100"></textarea>
     </div>
-
 
     <!-- see https://github.com/aws/amazon-connect-streams -->
     <script src="amazon-connect-v1.3.2.js"></script>
@@ -37,3 +44,5 @@
 </body>
 
 </html>
+
+
