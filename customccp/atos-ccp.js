@@ -51,7 +51,7 @@ logMsgToScreen("initCCP: start");
 
 connect.core.initCCP(containerDiv, {
 	ccpUrl: ccpUrl,
-	loginPopup: true,
+	loginPopup: false,
 	softphone: {
 		allowFramedSoftphone: true
 	}
