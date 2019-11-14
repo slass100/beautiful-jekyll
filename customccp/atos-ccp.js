@@ -34,8 +34,10 @@ bHangup.onclick = function() {
 
 bCall.onclick = function (){
 	logMsgToScreen("test - click");
+    var qarn = window.myCPP.agent.getRoutingProfiles().defaultOutboundQueue.queueARN;
+    
 	window.myCPP.agent.connect("12144032355", {
-        
+        queueARN: qarn,
 		success: function () {
 			logMsgToScreen("Set agent status to Available (routable) via Streams");
 		},
