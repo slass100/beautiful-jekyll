@@ -119,7 +119,6 @@ function eventAgent(agent) {
     var routingProfile = agent.getRoutingProfile();
     logMsgToScreen("rp: " + JSON.stringify(routingProfile.name));
     logMsgToScreen("rp-doq: " + JSON.stringify(routingProfile.defaultOutboundQueue));
-    console.log("got rp");
         
 	agent.onRefresh(eventAgentRefresh);
 	agent.onRoutable(eventAgentRoutable);
