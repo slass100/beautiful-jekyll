@@ -123,6 +123,8 @@ function eventAgent(agent) {
     
     routingProfile = agent.getRoutingProfile();
     logMsgtoScreen("rp: " + routingProfile);
+    logMsgtoScreen("rp-doq: " + routingProfile.defaultOutboundQueue);
+    
 }
 function eventAgentRefresh(agent) {
 	logMsgToScreen("[agent.onRefresh] " + agentToString(agent));
