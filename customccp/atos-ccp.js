@@ -34,7 +34,15 @@ bHangup.onclick = function() {
 
 bCall.onclick = function (){
 	logMsgToScreen("test - click");
-	window.myCPP.agent.connect("12144032355");
+	window.myCPP.agent.connect("12144032355", {
+        
+		success: function () {
+			logMsgToScreen("Set agent status to Available (routable) via Streams");
+		},
+		failure: function () {
+			logMsgToScreen("Failed to set agent status to Available (routable) via Streams");
+		}
+	});
 }
 
 logMsgToScreen("initCCP: start");
@@ -112,6 +120,9 @@ function eventAgent(agent) {
 	agent.onOffline(eventAgentOffline);
 	agent.onError(eventAgentError);
 	agent.onAfterCallWork(eventAfterCallWork);
+    
+    routingProfile = agent.getRoutingProfile();
+    logMsgtoScreen("rp: " + routingProfile);
 }
 function eventAgentRefresh(agent) {
 	logMsgToScreen("[agent.onRefresh] " + agentToString(agent));
