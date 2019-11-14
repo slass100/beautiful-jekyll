@@ -114,16 +114,19 @@ function eventAgent(agent) {
 	window.myCPP.agent = agent;
 	logMsgToScreen("eventAgent: " + agent.getName());
 	logMsgToScreen("Agent status: " + agent.getStatus().name);
+    
+        
+    routingProfile = agent.getRoutingProfile();
+    logMsgtoScreen("rp: " + routingProfile);
+    logMsgtoScreen("rp-doq: " + routingProfile.defaultOutboundQueue);
+    
 	agent.onRefresh(eventAgentRefresh);
 	agent.onRoutable(eventAgentRoutable);
 	agent.onNotRoutable(eventAgentNotRoutable);
 	agent.onOffline(eventAgentOffline);
 	agent.onError(eventAgentError);
 	agent.onAfterCallWork(eventAfterCallWork);
-    
-    routingProfile = agent.getRoutingProfile();
-    logMsgtoScreen("rp: " + routingProfile);
-    logMsgtoScreen("rp-doq: " + routingProfile.defaultOutboundQueue);
+
     
 }
 function eventAgentRefresh(agent) {
