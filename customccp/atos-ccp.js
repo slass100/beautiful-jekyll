@@ -117,6 +117,7 @@ function eventAgent(agent) {
     
         
     routingProfile = agent.getRoutingProfile();
+    logMsgToScreen("got rp");
     logMsgtoScreen("rp: " + JSON.stringify(routingProfile));
     logMsgtoScreen("rp-doq: " + JSON.stringify(routingProfile.defaultOutboundQueue));
     
