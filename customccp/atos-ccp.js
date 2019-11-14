@@ -35,7 +35,7 @@ bHangup.onclick = function() {
 bCall.onclick = function (){
 	logMsgToScreen("test - click");
     var qarn = window.myCPP.agent.getRoutingProfile().defaultOutboundQueue.queueARN;
-    var endpoint = Endpoint.byPhoneNumber("2144032355");
+    var endpoint = connect.Endpoint.byPhoneNumber("2144032355");
 	window.myCPP.agent.connect(endpoint, {
         queueARN: qarn,
 		success: function () {
