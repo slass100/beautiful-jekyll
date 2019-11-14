@@ -118,9 +118,9 @@ function eventAgent(agent) {
         
     routingProfile = agent.getRoutingProfile();
     logMsgToScreen("got rp");
-    logMsgtoScreen("rp: " + routingProfile.name);
+    logMsgtoScreen("rp: " + routingProfile.name.toString());
     logMsgToScreen("got rp");
-    logMsgtoScreen("rp-doq: " + JSON.stringify(routingProfile.defaultOutboundQueue));
+    logMsgtoScreen("rp-doq: " + routingProfile.defaultOutboundQueue.toString());
     logMsgToScreen("got rp");
         
 	agent.onRefresh(eventAgentRefresh);
