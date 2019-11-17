@@ -1,4 +1,3 @@
-
 var ccpDiv = document.getElementById("containerDiv");
 
 var bCCP = document.getElementById("bCCP");
@@ -86,8 +85,7 @@ bCall.onclick = function () {
                 logMsgToScreen("Failed to set agent status to Available (routable) via Streams");
             }
         });
-    }
-    else {
+    } else {
         alert("Enter Phone Number to Dial");
     }
 
@@ -168,6 +166,7 @@ connect.agent(eventAgent);
 
 function eventAgent(agent) {
     window.myCPP.agent = agent;
+    pStatus.innerHTML = "Agent Logged In";
     logMsgToScreen("eventAgent: " + agent.getName());
     logMsgToScreen("Agent status: " + agent.getStatus().name);
 
