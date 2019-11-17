@@ -45,6 +45,7 @@ bCCP.onclick = function () {
 bAnswer.disabled = 'true';
 bHold.disabled = 'true';
 bHangup.disabled = 'true';
+bMute.disabled = 'true';
 
 login.onclick = function () {
     logMsgToScreen("login");
@@ -75,11 +76,10 @@ bCall.onclick = function () {
     var obqueue = window.myCPP.agent.getRoutingProfile().defaultOutboundQueue;
     var qarn = obqueue.queueARN;
     if (dialnum.value.length > 0) {
-        var pn = dialnum.value
-        if (! pn.startsWith("+1")) {
+        if (!dialnum.value.startsWith("+1")) {
             dialnum.value = "+1" + dialnum.value
         }
-        if (! pn.startsWith("+")) {
+        if (!dialnum.value.startsWith("+")) {
             dialnum.value = "+" + dialnum.value
         }
 
@@ -114,39 +114,39 @@ logMsgToScreen("initCCP: end");
 var eventbus = connect.core.getEventBus()
 
 eventbus.subscribe(connect.EventType.ACKNOWLEDGE,
-    function() {
+    function () {
         logMsgToScreen("Event: ACKNOWLEDGE");
-});
+    });
 
 eventbus.subscribe(connect.EventType.ACK_TIMEOUT,
-    function() {
+    function () {
         logMsgToScreen("Event: ACK_TIMEOUT");
-});
+    });
 
 eventbus.subscribe(connect.EventType.API_REQUEST,
-    function() {
+    function () {
         logMsgToScreen("Event: API_REQUEST");
-});
+    });
 
 eventbus.subscribe(connect.EventType.API_RESPONSE,
-    function() {
+    function () {
         logMsgToScreen("Event: API_RESPONSE");
-});
+    });
 
 eventbus.subscribe(connect.EventType.CLOSE,
-    function() {
+    function () {
         logMsgToScreen("Event: CLOSE");
-});
+    });
 
 eventbus.subscribe(connect.EventType.TERMINATE,
-    function() {
+    function () {
         logMsgToScreen("Event: TERMINATE");
-});
+    });
 
 eventbus.subscribe(connect.EventType.TERMINATED,
-    function() {
+    function () {
         logMsgToScreen("Event: TERMINATED");
-});
+    });
 
 
 
