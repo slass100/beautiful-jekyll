@@ -6,6 +6,7 @@ var logout = document.getElementById("logout");
 
 var bAnswer = document.getElementById("bAnswer");
 var bHold = document.getElementById("bHold");
+var bMute = document.getElementById("bMute");
 var bHangup = document.getElementById("bHangup");
 var bCall = document.getElementById("bCall");
 var logMsgs = document.getElementById("logMsgs");
