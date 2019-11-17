@@ -47,6 +47,7 @@ bAnswer.disabled = true;
 bHold.disabled = true;
 bHangup.disabled = true;
 bMute.disabled = true;
+bUnmute.disabled = true;
 bCall.disabled = false;
 
 login.onclick = function () {
@@ -105,6 +106,7 @@ bCall.onclick = function () {
                 bHold.disabled = false;
                 bHangup.disabled = false;
                 bMute.disabled = false;
+                bUnmute.disabled = false;
                 bCall.disabled = true;
 
             },
@@ -114,6 +116,7 @@ bCall.onclick = function () {
                 bHold.disabled = true;
                 bHangup.disabled = true;
                 bMute.disabled = true;
+                bUnmute.disabled = true;
                 bCall.disabled = false;
                 alert("Failed to connect");
 
