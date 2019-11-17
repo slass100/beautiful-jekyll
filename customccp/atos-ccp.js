@@ -1,7 +1,9 @@
 window.myCPP = window.myCPP || {};
 window.myCPP.agent = window.myCPP.agent || null;
 
-var ccpUrl = "https://atosjnjsandbox.awsapps.com/connect/ccp#/";
+var alias = "atosjnjsandbox";
+
+var ccpUrl = "https://${alias}.awsapps.com/connect/ccp#/";
 var ccpDiv = document.getElementById("containerDiv");
 
 var bCCP = document.getElementById("bCCP");
