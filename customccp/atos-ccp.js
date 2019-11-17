@@ -110,6 +110,46 @@ connect.core.initCCP(containerDiv, {
 logMsgToScreen("initCCP: end");
 
 
+var eventbus = connect.core.getEventBus()
+
+eventbus.subscribe(connect.EventType.ACKNOWLEDGE,
+    function() {
+        logMsgToScreen("Event: ACKNOWLEDGE");
+});
+
+eventbus.subscribe(connect.EventType.ACK_TIMEOUT,
+    function() {
+        logMsgToScreen("Event: ACK_TIMEOUT");
+});
+
+eventbus.subscribe(connect.EventType.API_REQUEST,
+    function() {
+        logMsgToScreen("Event: API_REQUEST");
+});
+
+eventbus.subscribe(connect.EventType.API_RESPONSE,
+    function() {
+        logMsgToScreen("Event: API_RESPONSE");
+});
+
+eventbus.subscribe(connect.EventType.CLOSE,
+    function() {
+        logMsgToScreen("Event: CLOSE");
+});
+
+eventbus.subscribe(connect.EventType.TERMINATE,
+    function() {
+        logMsgToScreen("Event: TERMINATE");
+});
+
+eventbus.subscribe(connect.EventType.TERMINATED,
+    function() {
+        logMsgToScreen("Event: TERMINATED");
+});
+
+
+
+
 connect.contact(eventContact);
 
 function eventContact(contact) {
