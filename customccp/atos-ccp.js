@@ -345,24 +345,24 @@ function acceptContact() {
 function toggleHold() {
     var conn = window.myCCP.contact.getAgentConnection();
     if (conn.isOnHold()) {
-        conn.hold(
+        conn.hold({
             success: function () {
                 logMsgToScreen("hold - success");
             },
             failure: function () {
                 logMsgToScreen("hold - fail");
             }
-        );
+        });
     }
     else {
-         conn.resume(
+         conn.resume({
             success: function () {
                 logMsgToScreen("resume - success");
             },
             failure: function () {
                 logMsgToScreen("resume - fail");
             }
-        );       
+         });       
     }
 }
 
