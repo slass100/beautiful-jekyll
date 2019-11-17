@@ -17,8 +17,10 @@ var pAlias = document.getElementById("alias");
 var pStatus = document.getElementById("status");
 
 var url = new URL(document.URL);
-var connectalias = url.searchParams.get("alias");
-pAlias.innerHTML = connectalias;
+alias = url.searchParams.get("alias");
+if (alias) {
+    pAlias.innerHTML = connectalias;
+}
 
 if (! window.myCPP.agent) {
     pStatus.innerHTML = "Login Needed";
