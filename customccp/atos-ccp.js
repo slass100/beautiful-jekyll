@@ -352,7 +352,7 @@ function toggleHold() {
             failure: function () {
                 logMsgToScreen("hold - fail");
             }
-        ));
+        );
     }
     else {
          conn.resume(
@@ -362,10 +362,8 @@ function toggleHold() {
             failure: function () {
                 logMsgToScreen("resume - fail");
             }
-        ));       
+        );       
     }
-}
-
 }
 
 function disconnectContact() {
