@@ -75,9 +75,9 @@ bCall.onclick = function () {
 
     var obqueue = window.myCPP.agent.getRoutingProfile().defaultOutboundQueue;
     var qarn = obqueue.queueARN;
-    if (dialnum.innerHTML.length > 0) {
+    if (dialnum.value.length > 0) {
 
-        var endpoint = connect.Endpoint.byPhoneNumber(dialnum.innerHTML);
+        var endpoint = connect.Endpoint.byPhoneNumber(dialnum.value);
         window.myCPP.agent.connect(endpoint, {
             queueARN: qarn,
             success: function () {
