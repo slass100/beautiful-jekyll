@@ -42,11 +42,11 @@ bCCP.onclick = function () {
     ccpDiv.style.display = 'block';
 }
 
-bAnswer.disabled = 'true';
-bHold.disabled = 'true';
-bHangup.disabled = 'true';
-bMute.disabled = 'true';
-bCall.disabled = 'false';
+bAnswer.disabled = true;
+bHold.disabled = true;
+bHangup.disabled = true;
+bMute.disabled = true;
+bCall.disabled = false;
 
 login.onclick = function () {
     logMsgToScreen("login");
@@ -89,20 +89,20 @@ bCall.onclick = function () {
             queueARN: qarn,
             success: function () {
                 logMsgToScreen("Set agent status to Available (routable) via Streams");
-                bAnswer.disabled = 'false';
-                bHold.disabled = 'false';
-                bHangup.disabled = 'false';
-                bMute.disabled = 'false';
-                bCall.disabled = 'true';
+                bAnswer.disabled = false;
+                bHold.disabled = false;
+                bHangup.disabled = false;
+                bMute.disabled = false;
+                bCall.disabled = true;
 
             },
             failure: function () {
                 logMsgToScreen("Failed to set agent status to Available (routable) via Streams");
-                bAnswer.disabled = 'true';
-                bHold.disabled = 'true';
-                bHangup.disabled = 'true';
-                bMute.disabled = 'true';
-                bCall.disabled = 'false';
+                bAnswer.disabled = true;
+                bHold.disabled = true;
+                bHangup.disabled = true;
+                bMute.disabled = true;
+                bCall.disabled = false;
                 alert("Failed to connect");
 
             }
