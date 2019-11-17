@@ -67,6 +67,11 @@ bAnswer.onclick = function () {
     bHangup.disabled = 'false';
 }
 
+bHold.onclick = function () {
+    logMsgToScreen("hold - click");
+    toggleHold();
+}
+
 bHangup.onclick = function () {
     disconnectContact();
     bAnswer.disabled = 'false';
@@ -335,6 +340,32 @@ function acceptContact() {
             logMsgToScreen("Failed to accept contact via Streams");
         }
     });
+}
+
+function toggleHold() {
+    var conn = window.myCCP.contact.getAgentConnection();
+    if (conn.isOnHold()) {
+        conn.hold(
+            success: function () {
+                logMsgToScreen("hold - success");
+            },
+            failure: function () {
+                logMsgToScreen("hold - fail");
+            }
+        ));
+    }
+    else {
+         conn.resume(
+            success: function () {
+                logMsgToScreen("resume - success");
+            },
+            failure: function () {
+                logMsgToScreen("resume - fail");
+            }
+        ));       
+    }
+}
+
 }
 
 function disconnectContact() {
