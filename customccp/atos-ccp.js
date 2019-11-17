@@ -262,8 +262,7 @@ function eventAgent(agent) {
     agent.onOffline(eventAgentOffline);
     agent.onError(eventAgentError);
     agent.onAfterCallWork(eventAfterCallWork);
-
-
+    agent.onMuteToggle(eventMuteToggle);
 }
 
 function eventAgentRefresh(agent) {
@@ -288,6 +287,10 @@ function eventAgentError(agent) {
 
 function eventAfterCallWork(agent) {
     logMsgToScreen("[agent.onAfterCallWork] " + agentToString(agent));
+}
+
+function eventMuteToggle(muted) {
+    logMsgToScreen("[agent.eventMuteToggle] " + JSON.stringify(muted));
 }
 
 function agentToString(agent) {
