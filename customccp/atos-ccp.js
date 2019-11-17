@@ -91,6 +91,7 @@ bCall.onclick = function () {
             },
             failure: function () {
                 logMsgToScreen("Failed to set agent status to Available (routable) via Streams");
+                alert("Failed to connect");
             }
         });
     } else {
