@@ -3,11 +3,23 @@ window.myCPP.agent = window.myCPP.agent || null;
 
 var alias = "atosjnjsandbox";
 
+var url = new URL(document.URL);
+alias = url.searchParams.get("alias");
+if (url.searchParams.get("alias")) {
+    alias = url.searchParams.get("alias");
+    pAlias.innerHTML = alias;
+}
+
+
 var ccpUrl = `https://${alias}.awsapps.com/connect/ccp#/`;
+var loginUrl = `https://${alias}.awsapps.com/connect/login`;
+var logoutUrl = `https://${alias}.awsapps.com/connect/logout`;
 
 var ccpDiv = document.getElementById("containerDiv");
 
 var bCCP = document.getElementById("bCCP");
+var login = document.getElementById("login");
+var logout = document.getElementById("logout");
 
 var bAnswer = document.getElementById("bAnswer");
 var bHold = document.getElementById("bHold");
@@ -18,12 +30,7 @@ var pAlias = document.getElementById("alias");
 var pStatus = document.getElementById("status");
 var dialnum = document.getElementById("phonenumber")
 
-var url = new URL(document.URL);
-alias = url.searchParams.get("alias");
-if (url.searchParams.get("alias")) {
-    alias = url.searchParams.get("alias");
-    pAlias.innerHTML = alias;
-}
+
 
 if (!window.myCPP.agent) {
     pStatus.innerHTML = "Login Needed";
@@ -39,6 +46,10 @@ bCCP.onclick = function () {
 bAnswer.disabled = 'true';
 bHold.disabled = 'true';
 bHangup.disabled = 'true';
+
+login.onclick = function () {
+    window.open
+}
 
 bAnswer.onclick = function () {
     acceptContact();
