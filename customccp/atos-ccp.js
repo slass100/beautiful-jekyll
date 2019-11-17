@@ -1,19 +1,3 @@
-window.myCPP = window.myCPP || {};
-window.myCPP.agent = window.myCPP.agent || null;
-
-var alias = "atosjnjsandbox";
-
-var url = new URL(document.URL);
-alias = url.searchParams.get("alias");
-if (url.searchParams.get("alias")) {
-    alias = url.searchParams.get("alias");
-    pAlias.innerHTML = alias;
-}
-
-
-var ccpUrl = `https://${alias}.awsapps.com/connect/ccp#/`;
-var loginUrl = `https://${alias}.awsapps.com/connect/login`;
-var logoutUrl = `https://${alias}.awsapps.com/connect/logout`;
 
 var ccpDiv = document.getElementById("containerDiv");
 
@@ -30,6 +14,21 @@ var pAlias = document.getElementById("alias");
 var pStatus = document.getElementById("status");
 var dialnum = document.getElementById("phonenumber")
 
+window.myCPP = window.myCPP || {};
+window.myCPP.agent = window.myCPP.agent || null;
+
+var alias = "atosjnjsandbox";
+
+var url = new URL(document.URL);
+alias = url.searchParams.get("alias");
+if (url.searchParams.get("alias")) {
+    alias = url.searchParams.get("alias");
+    pAlias.innerHTML = alias;
+}
+
+var ccpUrl = `https://${alias}.awsapps.com/connect/ccp#/`;
+var loginUrl = `https://${alias}.awsapps.com/connect/login`;
+var logoutUrl = `https://${alias}.awsapps.com/connect/logout`;
 
 
 if (!window.myCPP.agent) {
