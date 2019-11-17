@@ -1,4 +1,5 @@
 window.myCPP = window.myCPP || {};
+window.myCPP.agent = window.myCPP.agent || null;
 
 var ccpUrl = "https://atosjnjsandbox.awsapps.com/connect/ccp#/";
 var ccpDiv = document.getElementById("containerDiv");
@@ -11,9 +12,16 @@ var bHangup = document.getElementById("bHangup");
 var bCall = document.getElementById("bCall");
 var logMsgs = document.getElementById("logMsgs");
 var pAlias = document.getElementById("alias");
+var pStatus = document.getElementById("status");
 
 var url = new URL(document.URL);
-pAlias.innerHTML = url.searchParams.get("alias");
+var connectalias = url.searchParams.get("alias");
+pAlias.innerHTML = connectalias;
+
+if (! window.myCPP.agent) {
+    pStatus.innerHTML = "Login Needed";
+}
+
 
 ccpDiv.style.visibility = 'hidden';
 bCCP.onclick = function (){
