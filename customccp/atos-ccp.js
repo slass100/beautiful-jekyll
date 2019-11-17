@@ -75,13 +75,12 @@ bHangup.onclick = function () {
 
 bMute.onclick = function () {
     logMsgToScreen("mute - click");
-    window.ccp.agent.mute();
-
+    window.myCPP.agent.mute();
 }
 
 bUnmute.onclick = function () {
     logMsgToScreen("unmute - click");
-    window.ccp.agent.unmute();
+    window.myCPP.agent.unmute();
 
 }
 bCall.onclick = function () {
