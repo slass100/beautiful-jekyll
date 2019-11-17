@@ -48,8 +48,15 @@ bHold.disabled = 'true';
 bHangup.disabled = 'true';
 
 login.onclick = function () {
-    window.open
+    logMsgToScreen("login");
+    window.open(loginUrl);
 }
+
+logout.onclick = function () {
+    logMsgToScreen("logout");
+    window.open(logoutUrl);
+}
+
 
 bAnswer.onclick = function () {
     acceptContact();
