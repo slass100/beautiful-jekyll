@@ -7,6 +7,7 @@ var logout = document.getElementById("logout");
 var bAnswer = document.getElementById("bAnswer");
 var bHold = document.getElementById("bHold");
 var bMute = document.getElementById("bMute");
+var bUnmute = document.getElementById("bUnmute");
 var bHangup = document.getElementById("bHangup");
 var bCall = document.getElementById("bCall");
 var logMsgs = document.getElementById("logMsgs");
@@ -71,8 +72,19 @@ bHangup.onclick = function () {
     bHangup.disabled = 'true';
 }
 
+bMute.onclick = function () {
+    logMsgToScreen("mute - click");
+    window.ccp.agent.mute();
+
+}
+
+bUnmute.onclick = function () {
+    logMsgToScreen("unmute - click");
+    window.ccp.agent.unmute();
+
+}
 bCall.onclick = function () {
-    logMsgToScreen("test - click");
+    logMsgToScreen("call - click");
 
     var obqueue = window.myCPP.agent.getRoutingProfile().defaultOutboundQueue;
     var qarn = obqueue.queueARN;
