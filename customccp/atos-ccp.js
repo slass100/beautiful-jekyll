@@ -326,6 +326,7 @@ function eventAgent(agent) {
     agent.onError(eventAgentError);
     agent.onAfterCallWork(eventAfterCallWork);
     agent.onMuteToggle(eventMuteToggle);
+    ccpStateReady();
 }
 
 function eventAgentRefresh(agent) {
