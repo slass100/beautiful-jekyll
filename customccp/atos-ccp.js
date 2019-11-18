@@ -366,6 +366,7 @@ function agentToString(agent) {
     config = agent.getConfiguration();
     rv.push("name:" + config.name);
     rv.push("user:" + config.username);
+    rv.push("full:" + JSON.stringify(agent));
     return "[Agent[" + rv.join(",") + "]]";
 }
 
