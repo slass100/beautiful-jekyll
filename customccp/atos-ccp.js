@@ -330,7 +330,10 @@ function eventAgent(agent) {
 
 function eventAgentRefresh(agent) {
     logMsgToScreen("[agent.onRefresh] " + agentToString(agent));
-    ccpStateConnecting();
+    if (agent.getState().name == "Available") {
+        logMsgToScreen("[agent.onRefresh]: Available");
+        ccpStateReady();
+    }
 }
 
 function eventAgentRoutable(agent) {
@@ -365,7 +368,7 @@ function agentToString(agent) {
     state = agent.getState().name;
     rv.push("state:" + state);
     type = agent.getState().type;
-    rv.push("state:" + type);
+    rv.push("type:" + type);
     config = agent.getConfiguration();
     rv.push("name:" + config.name);
     rv.push("user:" + config.username);
