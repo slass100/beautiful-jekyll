@@ -297,12 +297,13 @@ function contactToString(contact) {
     }
     id = contact.getContactId();
     rv.push("id:" + id);
+    state = contact.getState();
+    rv.push("state:" + state);
     type = contact.getType();
     rv.push("type:" + type);
     queue = contact.getQueue().name;
     rv.push("queue:" + queue);
     rv.push("attributes:" + JSON.stringify(contact.getAttributes()));
-    rv.push("full:" + JSON.stringify(contact));
     return "[Contact[" + rv.join(",") + "]]";
 }
 connect.agent(eventAgent);
@@ -363,10 +364,11 @@ function agentToString(agent) {
     }
     state = agent.getState().name;
     rv.push("state:" + state);
+    type = agent.getState().type;
+    rv.push("state:" + type);
     config = agent.getConfiguration();
     rv.push("name:" + config.name);
     rv.push("user:" + config.username);
-    rv.push("full:" + JSON.stringify(agent));
     return "[Agent[" + rv.join(",") + "]]";
 }
 
