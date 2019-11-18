@@ -27,6 +27,11 @@ if (url.searchParams.get("alias")) {
     pAlias.innerHTML = alias;
 }
 
+//https://atosjnjsandbox.awsapps.com/connect/home
+//https://atosjnjsandbox.awsapps.com/connect/login
+//https://atosjnjsandbox.awsapps.com/connect/logout
+
+
 var ccpUrl = `https://${alias}.awsapps.com/connect/ccp#/`;
 var loginUrl = `https://${alias}.awsapps.com/connect/login`;
 var logoutUrl = `https://${alias}.awsapps.com/connect/logout`;
@@ -131,6 +136,62 @@ bCall.onclick = function () {
     }
 
 }
+
+
+function ccpStateNotReady() {
+    bAnswer.disabled = true;
+    bHold.disabled = true;
+    bHangup.disabled = true;
+    bMute.disabled = true;
+    bUnmute.disabled = true;
+    bCall.disabled = true;
+}
+
+function ccpStateReady() {
+    bAnswer.disabled = true;
+    bHold.disabled = true;
+    bHangup.disabled = true;
+    bMute.disabled = true;
+    bUnmute.disabled = true;
+    bCall.disabled = false;
+}
+
+function ccpStateConnecting() {
+    bAnswer.disabled = true;
+    bHold.disabled = true;
+    bHangup.disabled = false;
+    bMute.disabled = true;
+    bUnmute.disabled = true;
+    bCall.disabled = true;
+}
+
+function ccpStateConnected() {
+    bAnswer.disabled = true;
+    bHold.disabled = false;
+    bHangup.disabled = false;
+    bMute.disabled = false;
+    bUnmute.disabled = true;
+    bCall.disabled = true;
+}
+
+function ccpStateMuted() {
+    bAnswer.disabled = true;
+    bHold.disabled = true;
+    bHangup.disabled = false;
+    bMute.disabled = true;
+    bUnmute.disabled = false;
+    bCall.disabled = true;
+}
+
+function ccpStateUnmuted() {
+    bAnswer.disabled = true;
+    bHold.disabled = false;
+    bHangup.disabled = false;
+    bMute.disabled = false;
+    bUnmute.disabled = true;
+    bCall.disabled = true;
+}
+
 
 logMsgToScreen("initCCP: start");
 
@@ -241,6 +302,7 @@ function contactToString(contact) {
     queue = contact.getQueue().name;
     rv.push("queue:" + queue);
     rv.push("attributes:" + JSON.stringify(contact.getAttributes()));
+    rv.push("full:" + JSON.stringify(contact));
     return "[Contact[" + rv.join(",") + "]]";
 }
 connect.agent(eventAgent);
@@ -267,6 +329,7 @@ function eventAgent(agent) {
 
 function eventAgentRefresh(agent) {
     logMsgToScreen("[agent.onRefresh] " + agentToString(agent));
+    ccpStateConnecting();
 }
 
 function eventAgentRoutable(agent) {
@@ -356,16 +419,15 @@ function toggleHold() {
                 logMsgToScreen("hold - fail");
             }
         });
-    }
-    else {
-         conn.resume({
+    } else {
+        conn.resume({
             success: function () {
                 logMsgToScreen("resume - success");
             },
             failure: function () {
                 logMsgToScreen("resume - fail");
             }
-         });       
+        });
     }
 }
 
