@@ -323,7 +323,7 @@ function eventAgent(agent) {
     logMsgToScreen("rp: " + JSON.stringify(routingProfile.name));
     logMsgToScreen("rp-doq: " + JSON.stringify(routingProfile.defaultOutboundQueue));
 
-    agent.onRefresh(eventAgentRefresh);
+    //agent.onRefresh(eventAgentRefresh);
     agent.onRoutable(eventAgentRoutable);
     agent.onNotRoutable(eventAgentNotRoutable);
     agent.onOffline(eventAgentOffline);
@@ -344,7 +344,7 @@ function eventAgentRefresh(agent) {
         ccpStateCalling();    
     }
     else if (agent.getState().name == "Busy") {
-        logMsgToScreen("[agent.onRefresh]: Calling");
+        logMsgToScreen("[agent.onRefresh]: Connected");
         ccpStateConnected();    
     }
 }
