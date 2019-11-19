@@ -309,7 +309,7 @@ function contactToString(contact) {
         //    rv.push("queue:" + queue);
         //    rv.push("attributes:" +                 JSON.stringify(contact.getAttributes()));
     } catch (err) {
-        rv.push("error:");
+        rv.push("error:" + JSON.stringify(err));
     }
     return "[Contact[" + rv.join(",") + "]]";
 }
