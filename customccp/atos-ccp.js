@@ -418,7 +418,7 @@ function acceptContact() {
 }
 
 function toggleHold() {
-    var conn = window.myCCP.contact.getAgentConnection();
+    var conn = window.myCPP.contact.getAgentConnection();
     if (conn.isOnHold()) {
         conn.hold({
             success: function () {
