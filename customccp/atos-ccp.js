@@ -343,6 +343,10 @@ function eventAgentRefresh(agent) {
         logMsgToScreen("[agent.onRefresh]: Calling");
         ccpStateCalling();    
     }
+    else if (agent.getState().name == "Busy") {
+        logMsgToScreen("[agent.onRefresh]: Calling");
+        ccpStateConnected();    
+    }
 }
 
 function eventAgentRoutable(agent) {
