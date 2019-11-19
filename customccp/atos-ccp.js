@@ -139,6 +139,7 @@ bCall.onclick = function () {
 
 
 function ccpStateNotReady() {
+    pStatus.innerHTML = "Not Ready";
     bAnswer.disabled = true;
     bHold.disabled = true;
     bHangup.disabled = true;
@@ -148,6 +149,7 @@ function ccpStateNotReady() {
 }
 
 function ccpStateReady() {
+    pStatus.innerHTML = "Ready";
     bAnswer.disabled = true;
     bHold.disabled = true;
     bHangup.disabled = true;
@@ -157,6 +159,7 @@ function ccpStateReady() {
 }
 
 function ccpStateCalling() {
+    pStatus.innerHTML = "Calling";
     bAnswer.disabled = true;
     bHold.disabled = true;
     bHangup.disabled = false;
@@ -166,6 +169,7 @@ function ccpStateCalling() {
 }
 
 function ccpStateConnected() {
+    pStatus.innerHTML = "Connected";
     bAnswer.disabled = true;
     bHold.disabled = false;
     bHangup.disabled = false;
