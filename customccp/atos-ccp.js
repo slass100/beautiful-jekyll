@@ -97,12 +97,12 @@ bCall.onclick = function () {
             queueARN: qarn,
             success: function () {
                 logMsgToScreen("Set agent status to Available (routable) via Streams");
-ccpStateCalling();
+                ccpStateCalling();
 
             },
             failure: function () {
                 logMsgToScreen("Failed to set agent status to Available (routable) via Streams");
-ccpStateNotReady();
+                ccpStateNotReady();
                 alert("Failed to connect");
 
             }
@@ -357,8 +357,7 @@ function eventMuteToggle(muted) {
     logMsgToScreen("[agent.eventMuteToggle] " + JSON.stringify(muted));
     if (muted.muted == true) {
         ccpStateMuted();
-    }
-    else {
+    } else {
         ccpStateUnmuted();
     }
 }
@@ -420,15 +419,6 @@ function acceptContact() {
 function toggleHold() {
     var conn = window.myCPP.contact.getAgentConnection();
     if (conn.isOnHold()) {
-        conn.hold({
-            success: function () {
-                logMsgToScreen("hold - success");
-            },
-            failure: function () {
-                logMsgToScreen("hold - fail");
-            }
-        });
-    } else {
         conn.resume({
             success: function () {
                 logMsgToScreen("resume - success");
@@ -437,6 +427,16 @@ function toggleHold() {
                 logMsgToScreen("resume - fail");
             }
         });
+    } else {
+        conn.hold({
+            success: function () {
+                logMsgToScreen("hold - success");
+            },
+            failure: function () {
+                logMsgToScreen("hold - fail");
+            }
+        });
+
     }
 }
 
