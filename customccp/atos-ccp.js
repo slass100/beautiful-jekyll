@@ -265,7 +265,7 @@ function eventContact(contact) {
     logMsgToScreen("Contact is from queue " + contact.getQueue().name);
     logMsgToScreen("Contact attributes are " + JSON.stringify(contact.getAttributes()));
 
-    //contact.onRefresh(eventContactRefresh);
+    contact.onRefresh(eventContactRefresh);
     contact.onIncoming(eventContactIncoming);
     contact.onAccepted(eventContactAccepted);
     contact.onConnected(eventContactConnected);
@@ -301,15 +301,20 @@ function contactToString(contact) {
     }
     id = contact.getContactId();
     rv.push("id:" + id);
-    state = contact.getState();
-    rv.push("state:" + state);
-    type = contact.getType();
-    rv.push("type:" + type);
-    queue = contact.getQueue().name;
-    rv.push("queue:" + queue);
-    rv.push("attributes:" + JSON.stringify(contact.getAttributes()));
+//    state = contact.getState();
+//    rv.push("state:" + state);
+//    type = contact.getType();
+//    rv.push("type:" + type);
+//    queue = contact.getQueue().name;
+//    rv.push("queue:" + queue);
+//    rv.push("attributes:" +                 JSON.stringify(contact.getAttributes()));
     return "[Contact[" + rv.join(",") + "]]";
 }
+
+
+
+
+
 connect.agent(eventAgent);
 
 function eventAgent(agent) {
