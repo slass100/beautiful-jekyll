@@ -299,22 +299,29 @@ function contactToString(contact) {
         if (!contact) {
             return "[Contact[nil]]";
         }
+    } catch (err) {}
+    try {
         id = contact.getContactId();
         rv.push("id:" + id);
+    } catch (err) {}
+    try {
         state = contact.getState();
         rv.push("state:" + state);
-        //    type = contact.getType();
-        //    rv.push("type:" + type);
-        //    queue = contact.getQueue().name;
-        //    rv.push("queue:" + queue);
-        //    rv.push("attributes:" +                 JSON.stringify(contact.getAttributes()));
-    } catch (err) {
-        rv.push("error:" + JSON.stringify(err));
-    }
+    } catch (err) {}
+    try {
+        type = contact.getType();
+        rv.push("type:" + type);
+    } catch (err) {}
+    try {
+        queue = contact.getQueue().name;
+        rv.push("queue:" + queue);
+    } catch (err) {}
+    try {
+        rv.push("attributes:" + JSON.stringify(contact.getAttributes()));
+    } catch (err) {}
+
     return "[Contact[" + rv.join(",") + "]]";
 }
-
-
 
 
 
