@@ -156,7 +156,7 @@ function ccpStateReady() {
     bCall.disabled = false;
 }
 
-function ccpStateConnecting() {
+function ccpStateCalling() {
     bAnswer.disabled = true;
     bHold.disabled = true;
     bHangup.disabled = false;
@@ -335,6 +335,10 @@ function eventAgentRefresh(agent) {
         logMsgToScreen("[agent.onRefresh]: Available");
         ccpStateReady();
     }
+    else if (agent.getState().name == "CallingCustomer") {
+        logMsgToScreen("[agent.onRefresh]: Calling");
+        ccpStateCalling();    
+    }
 }
 
 function eventAgentRoutable(agent) {
@@ -351,6 +355,7 @@ function eventAgentOffline(agent) {
 
 function eventAgentError(agent) {
     logMsgToScreen("[agent.onError] " + agentToString(agent));
+    alert("Agent Error");
 }
 
 function eventAfterCallWork(agent) {
