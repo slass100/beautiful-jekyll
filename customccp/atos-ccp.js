@@ -356,7 +356,6 @@ function eventAfterCallWork(agent) {
 function eventMuteToggle(muted) {
     logMsgToScreen("[agent.eventMuteToggle] " + JSON.stringify(muted));
     if (muted == true) {
-        console.log('muted');
         ccpStateMuted();
     }
     else {
