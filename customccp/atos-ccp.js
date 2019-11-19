@@ -265,7 +265,7 @@ function eventContact(contact) {
     logMsgToScreen("Contact is from queue " + contact.getQueue().name);
     logMsgToScreen("Contact attributes are " + JSON.stringify(contact.getAttributes()));
 
-    contact.onRefresh(eventContactRefresh);
+    //contact.onRefresh(eventContactRefresh);
     contact.onIncoming(eventContactIncoming);
     contact.onAccepted(eventContactAccepted);
     contact.onConnected(eventContactConnected);
