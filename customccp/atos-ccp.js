@@ -291,7 +291,6 @@ function eventContactConnected(contact) {
 
 function eventContactEnded(contact) {
     logMsgToScreen("[contact.onEnded] " + contactToString(contact));
-    clearAgentDisplay();
 }
 
 function contactToString(contact) {
@@ -301,8 +300,8 @@ function contactToString(contact) {
     }
     id = contact.getContactId();
     rv.push("id:" + id);
-//    state = contact.getState();
-//    rv.push("state:" + state);
+    state = contact.getState();
+    rv.push("state:" + state);
 //    type = contact.getType();
 //    rv.push("type:" + type);
 //    queue = contact.getQueue().name;
