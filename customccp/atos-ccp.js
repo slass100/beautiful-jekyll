@@ -295,18 +295,22 @@ function eventContactEnded(contact) {
 
 function contactToString(contact) {
     rv = [];
-    if (!contact) {
-        return "[Contact[nil]]";
+    try {
+        if (!contact) {
+            return "[Contact[nil]]";
+        }
+        id = contact.getContactId();
+        rv.push("id:" + id);
+        state = contact.getState();
+        rv.push("state:" + state);
+        //    type = contact.getType();
+        //    rv.push("type:" + type);
+        //    queue = contact.getQueue().name;
+        //    rv.push("queue:" + queue);
+        //    rv.push("attributes:" +                 JSON.stringify(contact.getAttributes()));
+    } catch (err) {
+        rv.push("error:");
     }
-    id = contact.getContactId();
-    rv.push("id:" + id);
-    state = contact.getState();
-    rv.push("state:" + state);
-//    type = contact.getType();
-//    rv.push("type:" + type);
-//    queue = contact.getQueue().name;
-//    rv.push("queue:" + queue);
-//    rv.push("attributes:" +                 JSON.stringify(contact.getAttributes()));
     return "[Contact[" + rv.join(",") + "]]";
 }
 
@@ -342,14 +346,12 @@ function eventAgentRefresh(agent) {
     if (agent.getState().name == "Available") {
         logMsgToScreen("[agent.onRefresh]: Available");
         ccpStateReady();
-    }
-    else if (agent.getState().name == "CallingCustomer") {
+    } else if (agent.getState().name == "CallingCustomer") {
         logMsgToScreen("[agent.onRefresh]: Calling");
-        ccpStateCalling();    
-    }
-    else if (agent.getState().name == "Busy") {
+        ccpStateCalling();
+    } else if (agent.getState().name == "Busy") {
         logMsgToScreen("[agent.onRefresh]: Connected");
-        ccpStateConnected();    
+        ccpStateConnected();
     }
 }
 
