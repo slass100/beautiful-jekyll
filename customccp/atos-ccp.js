@@ -4,7 +4,6 @@ var bCCP = document.getElementById("bCCP");
 var login = document.getElementById("login");
 var logout = document.getElementById("logout");
 
-var bAnswer = document.getElementById("bAnswer");
 var bHold = document.getElementById("bHold");
 var bMute = document.getElementById("bMute");
 var bUnmute = document.getElementById("bUnmute");
@@ -48,12 +47,7 @@ bCCP.onclick = function () {
     ccpDiv.style.display = 'block';
 }
 
-bAnswer.disabled = true;
-bHold.disabled = true;
-bHangup.disabled = true;
-bMute.disabled = true;
-bUnmute.disabled = true;
-bCall.disabled = false;
+ccpStateNotReady();
 
 login.onclick = function () {
     logMsgToScreen("login");
@@ -66,12 +60,6 @@ logout.onclick = function () {
 }
 
 
-bAnswer.onclick = function () {
-    acceptContact();
-    bAnswer.disabled = 'true';
-    bHangup.disabled = 'false';
-}
-
 bHold.onclick = function () {
     logMsgToScreen("hold - click");
     toggleHold();
@@ -79,8 +67,6 @@ bHold.onclick = function () {
 
 bHangup.onclick = function () {
     disconnectContact();
-    bAnswer.disabled = 'false';
-    bHangup.disabled = 'true';
 }
 
 bMute.onclick = function () {
@@ -111,22 +97,12 @@ bCall.onclick = function () {
             queueARN: qarn,
             success: function () {
                 logMsgToScreen("Set agent status to Available (routable) via Streams");
-                bAnswer.disabled = false;
-                bHold.disabled = false;
-                bHangup.disabled = false;
-                bMute.disabled = false;
-                bUnmute.disabled = false;
-                bCall.disabled = true;
+ccpStateCalling();
 
             },
             failure: function () {
                 logMsgToScreen("Failed to set agent status to Available (routable) via Streams");
-                bAnswer.disabled = true;
-                bHold.disabled = true;
-                bHangup.disabled = true;
-                bMute.disabled = true;
-                bUnmute.disabled = true;
-                bCall.disabled = false;
+ccpStateNotReady();
                 alert("Failed to connect");
 
             }
@@ -140,7 +116,6 @@ bCall.onclick = function () {
 
 function ccpStateNotReady() {
     pStatus.innerHTML = "Not Ready";
-    bAnswer.disabled = true;
     bHold.disabled = true;
     bHangup.disabled = true;
     bMute.disabled = true;
@@ -150,7 +125,6 @@ function ccpStateNotReady() {
 
 function ccpStateReady() {
     pStatus.innerHTML = "Ready";
-    bAnswer.disabled = true;
     bHold.disabled = true;
     bHangup.disabled = true;
     bMute.disabled = true;
@@ -160,7 +134,6 @@ function ccpStateReady() {
 
 function ccpStateCalling() {
     pStatus.innerHTML = "Calling";
-    bAnswer.disabled = true;
     bHold.disabled = true;
     bHangup.disabled = false;
     bMute.disabled = true;
@@ -170,7 +143,6 @@ function ccpStateCalling() {
 
 function ccpStateConnected() {
     pStatus.innerHTML = "Connected";
-    bAnswer.disabled = true;
     bHold.disabled = false;
     bHangup.disabled = false;
     bMute.disabled = false;
@@ -179,7 +151,6 @@ function ccpStateConnected() {
 }
 
 function ccpStateMuted() {
-    bAnswer.disabled = true;
     bHold.disabled = true;
     bHangup.disabled = false;
     bMute.disabled = true;
@@ -188,7 +159,6 @@ function ccpStateMuted() {
 }
 
 function ccpStateUnmuted() {
-    bAnswer.disabled = true;
     bHold.disabled = false;
     bHangup.disabled = false;
     bMute.disabled = false;
@@ -257,8 +227,6 @@ function eventContact(contact) {
     if (contact.getActiveInitialConnection() &&
         contact.getActiveInitialConnection().getEndpoint()) {
         logMsgToScreen("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString());
-        bAnswer.disabled = 'false';
-        bHold.disabled = 'false';
     } else {
         logMsgToScreen("This is an existing contact for this agent");
     }
@@ -287,6 +255,7 @@ function eventContactAccepted(contact) {
 
 function eventContactConnected(contact) {
     logMsgToScreen("[contact.onContactConnected] " + contactToString(contact));
+    ccpStateConnected();
 }
 
 function eventContactEnded(contact) {
@@ -381,6 +350,7 @@ function eventAgentError(agent) {
 
 function eventAfterCallWork(agent) {
     logMsgToScreen("[agent.onAfterCallWork] " + agentToString(agent));
+    ccpStateReady();
 }
 
 function eventMuteToggle(muted) {
