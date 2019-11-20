@@ -260,6 +260,7 @@ function eventContactConnected(contact) {
 
 function eventContactEnded(contact) {
     logMsgToScreen("[contact.onEnded] " + contactToString(contact));
+    ccpStateReady();
 }
 
 function contactToString(contact) {
