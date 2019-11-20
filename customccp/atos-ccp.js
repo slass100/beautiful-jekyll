@@ -71,7 +71,13 @@ bHangup.onclick = function () {
 
 bMute.onclick = function () {
     logMsgToScreen("mute - click");
-    window.myCPP.agent.mute();
+    if (bMute.innerHTML == "mute") {
+        window.myCPP.agent.mute();
+    }
+    else {
+        window.myCPP.agent.unmute();
+    }
+    
 }
 
 bUnmute.onclick = function () {
@@ -151,19 +157,11 @@ function ccpStateConnected() {
 }
 
 function ccpStateMuted() {
-    bHold.disabled = true;
-    bHangup.disabled = false;
-    bMute.disabled = true;
-    bUnmute.disabled = false;
-    bCall.disabled = true;
+    bMute.innerHTML = "unmute";
 }
 
 function ccpStateUnmuted() {
-    bHold.disabled = false;
-    bHangup.disabled = false;
-    bMute.disabled = false;
-    bUnmute.disabled = true;
-    bCall.disabled = true;
+    bMute.innerHTML = "mute";
 }
 
 
