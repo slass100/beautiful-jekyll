@@ -6,7 +6,6 @@ var logout = document.getElementById("logout");
 
 var bHold = document.getElementById("bHold");
 var bMute = document.getElementById("bMute");
-var bUnmute = document.getElementById("bUnmute");
 var bHangup = document.getElementById("bHangup");
 var bCall = document.getElementById("bCall");
 var logMsgs = document.getElementById("logMsgs");
@@ -80,11 +79,6 @@ bMute.onclick = function () {
     
 }
 
-bUnmute.onclick = function () {
-    logMsgToScreen("unmute - click");
-    window.myCPP.agent.unmute();
-
-}
 bCall.onclick = function () {
     logMsgToScreen("call - click");
 
@@ -125,7 +119,6 @@ function ccpStateNotReady() {
     bHold.disabled = true;
     bHangup.disabled = true;
     bMute.disabled = true;
-    bUnmute.disabled = true;
     bCall.disabled = true;
 }
 
@@ -134,7 +127,6 @@ function ccpStateReady() {
     bHold.disabled = true;
     bHangup.disabled = true;
     bMute.disabled = true;
-    bUnmute.disabled = true;
     bCall.disabled = false;
 }
 
@@ -143,7 +135,6 @@ function ccpStateCalling() {
     bHold.disabled = true;
     bHangup.disabled = false;
     bMute.disabled = true;
-    bUnmute.disabled = true;
     bCall.disabled = true;
 }
 
@@ -152,7 +143,6 @@ function ccpStateConnected() {
     bHold.disabled = false;
     bHangup.disabled = false;
     bMute.disabled = false;
-    bUnmute.disabled = true;
     bCall.disabled = true;
 }
 
