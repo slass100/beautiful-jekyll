@@ -45,7 +45,6 @@ bCCP.onclick = function () {
 ccpStateNotReady();
 
 bHold.onclick = function () {
-    ccpLogger("hold - click");
     toggleHold();
 }
 
@@ -54,7 +53,6 @@ bHangup.onclick = function () {
 }
 
 bMute.onclick = function () {
-    ccpLogger("mute - click");
     if (bMute.innerHTML == "mute") {
         window.myCPP.agent.mute();
     }
@@ -65,8 +63,6 @@ bMute.onclick = function () {
 }
 
 bCall.onclick = function () {
-    ccpLogger("call - click");
-
     var obqueue = window.myCPP.agent.getRoutingProfile().defaultOutboundQueue;
     var qarn = obqueue.queueARN;
     if (dialnum.value.length > 0) {
