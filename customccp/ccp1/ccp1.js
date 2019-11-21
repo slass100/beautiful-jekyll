@@ -1,14 +1,10 @@
 var ccpDiv = document.getElementById("containerDiv");
 
 var bCCP = document.getElementById("bCCP");
-var login = document.getElementById("login");
-var logout = document.getElementById("logout");
-
 var bHold = document.getElementById("bHold");
 var bMute = document.getElementById("bMute");
 var bHangup = document.getElementById("bHangup");
 var bCall = document.getElementById("bCall");
-var logMsgs = document.getElementById("logMsgs");
 var pAlias = document.getElementById("alias");
 var pStatus = document.getElementById("status");
 var dialnum = document.getElementById("phonenumber")
@@ -47,17 +43,6 @@ bCCP.onclick = function () {
 }
 
 ccpStateNotReady();
-
-login.onclick = function () {
-    ccpLogger("login");
-    window.open(loginUrl);
-}
-
-logout.onclick = function () {
-    ccpLogger("logout");
-    window.open(logoutUrl);
-}
-
 
 bHold.onclick = function () {
     ccpLogger("hold - click");
