@@ -62,6 +62,24 @@ bMute.onclick = function () {
 
 }
 
+var callbut = document.getElementsByClassName("ccpcall");
+var i;
+for (i = 0; i < x.length; i++) {
+    callbut[i].onclick = function () {
+        //var a = document.getElementById("bCall2");
+        var b = this.firstElementChild;
+        var c = b.innerHTML;
+        outboundcall(c);
+    }
+}
+
+//bCall2.onclick = function () {
+//    //var a = document.getElementById("bCall2");
+//    var b = this.firstElementChild;
+//    var c = b.innerHTML;
+//    outboundcall(c);
+//}
+
 bCall.onclick = function () {
     if (dialnum.value.length > 0) {
         if (!dialnum.value.startsWith("+1")) {
@@ -77,12 +95,6 @@ bCall.onclick = function () {
 
 }
 
-bCall2.onclick = function () {
-    //var a = document.getElementById("bCall2");
-    var b = this.firstElementChild;
-    var c = b.innerHTML;
-    outboundcall(c);
-}
 
 function ccpStateNotReady() {
     pStatus.innerHTML = "Not Ready";
