@@ -78,7 +78,7 @@ bCall.onclick = function () {
 }
 
 bCall2.onclick = function () {
-    var a = document.getElementsByClassName("bCall2")[0];
+    var a = document.getElementById("bCall2")[0];
     var span = a.getElementsByTagName('span')[0];
     var phonenum = span.innerHTML;
     outboundcall(phonenum);
