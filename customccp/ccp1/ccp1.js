@@ -5,6 +5,7 @@ var bHold = document.getElementById("bHold");
 var bMute = document.getElementById("bMute");
 var bHangup = document.getElementById("bHangup");
 var bCall = document.getElementById("bCall");
+var bCall2 = document.getElementById("bCall2");
 var pAlias = document.getElementById("alias");
 var pStatus = document.getElementById("status");
 var dialnum = document.getElementById("phonenumber")
@@ -55,16 +56,13 @@ bHangup.onclick = function () {
 bMute.onclick = function () {
     if (bMute.innerHTML == "mute") {
         window.myCPP.agent.mute();
-    }
-    else {
+    } else {
         window.myCPP.agent.unmute();
     }
-    
+
 }
 
 bCall.onclick = function () {
-    var obqueue = window.myCPP.agent.getRoutingProfile().defaultOutboundQueue;
-    var qarn = obqueue.queueARN;
     if (dialnum.value.length > 0) {
         if (!dialnum.value.startsWith("+1")) {
             dialnum.value = "+1" + dialnum.value
@@ -72,28 +70,19 @@ bCall.onclick = function () {
         if (!dialnum.value.startsWith("+")) {
             dialnum.value = "+" + dialnum.value
         }
-
-        var endpoint = connect.Endpoint.byPhoneNumber(dialnum.value);
-        window.myCPP.agent.connect(endpoint, {
-            queueARN: qarn,
-            success: function () {
-                ccpLogger("Set agent status to Available (routable) via Streams");
-                ccpStateCalling();
-
-            },
-            failure: function () {
-                ccpLogger("Failed to set agent status to Available (routable) via Streams");
-                ccpStateNotReady();
-                alert("Failed to connect");
-
-            }
-        });
+        outboundcall(dialnum.value);
     } else {
         alert("Enter Phone Number to Dial");
     }
 
 }
 
+bCall2.onclick = function () {
+    var a = document.getElementsByClassName("bCall2")[0];
+    var span = a.getElementsByTagName('span')[0];
+    var phonenum = span.innerHTML;
+    outboundcall(phonenum);
+}
 
 function ccpStateNotReady() {
     pStatus.innerHTML = "Not Ready";
@@ -216,6 +205,31 @@ function agentToString(agent) {
     rv.push("user:" + config.username);
     return "[Agent[" + rv.join(",") + "]]";
 }
+
+
+//================================================
+
+function outboundcall(phonenum) {
+    var obqueue = window.myCPP.agent.getRoutingProfile().defaultOutboundQueue;
+    var qarn = obqueue.queueARN;
+    var endpoint = connect.Endpoint.byPhoneNumber(phonenum);
+    window.myCPP.agent.connect(endpoint, {
+        queueARN: qarn,
+        success: function () {
+            ccpLogger("Set agent status to Available (routable) via Streams");
+            ccpStateCalling();
+
+        },
+        failure: function () {
+            ccpLogger("Failed to set agent status to Available (routable) via Streams");
+            ccpStateNotReady();
+            alert("Failed to connect");
+        }
+    });
+}
+
+
+
 
 function toggleHold() {
     var conn = window.myCPP.contact.getInitialConnection();
