@@ -62,14 +62,13 @@ bMute.onclick = function () {
 
 }
 
-var callbut = document.getElementsByClassName("ccpcall");
+var cblist = document.getElementsByClassName("ccpcall");
 var i;
-for (i = 0; i < x.length; i++) {
-    callbut[i].onclick = function () {
-        //var a = document.getElementById("bCall2");
-        var b = this.firstElementChild;
-        var c = b.innerHTML;
-        outboundcall(c);
+for (i = 0; i < cblist.length; i++) {
+    cblist[i].onclick = function () {
+        var ispan = this.firstElementChild;
+        var phonenum = ispan.innerHTML;
+        outboundcall(phonenum);
     }
 }
 
