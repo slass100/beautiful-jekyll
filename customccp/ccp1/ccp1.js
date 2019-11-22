@@ -78,10 +78,20 @@ bCall.onclick = function () {
 }
 
 bCall2.onclick = function () {
-    var a = document.getElementById("bCall2")[0];
-    var span = a.getElementsByTagName('span')[0];
-    var phonenum = span.innerHTML;
-    outboundcall(phonenum);
+    console.log('1');
+    var a = document.getElementById("bCall2");
+    console.log('2');
+    console.log(JSON.stringify(a));
+    console.log('3');
+    var b = a.firstElementChild;
+    console.log('4');
+    console.log(JSON.stringify(b));
+    console.log('5');
+    var c = b.innerHTML;
+    console.log('6');
+    console.log(JSON.stringify(c));
+    console.log('7');
+    outboundcall(c);
 }
 
 function ccpStateNotReady() {
