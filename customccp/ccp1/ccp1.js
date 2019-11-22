@@ -78,19 +78,9 @@ bCall.onclick = function () {
 }
 
 bCall2.onclick = function () {
-    console.log('1');
-    var a = document.getElementById("bCall2");
-    console.log('2');
-    console.log(JSON.stringify(a));
-    console.log('3');
-    var b = a.firstElementChild;
-    console.log('4');
-    console.log(JSON.stringify(b));
-    console.log('5');
+    //var a = document.getElementById("bCall2");
+    var b = this.firstElementChild;
     var c = b.innerHTML;
-    console.log('6');
-    console.log(JSON.stringify(c));
-    console.log('7');
     outboundcall(c);
 }
 
