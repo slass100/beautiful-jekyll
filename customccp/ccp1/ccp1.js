@@ -140,7 +140,7 @@ ccpLogger("initCCP: start");
 
 connect.core.initCCP(containerDiv, {
     ccpUrl: ccpUrl,
-    loginPopup: false,
+    loginPopup: true,
     softphone: {
         allowFramedSoftphone: true
     }
