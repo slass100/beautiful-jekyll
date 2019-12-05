@@ -10,15 +10,13 @@ var pAlias = document.getElementById("alias");
 var pStatus = document.getElementById("status");
 var dialnum = document.getElementById("phonenumber");
 
-window.myCPP = window.myCPP || {};
-window.myCPP.agent = window.myCPP.agent || null;
+window.myCCP = window.myCCP || {};
+window.myCCP.agent = window.myCCP.agent || null;
 
 var alias = "janssen-na-fras-qa";
 pAlias.innerHTML = alias;
 
-
-
-var idpUrl = `https://sso.connect.pingidentity.com/sso/sp/initsso?saasid=1b7ae09e-ca9b-4a29-ad27-f4e325fce893&idpid=7f5c3f99-306a-48c4-9247-82f6e16f3a44&appurl=https%3A%2F%2Fus-east-1.console.aws.amazon.com%2Fconnect%2Ffederate%2Fe9f556c8-c6e4-4adc-9977-de9e2ee0ca36%3Fdestination%3D%2Fconnect%2Fccp%23%2F`;
+var idpUrl = 'https://sso.connect.pingidentity.com/sso/sp/initsso?saasid=1b7ae09e-ca9b-4a29-ad27-f4e325fce893&idpid=7f5c3f99-306a-48c4-9247-82f6e16f3a44&appurl=https%3A%2F%2Fus-east-1.console.aws.amazon.com%2Fconnect%2Ffederate%2Fe9f556c8-c6e4-4adc-9977-de9e2ee0ca36%3Fdestination%3D%2Fconnect%2Fccp%23%2F';
 
 var ccpUrl = `https://janssen-na-fras-qa.awsapps.com/connect/ccp#/`;
 var loginUrl = `https://janssen-na-fras-qa.awsapps.com/connect/login`;
@@ -28,11 +26,11 @@ var logoutUrl = `https://janssen-na-fras-qa.awsapps.com/connect/logout`;
 var loginwindow = null;
 
 window.onload = function () {
-    console.log('windows:onload');
-    if (window.myCPP.agent == null) {
-        console.log('agent null');
+    ccpLogger('windows:onload');
+    if (window.myCCP.agent == null) {
+        ccpLogger('agent null');
     }
-    if (!window.myCPP.agent) {
+    if (!window.myCCP.agent) {
         pStatus.innerHTML = "Login Needed";
         loginwindow = window.open(idpUrl, 'Custom CCP', 'width=450, height=600');
     }
@@ -58,9 +56,9 @@ bHangup.onclick = function () {
 
 bMute.onclick = function () {
     if (bMute.innerHTML == "mute") {
-        window.myCPP.agent.mute();
+        window.myCCP.agent.mute();
     } else {
-        window.myCPP.agent.unmute();
+        window.myCCP.agent.unmute();
     }
 
 }
@@ -154,7 +152,7 @@ ccpLogger("initCCP: end");
 connect.contact(eventContact);
 
 function eventContact(contact) {
-    window.myCPP.contact = contact;
+    window.myCCP.contact = contact;
     if (contact.getActiveInitialConnection() &&
         contact.getActiveInitialConnection().getEndpoint()) {
         ccpLogger("New contact is from " + contact.getActiveInitialConnection().getEndpoint().phoneNumber.toString());
@@ -187,7 +185,8 @@ function contactToString(contact) {
 connect.agent(eventAgent);
 
 function eventAgent(agent) {
-    window.myCPP.agent = agent;
+    ccpLogger('eventAgent');
+    window.myCCP.agent = agent;
     loginwindow.close();
     loginwindow = null;
     pStatus.innerHTML = "Agent Logged In";
@@ -226,10 +225,10 @@ function agentToString(agent) {
 //================================================
 
 function outboundcall(phonenum) {
-    var obqueue = window.myCPP.agent.getRoutingProfile().defaultOutboundQueue;
+    var obqueue = window.myCCP.agent.getRoutingProfile().defaultOutboundQueue;
     var qarn = obqueue.queueARN;
     var endpoint = connect.Endpoint.byPhoneNumber(phonenum);
-    window.myCPP.agent.connect(endpoint, {
+    window.myCCP.agent.connect(endpoint, {
         queueARN: qarn,
         success: function () {
             ccpLogger("Set agent status to Available (routable) via Streams");
@@ -248,7 +247,7 @@ function outboundcall(phonenum) {
 
 
 function toggleHold() {
-    var conn = window.myCPP.contact.getInitialConnection();
+    var conn = window.myCCP.contact.getInitialConnection();
     if (conn.isOnHold()) {
         conn.resume({
             success: function () {
@@ -272,7 +271,7 @@ function toggleHold() {
 }
 
 function disconnectContact() {
-    window.myCPP.contact.getAgentConnection().destroy({
+    window.myCCP.contact.getAgentConnection().destroy({
         success: function () {
             ccpLogger("Disconnected contact via Streams");
         },
