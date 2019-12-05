@@ -18,9 +18,9 @@ pAlias.innerHTML = alias;
 
 var idpUrl = 'https://sso.connect.pingidentity.com/sso/sp/initsso?saasid=1b7ae09e-ca9b-4a29-ad27-f4e325fce893&idpid=7f5c3f99-306a-48c4-9247-82f6e16f3a44&appurl=https%3A%2F%2Fus-east-1.console.aws.amazon.com%2Fconnect%2Ffederate%2Fe9f556c8-c6e4-4adc-9977-de9e2ee0ca36%3Fdestination%3D%2Fconnect%2Fccp%23%2F';
 
-var ccpUrl = `https://janssen-na-fras-qa.awsapps.com/connect/ccp#/`;
-var loginUrl = `https://janssen-na-fras-qa.awsapps.com/connect/login`;
-var logoutUrl = `https://janssen-na-fras-qa.awsapps.com/connect/logout`;
+var ccpUrl = 'https://janssen-na-fras-qa.awsapps.com/connect/ccp#/';
+var loginUrl = 'https://janssen-na-fras-qa.awsapps.com/connect/login';
+var logoutUrl = 'https://janssen-na-fras-qa.awsapps.com/connect/logout';
 
 
 var loginwindow = null;
