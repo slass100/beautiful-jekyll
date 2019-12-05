@@ -189,8 +189,10 @@ connect.agent(eventAgent);
 function eventAgent(agent) {
     ccpLogger('eventAgent');
     window.myCCP.agent = agent;
-    loginwindow.close();
-    loginwindow = null;
+    if (loginwindow) {
+        loginwindow.close();
+        loginwindow = null;
+    }
     pStatus.innerHTML = "Agent Logged In";
     var routingProfile = agent.getRoutingProfile();
     agent.onError(eventAgentError);
