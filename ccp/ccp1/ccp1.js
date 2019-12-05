@@ -27,10 +27,13 @@ var logoutUrl = `https://janssen-na-fras-qa.awsapps.com/connect/logout`;
 
 var loginwindow = null;
 
-if (!window.myCPP.agent) {
-    pStatus.innerHTML = "Login Needed";
-    loginwindow = window.open(idpUrl, 'Custom CCP', 'width=450, height=600');
-}
+window.onload = function () {
+    if (!window.myCPP.agent) {
+        pStatus.innerHTML = "Login Needed";
+        loginwindow = window.open(idpUrl, 'Custom CCP', 'width=450, height=600');
+    }
+};
+
 
 
 ccpDiv.style.visibility = 'hidden';
