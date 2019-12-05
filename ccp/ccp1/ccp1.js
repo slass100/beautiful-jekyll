@@ -26,6 +26,7 @@ var logoutUrl = `https://janssen-na-fras-qa.awsapps.com/connect/logout`;
 var loginwindow = null;
 
 window.onload = function () {
+    ccpLogger("windows:onload");
     setTimeout(function () {
         ccpLogger('windows:onload');
         if (window.myCCP.agent == null) {
@@ -35,6 +36,7 @@ window.onload = function () {
             pStatus.innerHTML = "Login Needed";
             loginwindow = window.open(idpUrl, 'Custom CCP', 'width=450, height=600');
         }
+        ccpLogger('windows:onload:done');
     }, 3000);
 };
 
