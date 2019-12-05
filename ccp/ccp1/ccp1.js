@@ -188,7 +188,7 @@ connect.agent(eventAgent);
 
 function eventAgent(agent) {
     window.myCPP.agent = agent;
-    loginwindow.close;
+    loginwindow.close();
     loginwindow = null;
     pStatus.innerHTML = "Agent Logged In";
     var routingProfile = agent.getRoutingProfile();
