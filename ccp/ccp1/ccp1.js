@@ -26,14 +26,16 @@ var logoutUrl = `https://janssen-na-fras-qa.awsapps.com/connect/logout`;
 var loginwindow = null;
 
 window.onload = function () {
-    ccpLogger('windows:onload');
-    if (window.myCCP.agent == null) {
-        ccpLogger('agent null');
-    }
-    if (!window.myCCP.agent) {
-        pStatus.innerHTML = "Login Needed";
-        loginwindow = window.open(idpUrl, 'Custom CCP', 'width=450, height=600');
-    }
+    setTimeout(function () {
+        ccpLogger('windows:onload');
+        if (window.myCCP.agent == null) {
+            ccpLogger('agent null');
+        }
+        if (!window.myCCP.agent) {
+            pStatus.innerHTML = "Login Needed";
+            loginwindow = window.open(idpUrl, 'Custom CCP', 'width=450, height=600');
+        }
+    }, 3000);
 };
 
 
