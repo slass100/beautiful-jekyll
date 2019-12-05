@@ -200,7 +200,7 @@ function eventAgent(agent) {
 }
 
 function eventAgentError(agent) {
-    alert("Agent Error");
+    ccpLogger("agent error: " + agentToString(agent));
 }
 
 function eventAfterCallWork(agent) {
