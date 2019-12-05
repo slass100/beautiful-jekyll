@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Custom CCP</title>
+    <link rel="stylesheet" type="text/css" href="flat-ui.css">
+</head>
+
+<body>
+    <div id="myApp">
+        <h4>AWS Connect - Custom CCP</h4>
+    </div>
+    <div>
+        <table style='border: solid lightgray; border-radius: 6px; padding: 10px; width: 400px; '>
+            <tr>
+                <td>
+                    Connect Alias:</td>
+                <td>
+                    <div id="alias"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Status:</td>
+                <td>
+                    <div id="status"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p />
+    <p />
+    <p />
+    <p />
+
+
+    <p />
+    <div>
+        <button class='btn btn-block btn-primary' id="bHold" disabled>hold</button>
+        <button class='btn btn-block btn-primary' id="bMute" disabled>mute</button>
+        <button class='btn btn-block btn-primary' id="bHangup" disabled>hangup</button>
+    </div>
+    <p />
+    <p />
+    <div>
+        <table style='border: solid lightgray; border-radius: 6px; padding: 10px; width: 400px; '>
+            <tr>
+                <td>
+                    Patient 1</td>
+                <td>
+                    <button class='ccpcall btn btn-block btn-primary'>call<span style="display: none;">+12144032355</span></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Patient 2</td>
+                <td>
+                    <button class='ccpcall btn btn-block btn-primary'>call<span style="display: none;">+12144032355</span></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Patient 3</td>
+                <td>
+                    <button class='ccpcall btn btn-block btn-primary'>call<span style="display: none;">+12144032355</span></button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p />
+    <p />
+    <div>
+        Phone Number to Dial
+    </div>
+    <div>
+        <input class="form-control" type="text" id="phonenumber" value="">
+        <button class='btn btn-block btn-primary' id="bCall" disabled>call</button>
+    </div>
+    <p />
+    <div>
+        <button class="btn btn-block btn-info" id="bCCP">CCP</button>
+    </div>
+    <div id="containerDiv" style="float:left; width: 320px; min-width: 200px; height: 465px; min-height: 400px; ">
+        <!--Amazon CCP will go here-->
+    </div>
+    <br>
+
+    <!-- see https://github.com/aws/amazon-connect-streams -->
+    <script src="amazon-connect-v1.3.2.js"></script>
+    <script src="ccp1.js"></script>
+</body></html>
