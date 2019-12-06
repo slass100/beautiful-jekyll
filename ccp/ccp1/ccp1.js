@@ -74,7 +74,7 @@ for (i = 0; i < cblist.length; i++) {
     cblist[i].onclick = function () {
         var ispan = this.firstElementChild;
         var phonenum = ispan.innerHTML;
-        if (setagentnum) {
+        if (setagentnum()) {
             outboundcall(phonenum);
         }
     }
