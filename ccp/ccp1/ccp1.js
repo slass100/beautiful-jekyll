@@ -228,17 +228,24 @@ function agentToString(agent) {
 function setagentnum() {
     var agentconfig = window.myCCP.agent.getConfiguration();
     if (agentnum.value.length > 0) {
+        ccpLogger("deskphone");
+        if (!agentnum.value.startsWith("+1")) {
+            agentnum.value = "+1" + agentnum.value
+        }
+        if (!agentnum.value.startsWith("+")) {
+            agentnum.value = "+" + agentnum.value
+        }
         agentconfig.softphoneEnabled = false;
         agentconfig.extension = agentnum.value;
-    }
-    else {
+    } else {
+        ccpLogger("softphone");
         agentconfig.softphoneEnabled = true;
     }
     window.myCCP.agent.setConfiguration(agentconfig, {
-        success: function(data) {
-            
+        success: function (data) {
+
         },
-        failure: function(data) {
+        failure: function (data) {
             alert("Invalid Agent Number");
             return false;
         }
