@@ -74,7 +74,9 @@ for (i = 0; i < cblist.length; i++) {
     cblist[i].onclick = function () {
         var ispan = this.firstElementChild;
         var phonenum = ispan.innerHTML;
-        outboundcall(phonenum);
+        if (setagentnum) {
+            outboundcall(phonenum);
+        }
     }
 }
 
@@ -86,7 +88,9 @@ bCall.onclick = function () {
         if (!dialnum.value.startsWith("+")) {
             dialnum.value = "+" + dialnum.value
         }
-        outboundcall(dialnum.value);
+        if (setagentnum) {
+            outboundcall(dialnum.value);
+        }
     } else {
         alert("Enter Phone Number to Dial");
     }
