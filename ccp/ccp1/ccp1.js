@@ -9,7 +9,7 @@ var bCall2 = document.getElementById("bCall2");
 var pAlias = document.getElementById("alias");
 var pStatus = document.getElementById("status");
 var dialnum = document.getElementById("phonenumber");
-var agentnum = document.getElementById("agentnumber");
+var agentnum = document.getElementById("agentphone");
 
 window.myCCP = window.myCCP || {};
 window.myCCP.agent = window.myCCP.agent || null;
