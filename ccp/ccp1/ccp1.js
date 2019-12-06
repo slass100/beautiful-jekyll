@@ -1,23 +1,22 @@
+
 var ccpDiv = document.getElementById("containerDiv");
 
-var bCCP = document.getElementById("bCCP");
-var bHold = document.getElementById("bHold");
-var bMute = document.getElementById("bMute");
-var bHangup = document.getElementById("bHangup");
-var bCall = document.getElementById("bCall");
-var bCall2 = document.getElementById("bCall2");
-var pAlias = document.getElementById("alias");
-var pStatus = document.getElementById("status");
-var dialnum = document.getElementById("phonenumber");
-var agentnum = document.getElementById("agentphone");
-var bAgtSet = document.getElementById("agentset");
-
+var uibCCP = document.getElementById("CCP");
+var uibHold = document.getElementById("Hold");
+var uibMute = document.getElementById("Mute");
+var uibHangup = document.getElementById("Hangup");
+var uibCall = document.getElementById("Call");
+var uipAlias = document.getElementById("Alias");
+var uipStatus = document.getElementById("Status");
+var uiiDialnum = document.getElementById("PhoneNum");
+var uiiAgentnum = document.getElementById("AgentNum");
+var uibAgentSet = document.getElementById("AgentSet");
 
 window.myCCP = window.myCCP || {};
 window.myCCP.agent = window.myCCP.agent || null;
 
 var alias = "janssen-na-fras-qa";
-pAlias.innerHTML = alias;
+uipAlias.innerHTML = alias;
 
 var idpUrl = 'https://sso.connect.pingidentity.com/sso/sp/initsso?saasid=1b7ae09e-ca9b-4a29-ad27-f4e325fce893&idpid=7f5c3f99-306a-48c4-9247-82f6e16f3a44&appurl=https%3A%2F%2Fus-east-1.console.aws.amazon.com%2Fconnect%2Ffederate%2Fe9f556c8-c6e4-4adc-9977-de9e2ee0ca36%3Fdestination%3D%2Fconnect%2Fccp%23%2F';
 
@@ -27,47 +26,45 @@ var logoutUrl = 'https://janssen-na-fras-qa.awsapps.com/connect/logout';
 
 
 var loginwindow = null;
-
 window.onload = function () {
     ccpLogger("windows:onload");
     setTimeout(function () {
-        ccpLogger('windows:onload');
+        ccpLogger('windows:onload:start');
         if (window.myCCP.agent == null) {
             ccpLogger('agent null');
         }
         if (!window.myCCP.agent) {
-            pStatus.innerHTML = "Login Needed";
+            uipStatus.innerHTML = "Login Needed";
             loginwindow = window.open(idpUrl, 'Custom CCP', 'width=450, height=600');
         }
-        ccpLogger('windows:onload:done');
-    }, 3000);
+        ccpLogger('windows:onload:end');
+    }, 000);
 };
 
 
-
 ccpDiv.style.visibility = 'hidden';
-bCCP.onclick = function () {
+uibCCP.onclick = function () {
     ccpDiv.style.visibility = (ccpDiv.style.visibility == 'visible') ? 'hidden' : 'visible';
     ccpDiv.style.display = 'block';
 }
 
 ccpStateNotReady();
 
-bAgtSet.onclick = function () {
-    setagentnum();
+uibAgentSet.onclick = function () {
+    setuiiAgentnum();
 }
 
 
-bHold.onclick = function () {
+uibHold.onclick = function () {
     toggleHold();
 }
 
-bHangup.onclick = function () {
+uibHangup.onclick = function () {
     disconnectContact();
 }
 
-bMute.onclick = function () {
-    if (bMute.innerHTML == "mute") {
+uibMute.onclick = function () {
+    if (uibMute.innerHTML == "mute") {
         window.myCCP.agent.mute();
     } else {
         window.myCCP.agent.unmute();
@@ -85,15 +82,15 @@ for (i = 0; i < cblist.length; i++) {
     }
 }
 
-bCall.onclick = function () {
-    if (dialnum.value.length > 0) {
-        if (!dialnum.value.startsWith("+1")) {
-            dialnum.value = "+1" + dialnum.value
+uibCall.onclick = function () {
+    if (uiiDialnum.value.length > 0) {
+        if (!uiiDialnum.value.startsWith("+1")) {
+            uiiDialnum.value = "+1" + uiiDialnum.value
         }
-        if (!dialnum.value.startsWith("+")) {
-            dialnum.value = "+" + dialnum.value
+        if (!uiiDialnum.value.startsWith("+")) {
+            uiiDialnum.value = "+" + uiiDialnum.value
         }
-        outboundcall(dialnum.value);
+        outboundcall(uiiDialnum.value);
     } else {
         alert("Enter Phone Number to Dial");
     }
@@ -102,43 +99,43 @@ bCall.onclick = function () {
 
 
 function ccpStateNotReady() {
-    pStatus.innerHTML = "Not Ready";
-    bHold.disabled = true;
-    bHangup.disabled = true;
-    bMute.disabled = true;
-    bCall.disabled = true;
+    uipStatus.innerHTML = "Not Ready";
+    uibHold.disabled = true;
+    uibHangup.disabled = true;
+    uibMute.disabled = true;
+    uibCall.disabled = true;
 }
 
 function ccpStateReady() {
-    pStatus.innerHTML = "Ready";
-    bHold.disabled = true;
-    bHangup.disabled = true;
-    bMute.disabled = true;
-    bCall.disabled = false;
+    uipStatus.innerHTML = "Ready";
+    uibHold.disabled = true;
+    uibHangup.disabled = true;
+    uibMute.disabled = true;
+    uibCall.disabled = false;
 }
 
 function ccpStateCalling() {
-    pStatus.innerHTML = "Calling";
-    bHold.disabled = true;
-    bHangup.disabled = false;
-    bMute.disabled = true;
-    bCall.disabled = true;
+    uipStatus.innerHTML = "Calling";
+    uibHold.disabled = true;
+    uibHangup.disabled = false;
+    uibMute.disabled = true;
+    uibCall.disabled = true;
 }
 
 function ccpStateConnected() {
-    pStatus.innerHTML = "Connected";
-    bHold.disabled = false;
-    bHangup.disabled = false;
-    bMute.disabled = false;
-    bCall.disabled = true;
+    uipStatus.innerHTML = "Connected";
+    uibHold.disabled = false;
+    uibHangup.disabled = false;
+    uibMute.disabled = false;
+    uibCall.disabled = true;
 }
 
 function ccpStateMuted() {
-    bMute.innerHTML = "unmute";
+    uibMute.innerHTML = "unmute";
 }
 
 function ccpStateUnmuted() {
-    bMute.innerHTML = "mute";
+    uibMute.innerHTML = "mute";
 }
 
 
@@ -196,7 +193,7 @@ function eventAgent(agent) {
         loginwindow.close();
         loginwindow = null;
     }
-    pStatus.innerHTML = "Agent Logged In";
+    uipStatus.innerHTML = "Agent Logged In";
     var routingProfile = agent.getRoutingProfile();
     agent.onError(eventAgentError);
     agent.onAfterCallWork(eventAfterCallWork);
@@ -232,18 +229,18 @@ function agentToString(agent) {
 //================================================
 
 
-function setagentnum() {
+function setuiiAgentnum() {
     var agentconfig = window.myCCP.agent.getConfiguration();
-    if (agentnum.value.length > 0) {
+    if (uiiAgentnum.value.length > 0) {
         ccpLogger("deskphone");
-        if (!agentnum.value.startsWith("+1")) {
-            agentnum.value = "+1" + agentnum.value
+        if (!uiiAgentnum.value.startsWith("+1")) {
+            uiiAgentnum.value = "+1" + uiiAgentnum.value
         }
-        if (!agentnum.value.startsWith("+")) {
-            agentnum.value = "+" + agentnum.value
+        if (!uiiAgentnum.value.startsWith("+")) {
+            uiiAgentnum.value = "+" + uiiAgentnum.value
         }
         agentconfig.softphoneEnabled = false;
-        agentconfig.extension = agentnum.value;
+        agentconfig.extension = uiiAgentnum.value;
     } else {
         ccpLogger("softphone");
         agentconfig.softphoneEnabled = true;
