@@ -9,6 +9,7 @@ var bCall2 = document.getElementById("bCall2");
 var pAlias = document.getElementById("alias");
 var pStatus = document.getElementById("status");
 var dialnum = document.getElementById("phonenumber");
+var agentnum = document.getElementById("agentnumber");
 
 window.myCCP = window.myCCP || {};
 window.myCCP.agent = window.myCCP.agent || null;
@@ -76,13 +77,6 @@ for (i = 0; i < cblist.length; i++) {
         outboundcall(phonenum);
     }
 }
-
-//bCall2.onclick = function () {
-//    //var a = document.getElementById("bCall2");
-//    var b = this.firstElementChild;
-//    var c = b.innerHTML;
-//    outboundcall(c);
-//}
 
 bCall.onclick = function () {
     if (dialnum.value.length > 0) {
@@ -229,6 +223,29 @@ function agentToString(agent) {
 
 
 //================================================
+
+
+function setagentnum() {
+    var agentconfig = window.myCCP.agent.getConfiguration();
+    if (agentnum.value.length > 0) {
+        agentconfig.softphoneEnabled = false;
+        agentconfig.extension = agentnum.value;
+    }
+    else {
+        agentconfig.softphoneEnabled = true;
+    }
+    window.myCCP.agent.setConfiguration(agentconfig, {
+        success: function(data) {
+            
+        },
+        failure: function(data) {
+            alert("Invalid Agent Number");
+            return false;
+        }
+    });
+    return true;
+}
+
 
 function outboundcall(phonenum) {
     var obqueue = window.myCCP.agent.getRoutingProfile().defaultOutboundQueue;
