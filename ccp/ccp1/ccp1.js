@@ -247,7 +247,7 @@ function setagentnum() {
     }
     window.myCCP.agent.setConfiguration(agentconfig, {
         success: function (data) {
-
+            ccpLogger("agentconfig:set");
         },
         failure: function (data) {
             alert("Invalid Agent Number");
