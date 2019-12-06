@@ -88,7 +88,7 @@ bCall.onclick = function () {
         if (!dialnum.value.startsWith("+")) {
             dialnum.value = "+" + dialnum.value
         }
-        if (setagentnum) {
+        if (setagentnum()) {
             outboundcall(dialnum.value);
         }
     } else {
