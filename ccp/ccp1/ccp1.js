@@ -10,6 +10,8 @@ var pAlias = document.getElementById("alias");
 var pStatus = document.getElementById("status");
 var dialnum = document.getElementById("phonenumber");
 var agentnum = document.getElementById("agentphone");
+var bAgtSet = document.getElementById("agentset");
+
 
 window.myCCP = window.myCCP || {};
 window.myCCP.agent = window.myCCP.agent || null;
@@ -51,6 +53,11 @@ bCCP.onclick = function () {
 
 ccpStateNotReady();
 
+bAgtSet.onclick = function () {
+    setagentnum();
+}
+
+
 bHold.onclick = function () {
     toggleHold();
 }
@@ -74,9 +81,7 @@ for (i = 0; i < cblist.length; i++) {
     cblist[i].onclick = function () {
         var ispan = this.firstElementChild;
         var phonenum = ispan.innerHTML;
-        if (setagentnum()) {
-            outboundcall(phonenum);
-        }
+        outboundcall(phonenum);
     }
 }
 
@@ -88,9 +93,7 @@ bCall.onclick = function () {
         if (!dialnum.value.startsWith("+")) {
             dialnum.value = "+" + dialnum.value
         }
-        if (setagentnum()) {
-            outboundcall(dialnum.value);
-        }
+        outboundcall(dialnum.value);
     } else {
         alert("Enter Phone Number to Dial");
     }
