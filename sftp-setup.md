@@ -20,31 +20,31 @@
 
 1. create user / set passwd (make it hard, forget it)
 
-        export FTPUSER=<new_sftp_user>
-        useradd ${SFTPUSER}
-        passwd ${SFTPUSER}
+        export SFTP_USER=<new_sftp_user>
+        useradd ${SFTP_USER}
+        passwd ${SFTP_USER}
         
 1. generate keys
 
-        ssh-keygen -t rsa -f /root/sftp-keys/${SFTPUSER}
+        ssh-keygen -t rsa -f /root/sftp-keys/${SFTP_USER}
         
 1. copy keys to user
 
-        mkdir /home/${SFTPUSER}/.ssh
-        chmod 700 /home/${SFTPUSER}/.ssh
-        cp /root/sftp-keys/${SFTPUSER}.pub /home/${SFTPUSER}/.authorized_keys
-        chmod 400 /home/${SFTPUSER}/.ssh/.authorized_keys
+        mkdir /home/${SFTP_USER}/.ssh
+        chmod 700 /home/${SFTP_USER}/.ssh
+        cp /root/sftp-keys/${SFTP_USER}.pub /home/${SFTP_USER}/.ssh/.authorized_keys
+        chmod 400 /home/${SFTP_USER}/.ssh/.authorized_keys
         
         NOTE: client can provide their rsa public keys, instead of generating.
         
         
 1. setup sftp directory for user
 
-        mkdir -p /sftp/${SFTPUSER}/upload
-        chown root:root /sftp/${SFTPUSER}
-        chmod 755 /sftp/${SFTPUSER}
-        chown ${SFTPUSER}:${SFTPUSER} /sftp/${SFTPUSER}/upload
-        chmod 700 /sftp/${SFTPUSER}/upload
+        mkdir -p /sftp/${SFTP_USER}/upload
+        chown root:root /sftp/${SFTP_USER}
+        chmod 755 /sftp/${SFTP_USER}
+        chown ${SFTP_USER}:${SFTP_USER} /sftp/${SFTP_USER}/upload
+        chmod 700 /sftp/${SFTP_USER}/upload
         
 1. edit /etc/ssh/sshd_config
 
