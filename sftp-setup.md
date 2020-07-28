@@ -19,7 +19,7 @@
 
 1. create user / set passwd (make it hard, forget it)
 
-        export FTPUSER=${SFTPUSER}
+        export FTPUSER=<new_sftp_user>
         useradd ${SFTPUSER}
         passwd ${SFTPUSER}
         
@@ -54,7 +54,7 @@
     
     Add this block for each user
     
-        Match User ${SFTPUSER}           <<== substitute username here
+        Match User <new_sftp_user>           <<== substitute username here
             ForceCommand internal-sftp
             ChrootDirectory /sftp/%u/
             X11Forwarding no
@@ -66,6 +66,9 @@
     1. restart service
     
             systemctl restart sshd
+            systemctl status sshd
+            
+            
     1. check for errors
     
             tail /var/log/secure
