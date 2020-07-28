@@ -79,11 +79,11 @@
     
 ### Testing
     
-    1. If keys were generated, provide private key to client securely
-    2. SFTP to server
-            sftp -i <identity_file> ${SFTPUSER}@sftpserver.host.name
-    3. SSH to server.  Verify is it blocked
-            ssh -i <identity_file> ${SFTPUSER}@sftpserver.host.name
-            **This service allows sftp connections only.**
+1. If keys were generated, provide private key to client securely
+2. SFTP to server
+        sftp -i <identity_file> ${SFTPUSER}@sftpserver.host.name
+3. SSH to server.  Verify is it blocked
+        ssh -i <identity_file> ${SFTPUSER}@sftpserver.host.name
+        **This service allows sftp connections only.**
             
 
