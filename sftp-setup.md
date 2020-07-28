@@ -62,7 +62,7 @@
             AllowTcpForwarding no
 
 1. VERY IMPORTANT
-    1. login into a session terminal session (otherwise, you can lock yourself out of system!!!)
+    1. login into a second/separate terminal session (otherwise, you can lock yourself out of system!!!)
     
     1. restart service
     
