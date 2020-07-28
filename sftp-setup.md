@@ -3,6 +3,7 @@
 ### Initial Setup
 
 1. sudo to root
+
         sudo su -
         
 1. make directory for sftp / set ownership
