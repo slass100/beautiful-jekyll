@@ -62,11 +62,15 @@
 
 1. VERY IMPORTANT
     1. login into a session terminal session (otherwise, you can lock yourself out of system!!!)
+    
     1. restart service
+    
             systemctl restart sshd
     1. check for errors
+    
             tail /var/log/secure
             tail /var/log/messages
+            
     1. login normally to verify sshd_config is not broken
     
 ### Testing
